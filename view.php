@@ -7,6 +7,7 @@
 		</ul>
 	</div>
 </nav>
+<p>파일경로 : <input type="text" value="<?php echo $parsed['real_full_file'] ?>"></p>
 <?php 
 $html = Markdown(file_get_contents($parsed['real_full_file']));
 $html = str_replace('<img src="http://', '<imgsrchttp', $html);
