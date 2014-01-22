@@ -137,12 +137,20 @@ function is_target_ext($full_path){
 }
 
 function get_cmd_type(){
+	if( ! isset($_GET['path'])){
+		return null;
+	}
+	
 	$temp = explode(':', $_GET['path']);
 	$type = $temp[0];
 	return $type;
 }
 
 function parse_path(){
+	if( ! isset($_GET['path'])){
+		return null;
+	}
+
 	global $doc_roots;
 
 	$temp = explode(':', $_GET['path']);
