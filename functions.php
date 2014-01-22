@@ -159,9 +159,20 @@ function parse_path(){
 	$root_path = realpath($doc_roots[$root]);
 	$real_full_path = $root_path . '/' . implode('/', $temp2);
 
+	if( ! is_file($real_full_path) AND ! is_dir($real_full_path)){
+		echo '잘못된 경로.';
+		exit;
+	}
+
 	$file = '';
+	$full_file = '';
+	$real_full_file = '';
 	if(is_file($real_full_path)){
 		$file = array_pop($temp2);
+		$full_file = $full_path;
+		$real_full_file = $real_full_path;
+		$full_path = str_replace('/' . $file, '', $full_path);
+		$real_full_path = str_replace('/' . $file, '', $real_full_path);
 	}
 
 	$relative_path = implode('/', $temp2);
@@ -172,6 +183,9 @@ function parse_path(){
 		'relative_path' => $relative_path,
 		'file' => $file,
 		'full_path' => $full_path,
+		'real_full_path' => $real_full_path,
+		'full_file' => $full_file,
+		'real_full_file' => $real_full_file,
 	);
 
 }

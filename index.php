@@ -27,19 +27,18 @@ require_once 'lib/php-markdown/markdown.php';
 <div class="content">
 <?php 
 check_config_error();
+$parsed = parse_path();
 
-if(isset($_GET['r']) AND isset($_GET['f']) AND isset($_GET['c']) AND $_GET['c'] === 'modify'){
+if(get_cmd_type() == 'edit'){
 	// 수정 
 	include 'edit.php';
 
-
-}else if(isset($_GET['r']) AND isset($_GET['f'])){
+}else if(get_cmd_type() == 'view'){
 	// 본문 
 	include $template['view'];
 
 }else if(get_cmd_type() == 'list'){
 	// 목록 
-	$parsed = parse_path();
 	print_docs_list($parsed);
 
 }else{
