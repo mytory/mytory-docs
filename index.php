@@ -28,7 +28,12 @@ require_once 'lib/php-markdown/markdown.php';
 <?php 
 check_config_error();
 
-if(isset($_GET['r']) AND isset($_GET['f'])){
+if(isset($_GET['r']) AND isset($_GET['f']) AND isset($_GET['c']) AND $_GET['c'] === 'modify'){
+	// 수정 
+	include 'edit.php';
+
+
+}else if(isset($_GET['r']) AND isset($_GET['f'])){
 	// 본문 
 	include $template['view'];
 
@@ -51,6 +56,7 @@ if(isset($_GET['r']) AND isset($_GET['f'])){
 <?php } ?>
 </div>
 </div>
+<script src="lib/jquery.min.js"></script>
 <?php foreach ($js_list as $js_file) { ?>
 	<script src="<?php echo $js_file ?>"></script>
 <?php } ?>

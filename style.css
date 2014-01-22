@@ -23,3 +23,7 @@ a:hover {
 .doc-file {
   color: black;
 }
+
+.epiceditor {
+	height: 600px;
+}
