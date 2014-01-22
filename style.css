@@ -27,3 +27,12 @@ a:hover {
 .epiceditor {
 	height: 600px;
 }
+
+.content img {
+	max-width: 100%;
+	height: auto;
+}
+
+.content blockquote p {
+	font-size: 1em;
+}
