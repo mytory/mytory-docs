@@ -24,10 +24,8 @@ function get_filename_or_md_headline($dir, $file){
 	}
 }
 
-function print_docs_list($root, $relative_path){
-	global $doc_roots;
-
-	$dir = $doc_roots[$root] . '/' . $relative_path;
+function print_docs_list($parsed){
+	$dir = $parsed['root_path'] . '/' . $parsed['relative_path'];
 	$dir_list = array();
 	$file_list = array();
 
@@ -38,31 +36,34 @@ function print_docs_list($root, $relative_path){
 				if($file === '.' || $file === '..' || substr($file, 0, 1) === '.'){
 					continue;
 				}
-				$fullpath = $dir . '/' . $file;
-				if(is_file($fullpath) AND is_target_ext($file)){
+				$full_path = $dir . '/' . $file;
+				if(is_file($full_path) AND is_target_ext($file)){
 					$file_list[] = array(
-						'r' => $root,
-						'p' => $relative_path,
-						'f' => $file,
+						'path' => 'view:' . $parsed['full_path'] . '/' . $file,
 						'title' => get_filename_or_md_headline($dir, $file)
 					);
 				}
-				if(is_dir($fullpath)){
+				if(is_dir($full_path)){
 					$dir_list[] = array(
-						'r' => $root,
-						'p' => $relative_path . '/' . $file,
+						'path' => 'list:' . $parsed['full_path'] . '/' . $file,
 						'title' => $file
 					);
 				}
 			}
 			closedir($dh);
 
-			if($relative_path !== '.'){
-				$parent_folder = get_parent_folder($relative_path);
+			if($parsed['relative_path'] !== ''){
+				$parent_folder = get_parent_folder($parsed['relative_path']);
+				if($parent_folder){
+					$parent_path = 'list:' . $parsed['root'] . '/' . $parent_folder;
+				}else{
+					$parent_path = 'list:' . $parsed['root'];
+				}
+				
 				?>
 				<li>
 					<a class="directory" 
-							href="?r=<?php echo $root ?>&amp;p=<?php echo $parent_folder?>">
+							href="?path=<?php echo $parent_path ?>">
 							상위 폴더
 					</a>
 				</li>
@@ -71,7 +72,7 @@ function print_docs_list($root, $relative_path){
 				?>
 				<li>
 					<a href="/" class="directory">
-						docs 목록 
+						root 목록 
 					</a>
 				</li>
 				<?php
@@ -95,7 +96,7 @@ function print_docs_list($root, $relative_path){
 				?>
 				<li>
 					<a class="directory" 
-							href="?r=<?php echo $info['r'] ?>&amp;p=<?php echo $info['p'] ?>">
+							href="?path=<?php echo $info['path'] ?>">
 						<?php echo $info['title'] ?>
 					</a>	
 				</li>
@@ -106,7 +107,7 @@ function print_docs_list($root, $relative_path){
 				?>
 				<li>
 					<a class="doc-file" 
-							href="?r=<?php echo $info['r'] ?>&amp;p=<?php echo $info['p'] ?>&amp;f=<?php echo $info['f'] ?>">
+							href="?path=<?php echo $info['path'] ?>">
 						<?php echo $info['title'] ?>
 					</a>	
 				</li>
@@ -123,7 +124,7 @@ function print_docs_list($root, $relative_path){
 function get_parent_folder($relative_path){
 	$temp = explode('/', $relative_path);
 	if(count($temp) === 1){
-		return '.';
+		return '';
 	}else{
 		array_pop($temp);
 		return implode('/', $temp);
@@ -133,4 +134,44 @@ function get_parent_folder($relative_path){
 function is_target_ext($full_path){
 	global $ext_list;
 	return in_array(pathinfo($full_path, PATHINFO_EXTENSION), $ext_list);
+}
+
+function get_cmd_type(){
+	$temp = explode(':', $_GET['path']);
+	$type = $temp[0];
+	return $type;
+}
+
+function parse_path(){
+	global $doc_roots;
+
+	$temp = explode(':', $_GET['path']);
+	array_shift($temp);
+	$full_path = implode('/', $temp);
+	$temp2 = explode('/', $full_path);
+
+	$root = array_shift($temp2);
+	if( ! isset($doc_roots[$root])){
+		echo '잘못된 경로.';
+		exit;
+	}
+
+	$root_path = realpath($doc_roots[$root]);
+	$real_full_path = $root_path . '/' . implode('/', $temp2);
+
+	$file = '';
+	if(is_file($real_full_path)){
+		$file = array_pop($temp2);
+	}
+
+	$relative_path = implode('/', $temp2);
+
+	return array(
+		'root' => $root,
+		'root_path' => $root_path,
+		'relative_path' => $relative_path,
+		'file' => $file,
+		'full_path' => $full_path,
+	);
+
 }

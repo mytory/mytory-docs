@@ -37,20 +37,16 @@ if(isset($_GET['r']) AND isset($_GET['f']) AND isset($_GET['c']) AND $_GET['c'] 
 	// 본문 
 	include $template['view'];
 
-
-}else if(isset($_GET['r'])){
+}else if(get_cmd_type() == 'list'){
 	// 목록 
-	$root = $_GET['r'];
-	$relative_path = $_GET['p'];
-	$dir = realpath($doc_roots[$root] . '/' . $relative_path);
-	print_docs_list($root, $relative_path);
-
+	$parsed = parse_path();
+	print_docs_list($parsed);
 
 }else{
 	// 최상위 
 	?><ul><?php
 		foreach ($doc_roots as $name => $dir) { ?>
-		<li><a href="?r=<?php echo $name ?>&amp;p=."><?php echo $name?></a></li>	
+		<li><a href="?path=list:<?php echo $name ?>"><?php echo $name?></a></li>	
 		<?php } ?>
 	</ul>
 <?php } ?>
