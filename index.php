@@ -1,4 +1,10 @@
 <?php 
+if( ! is_file('config.php')){
+	if( ! copy('config.sample.php', 'config.php')){
+		echo "It's need config.php file. Rename config.sample.php to config.php";
+		exit;
+	}
+}
 include 'config.php'; 
 include 'functions.php';
 require_once 'lib/php-markdown/markdown.php';
