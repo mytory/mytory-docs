@@ -140,7 +140,7 @@ function get_cmd_type(){
 	if( ! isset($_GET['path'])){
 		return null;
 	}
-	
+
 	$temp = explode(':', $_GET['path']);
 	$type = $temp[0];
 	return $type;
@@ -160,7 +160,7 @@ function parse_path(){
 
 	$root = array_shift($temp2);
 	if( ! isset($doc_roots[$root])){
-		echo '잘못된 경로.';
+		echo '잘못된 경로 type1.';
 		exit;
 	}
 
@@ -168,7 +168,7 @@ function parse_path(){
 	$real_full_path = $root_path . '/' . implode('/', $temp2);
 
 	if( ! is_file($real_full_path) AND ! is_dir($real_full_path)){
-		echo '잘못된 경로.';
+		echo '잘못된 경로 type2.';
 		exit;
 	}
 
