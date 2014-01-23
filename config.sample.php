@@ -29,3 +29,5 @@ $ext_list = array(
 	'txt',
 	// ... 
 );
+
+header("Content-Type: text/html; charset=UTF-8");
