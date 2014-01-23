@@ -2,7 +2,7 @@
 
 // auto
 define('ROOT', dirname(__FILE__));
-define('BASE_URL', $_SERVER['HTTP_HOST']);
+define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']));
 
 // theme
 $css_list = array(
