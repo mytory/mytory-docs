@@ -1,6 +1,6 @@
 <?php
 
-// auto
+// auto. If you need, change.
 if( ! isset($_SERVER['QUERY_STRING'])){
 	$_SERVER['QUERY_STRING'] = '';
 }

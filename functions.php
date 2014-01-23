@@ -165,7 +165,7 @@ function parse_path(){
 	}
 
 	$root_path = realpath($doc_roots[$root]);
-	$real_full_path = $root_path . DIRECTORY_SEPARATOR . implode(PATH_SEPARATOR, $temp2);
+	$real_full_path = $root_path . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $temp2);
 
 	if( ! is_file($real_full_path) AND ! is_dir($real_full_path)){
 		echo '잘못된 경로 type2. ' . $real_full_path;
