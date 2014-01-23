@@ -71,7 +71,7 @@ function print_docs_list($parsed){
 			}else{
 				?>
 				<li>
-					<a href="/" class="directory">
+					<a href="<?php echo BASE_URL ?>" class="directory">
 						최상위 root 목록 
 					</a>
 				</li>
