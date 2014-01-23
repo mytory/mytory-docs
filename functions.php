@@ -3,8 +3,8 @@
 function check_config_error(){
 	global $doc_roots;
 	foreach($doc_roots as $root){
-		if( ! is_dir($root)){
-			echo "$root is not a real directory.";
+		if( ! $result = is_dir($root)){
+            echo "$root is not a real directory or server has not permission: " . __FILE__ . " : " . __LINE__;
 			exit;
 		}
 	}
@@ -12,7 +12,7 @@ function check_config_error(){
 
 function get_filename_or_md_headline($dir, $file){
 	$full_path = realpath($dir . '/' . $file);
-	
+
 	$content = file_get_contents($full_path);
 
 	preg_match('/^#(.*)#*\n|(.*)\n={3,}/', $content, $match);
@@ -59,10 +59,10 @@ function print_docs_list($parsed){
 				}else{
 					$parent_path = 'list:' . $parsed['root'];
 				}
-				
+
 				?>
 				<li>
-					<a class="directory" 
+					<a class="directory"
 							href="?path=<?php echo $parent_path ?>">
 							상위 폴더
 					</a>
@@ -72,7 +72,7 @@ function print_docs_list($parsed){
 				?>
 				<li>
 					<a href="<?php echo BASE_URL ?>" class="directory">
-						최상위 root 목록 
+						최상위 root 목록
 					</a>
 				</li>
 				<?php
@@ -95,10 +95,10 @@ function print_docs_list($parsed){
 			foreach ($dir_list as $info) {
 				?>
 				<li>
-					<a class="directory" 
+					<a class="directory"
 							href="?path=<?php echo $info['path'] ?>">
 						<?php echo $info['title'] ?>
-					</a>	
+					</a>
 				</li>
 				<?php
 			}
@@ -106,17 +106,17 @@ function print_docs_list($parsed){
 			foreach ($file_list as $info) {
 				?>
 				<li>
-					<a class="doc-file" 
+					<a class="doc-file"
 							href="?path=<?php echo $info['path'] ?>">
 						<?php echo $info['title'] ?>
-					</a>	
+					</a>
 				</li>
 				<?php
-			}		
+			}
 			?></ul><?php
 		}
 	}else{
-		echo "$dir is not a real directory.";
+		echo "$dir is not a real directory : " . __FILE__ . " : " . __LINE__;
 		exit;
 	}
 }
@@ -160,7 +160,7 @@ function parse_path(){
 
 	$root = array_shift($temp2);
 	if( ! isset($doc_roots[$root])){
-		echo '잘못된 경로 type1.';
+		echo "잘못된 경로 type1 : " . __FILE__ . " : " . __LINE__;
 		exit;
 	}
 
@@ -168,7 +168,7 @@ function parse_path(){
 	$real_full_path = $root_path . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $temp2);
 
 	if( ! is_file($real_full_path) AND ! is_dir($real_full_path)){
-		echo '잘못된 경로 type2. ' . $real_full_path;
+		echo '잘못된 경로 type2. ' . $real_full_path . " : " . __FILE__ . " : " . __LINE__;;
 		exit;
 	}
 

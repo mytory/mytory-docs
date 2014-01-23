@@ -7,6 +7,7 @@ if( ! isset($_SERVER['QUERY_STRING'])){
 
 define('ROOT', dirname(__FILE__));
 define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . str_replace('?' . $_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']));
+define('BACKUP_PATH', ROOT . '/backup');
 
 // theme
 $css_list = array(
