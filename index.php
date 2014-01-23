@@ -21,7 +21,7 @@ $parsed = parse_path();
 		<link rel="stylesheet" href="<?php echo $css_file ?>">
 	<?php } ?>    
     <title>Mytory Docs</title>
-
+    <script src="lib/jquery.min.js"></script>
 </head>
 <body><div class="wrapper">
 <div class="header">
@@ -81,7 +81,6 @@ if(get_cmd_type() == 'edit'){
 <?php } ?>
 </div>
 </div>
-<script src="lib/jquery.min.js"></script>
 <?php foreach ($js_list as $js_file) { ?>
 	<script src="<?php echo $js_file ?>"></script>
 <?php } ?>

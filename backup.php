@@ -4,10 +4,15 @@ include 'functions.php';
 
 $parsed = parse_path();
 
-var_dump($parsed);
-exit;
+date_default_timezone_set('Asia/Seoul');
 
-$handle = fopen($parsed['real_full_file'], 'w');
+$datetime = date('Y-m-d_H_i_s');
+$backup_folder = BACKUP_PATH . DIRECTORY_SEPARATOR .  $parsed['full_path'];
+if( ! is_dir($backup_folder)){
+    mkdir($backup_folder, 0777, true);
+}
+$handle = fopen($backup_folder .
+    DIRECTORY_SEPARATOR . $datetime . '__' . $parsed['file'], 'w');
 if( ! $handle){
     echo json_encode(array(
         'code' => 'fail',
