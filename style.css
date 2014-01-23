@@ -12,8 +12,7 @@ a:hover {
 }
 
 .header {
-  padding: 1em;
-  border-bottom: 1px solid #dddddd;
+  padding-top: 1em;
 }
 
 .directory {

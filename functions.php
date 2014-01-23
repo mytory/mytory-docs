@@ -72,7 +72,7 @@ function print_docs_list($parsed){
 				?>
 				<li>
 					<a href="/" class="directory">
-						root 목록 
+						최상위 root 목록 
 					</a>
 				</li>
 				<?php
