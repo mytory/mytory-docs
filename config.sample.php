@@ -1,7 +1,8 @@
 <?php
 
 // auto
-$root_dir = dirname(__FILE__);
+define('ROOT', dirname(__FILE__));
+define('BASE_URL', $_SERVER['HTTP_HOST']);
 
 // theme
 $css_list = array(

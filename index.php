@@ -34,7 +34,7 @@ $parsed = parse_path();
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/" title="Mytory Docs">MD</a>
+			<a class="navbar-brand" href="<?php echo BASE_URL ?>" title="Mytory Docs">MD</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="main-menu">
