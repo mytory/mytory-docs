@@ -61,7 +61,7 @@ $parsed = parse_path();
 <?php 
 if(get_cmd_type() == 'edit'){
 	// 수정 
-	include 'edit.php';
+	include $template['edit'];
 
 }else if(get_cmd_type() == 'view'){
 	// 본문 
@@ -69,7 +69,7 @@ if(get_cmd_type() == 'edit'){
 
 }else if(get_cmd_type() == 'list'){
 	// 목록 
-	print_docs_list($parsed);
+	include $template['list'];
 
 }else{
 	// 최상위 

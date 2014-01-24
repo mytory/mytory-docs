@@ -20,7 +20,9 @@ $js_list = array(
 	//"custom-theme/script.js",
 );
 $template = array(
-	'view' => 'view.php',
+    'view' => 'view.php',
+    'list' => 'list.php',
+    'edit' => 'edit.php',
 );
 
 // docs
