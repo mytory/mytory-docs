@@ -15,6 +15,13 @@ a:hover {
   padding-top: 1em;
 }
 
+.dir-li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: -1.5em;
+}
+
 .directory {
   color: #4a8ec2;
 }
