@@ -23,6 +23,7 @@ $template = array(
     'view' => 'view.php',
     'list' => 'list.php',
     'edit' => 'edit.php',
+    'header' => 'header.php',
 );
 
 // docs
