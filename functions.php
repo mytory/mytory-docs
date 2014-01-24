@@ -114,3 +114,11 @@ function new_file(){
         header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
     }
 }
+
+function delete_file(){
+    global $parsed;
+    if(is_file($parsed['real_full_file'])){
+        unlink($parsed['real_full_file']);
+    }
+    header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
+}

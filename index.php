@@ -11,6 +11,14 @@ require_once 'lib/php-markdown/markdown.php';
 check_config_error();
 $parsed = parse_path();
 
+if(get_cmd_type() == 'new-file'){
+    new_file();
+    exit;
+}else if(get_cmd_type() == 'delete-file'){
+    delete_file();
+    exit;
+}
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,11 +39,8 @@ include $template['header'];
 
 <div class="content">
 <?php
-if(get_cmd_type() == 'new-file'){
-    new_file();
-
-}else if(get_cmd_type() == 'edit'){
-	// 수정 
+if(get_cmd_type() == 'edit'){
+	// 수정
 	include $template['edit'];
 
 }else if(get_cmd_type() == 'view'){

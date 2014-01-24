@@ -84,11 +84,14 @@ if (is_dir($dir)) {
 
         foreach ($file_list as $info) {
             ?>
-            <li>
+            <li class="doc-li">
                 <a class="doc-file"
                    href="?path=<?php echo $info['path'] ?>">
                     <?php echo $info['title'] ?>
                 </a>
+                <a class="glyphicon glyphicon-trash js-delete-file" data-toggle="modal" data-target="#delete-file"
+                   data-title="<?php echo htmlspecialchars($info['title']) ?>"
+                   data-path="<?php echo str_replace('view:', 'delete-file:', $info['path']) ?>"></a>
             </li>
         <?php
         }
@@ -99,3 +102,9 @@ if (is_dir($dir)) {
     exit;
 }
 ?>
+<script>
+    $('.js-delete-file').click(function(){
+        $('#delete-file').find('[name="path"]').val($(this).data('path'));
+        $('#delete-file').find('.modal-body p').text("다음 파일을 삭제합니다 : " + $(this).data('title'));
+    });
+</script>
