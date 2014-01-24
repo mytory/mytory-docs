@@ -21,7 +21,7 @@
                 <?php } ?>
                 <?php if(get_cmd_type() == 'list'){ ?>
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#new-file">
+                        <a href="#" data-toggle="modal" data-target="#new-file" onclick="setTimeout(function(){$('#filename').focus()}, 1000)">
                             새 파일
                         </a>
                     </li>

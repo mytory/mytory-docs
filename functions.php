@@ -102,16 +102,22 @@ function parse_path(){
 }
 
 function new_file(){
-    global $parsed;
+    global $parsed, $ext_list;
+
+    $pathinfo = pathinfo($_REQUEST['filename']);
+    if( ! in_array($pathinfo['extension'], $ext_list)){
+        $_REQUEST['filename'] .=  '.' . $ext_list[0];
+    }
+
     $new_file = $parsed['real_full_path'] . DIRECTORY_SEPARATOR . $_REQUEST['filename'];
     if(is_file($new_file)){
         echo "파일명 중복";
         exit;
     }else{
         $handle = fopen($new_file, 'w');
-        fwrite($handle, "\n");
+        fwrite($handle, '# ' . $pathinfo['filename']);
         fclose($handle);
-        header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
+        header('location: ' . BASE_URL . '/?path=edit:' . $parsed['full_path'] . '/' . $_REQUEST['filename']);
     }
 }
 
