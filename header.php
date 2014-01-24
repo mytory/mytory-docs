@@ -19,6 +19,13 @@
                 <?php if(get_cmd_type() == 'view'){ ?>
                     <li><a href="?path=edit:<?php echo $parsed['full_file']?>">수정</a></li>
                 <?php } ?>
+                <?php if(get_cmd_type() == 'list'){ ?>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#new-file">
+                            새 파일
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
             <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
                 <span class="navbar-text navbar-left">파일경로</span>
@@ -31,3 +38,28 @@
         </div>
     </nav>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="new-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">파일명을 입력해 주세요.</h4>
+            </div>
+            <form role="form" action="<?php echo BASE_URL ?>">
+                <div class="modal-body">
+                    <input name="path" type="hidden" value="new-file:<?php echo $parsed['full_path'] ?>"/>
+                    <div class="form-group">
+                        <label for="filename">파일명</label>
+                        <input type="text" class="form-control" id="filename" name="filename" placeholder="new file.md">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-primary">생성</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -100,3 +100,17 @@ function parse_path(){
 	);
 
 }
+
+function new_file(){
+    global $parsed;
+    $new_file = $parsed['real_full_path'] . DIRECTORY_SEPARATOR . $_REQUEST['filename'];
+    if(is_file($new_file)){
+        echo "파일명 중복";
+        exit;
+    }else{
+        $handle = fopen($new_file, 'w');
+        fwrite($handle, "\n");
+        fclose($handle);
+        header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
+    }
+}

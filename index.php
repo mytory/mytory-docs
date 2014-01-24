@@ -30,8 +30,11 @@ include $template['header'];
 ?>
 
 <div class="content">
-<?php 
-if(get_cmd_type() == 'edit'){
+<?php
+if(get_cmd_type() == 'new-file'){
+    new_file();
+
+}else if(get_cmd_type() == 'edit'){
 	// 수정 
 	include $template['edit'];
 
