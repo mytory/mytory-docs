@@ -8,6 +8,7 @@ $content = file_get_contents($parsed['real_full_file']);
 <script>
 var full_file = '<?php echo $parsed['full_file'] ?>';
 var epic = new EpicEditor({
+    clientSideStorage: false,
 	file: {
 		name: full_file,
 		defaultContent: document.getElementById('epiceditor').innerHTML,
