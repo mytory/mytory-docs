@@ -48,8 +48,8 @@ function auto_backup(){
     }, 'json');
 }
 
-setInterval(auto_save, 1000);
+$(epic.getElement('editor').body).keyup(auto_save);
 auto_backup();
 setInterval(auto_backup, 60*5*1000);
-
+$('body').css('background', 'rgb(41,41,41)');
 </script>
