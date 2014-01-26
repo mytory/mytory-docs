@@ -5,6 +5,7 @@ $content = file_get_contents($parsed['real_full_file']);
 <div class="msg"></div>
 <div class="msg2"></div>
 <script src="lib/EpicEditor/js/epiceditor.min.js"></script>
+<script src="lib/md5.js"></script>
 <script>
 var full_file = '<?php echo $parsed['full_file'] ?>';
 var epic = new EpicEditor({
@@ -22,14 +23,22 @@ var epic = new EpicEditor({
 	}
 }).load();
 
+var content_saved_md5 = CryptoJS.MD5(epic.getFiles()[full_file].content).toString();
+
 function auto_save(){
+    var content = epic.getFiles()[full_file].content;
 	$.post('save.php', {
-		content: epic.getFiles()[full_file].content,
+        content_saved_md5: content_saved_md5,
+		content: content,
 		path: '<?php echo $_GET['path'] ?>'
 	}, function(data){
 		if(data.code == 'fail'){
 			$('.msg').text(data.msg);
+        }else if(data.code == 'file changed'){
+            $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
+            location.reload();
 		}else{
+            content_saved_md5 = data.content_saved_md5;
 			$('.msg').text(new Date().toString() + ' - 저장');
 		}
 	}, 'json');
