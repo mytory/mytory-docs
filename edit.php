@@ -7,6 +7,7 @@ $content = file_get_contents($parsed['real_full_file']);
 <script src="lib/EpicEditor/js/epiceditor.min.js"></script>
 <script src="lib/md5.js"></script>
 <script>
+var auto_save_interval, auto_backup_interval;
 var full_file = '<?php echo $parsed['full_file'] ?>';
 var epic = new EpicEditor({
     clientSideStorage: false,
@@ -57,8 +58,22 @@ function auto_backup(){
     }, 'json');
 }
 
-$(epic.getElement('editor').body).keyup(auto_save);
-auto_backup();
-setInterval(auto_backup, 60*5*1000);
+function init_auto_save_backup(){
+    auto_save_interval = setInterval(auto_save, 1000);
+    auto_backup();
+    auto_backup_interval = setInterval(auto_backup, 60*5*1000);
+}
+
+function remove_auto_save_backup(){
+    clearInterval(auto_save_interval);
+    clearInterval(auto_backup_interval);
+}
+
+init_auto_save_backup();
+
+// $(window).blur(remove_auto_save_backup);
+// $(window).focus(init_auto_save_backup);
+
 $('body').css('background', 'rgb(41,41,41)');
+
 </script>
