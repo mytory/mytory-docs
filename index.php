@@ -24,6 +24,8 @@ if(get_cmd_type() == 'new-file'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
 	<?php
 	foreach ($css_list as $css_file) { ?>
 		<link rel="stylesheet" href="<?php echo $css_file ?>">
