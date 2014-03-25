@@ -16,30 +16,12 @@ a:hover {
     padding-top: 1em;
 }
 
-.dir-li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    margin-left: -1.5em;
-}
-
 .directory {
     color: #4a8ec2;
 }
 
 .doc-file {
     color: black;
-}
-
-.doc-li .glyphicon {
-    margin-left: 0.2em;
-    font-size: 0.9em;
-    opacity: 0;
-    -webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;
-}
-
-.doc-li:hover .glyphicon {
-    opacity: 1;
 }
 
 .epiceditor {

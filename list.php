@@ -6,7 +6,8 @@ $file_list = array();
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
         ?>
-        <ul><?php
+        <table class="table table-striped table-hover">
+        <?php
         while (($file = readdir($dh)) !== false) {
             if ($file === '.' || $file === '..' || substr($file, 0, 1) === '.') {
                 continue;
@@ -36,25 +37,10 @@ if (is_dir($dir)) {
                 $parent_path = 'list:' . $parsed['root'];
             }
 
-            ?>
-            <li class="dir-li">
-                <a class="directory" href="?path=<?php echo $parent_path ?>">
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    &nbsp;
-                    상위 폴더
-                </a>
-            </li>
-        <?php
+            print_one_dir('상위폴더', "?path={$parent_path}");
         } else {
-            ?>
-            <li class="dir-li">
-                <a href="<?php echo BASE_URL ?>" class="directory">
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    &nbsp;
-                    최상위 root 목록
-                </a>
-            </li>
-        <?php
+
+            print_one_dir('최상위', BASE_URL);
         }
 
         uasort($dir_list, function ($a, $b) {
@@ -72,32 +58,13 @@ if (is_dir($dir)) {
         });
 
         foreach ($dir_list as $info) {
-            ?>
-            <li class="dir-li">
-                <a class="directory" href="?path=<?php echo $info['path'] ?>">
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    &nbsp;
-                    <?php echo $info['title'] ?>
-                </a>
-            </li>
-        <?php
+            print_one_dir($info['title'], '?path=' . $info['path']);
         }
 
         foreach ($file_list as $info) {
-            ?>
-            <li class="doc-li">
-                <a class="doc-file"
-                   href="?path=<?php echo $info['path'] ?>">
-                    <?php echo $info['title'] ?>
-                    <small class="text-muted"><?php  echo $info['date'] ?></small>
-                </a>
-                <a class="glyphicon glyphicon-trash js-delete-file" data-toggle="modal" data-target="#delete-file"
-                   data-title="<?php echo htmlspecialchars($info['title']) ?>"
-                   data-path="<?php echo str_replace('view:', 'delete-file:', $info['path']) ?>"></a>
-            </li>
-        <?php
+            print_one_file($info);
         }
-        ?></ul><?php
+        ?></table><?php
     }
 } else {
     echo "$dir is not a real directory : " . __FILE__ . " : " . __LINE__;

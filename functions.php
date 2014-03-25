@@ -151,3 +151,40 @@ function get_date($full_path){
 
     return filectime($full_path);
 }
+
+function print_one_dir($name, $href){
+    ?>
+    <tr class="dir-row">
+        <td>
+            <span class="glyphicon glyphicon-folder-open"></span>
+        </td>
+        <td><a class="directory" href="<?php echo $href ?>">
+                <?php echo $name ?>
+            </a></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <?php
+}
+
+function print_one_file($info){
+    ?>
+    <tr class="doc-row">
+        <td></td>
+        <td>
+            <a class="doc-file"
+               href="?path=<?php echo $info['path'] ?>">
+                <?php echo $info['title'] ?>
+            </a>
+        </td>
+        <td>
+            <?php echo $info['date'] ?>
+        </td>
+        <td>
+            <a href="#" class="glyphicon glyphicon-trash js-delete-file" data-toggle="modal" data-target="#delete-file"
+               data-title="<?php echo htmlspecialchars($info['title']) ?>"
+               data-path="<?php echo str_replace('view:', 'delete-file:', $info['path']) ?>"></a>
+        </td>
+    </tr>
+    <?php
+}
