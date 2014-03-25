@@ -38,3 +38,18 @@ a:hover {
     line-height: 25.71428680419922px;
     color: #777;
 }
+
+th a {
+    color: #4A8EC2;
+}
+th a:hover {
+    color: #4A8EC2;
+    text-decoration: underline;
+}
+.dynatable-search {
+    position: static;
+    float: right;
+}
+.table {
+    clear: both;
+}

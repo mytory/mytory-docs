@@ -26,12 +26,14 @@ if(get_cmd_type() == 'new-file'){
     <meta name="viewport" content="width=device-width, minimum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="lib/dynatable/jquery.dynatable.css"/>
 	<?php
 	foreach ($css_list as $css_file) { ?>
 		<link rel="stylesheet" href="<?php echo $css_file ?>">
 	<?php } ?>    
     <title>Mytory Docs</title>
     <script src="lib/jquery.min.js"></script>
+    <script src="lib/dynatable/jquery.dynatable.js"></script>
 </head>
 <body><div class="wrapper">
 

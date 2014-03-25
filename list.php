@@ -6,7 +6,21 @@ $file_list = array();
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
         ?>
-        <table class="table table-striped table-hover">
+        <table id="list-table" class="table table-striped table-hover">
+        <colgroup>
+            <col width="50"/>
+            <col width="50%"/>
+            <col width="30%"/>
+        </colgroup>
+        <thead>
+            <tr>
+                <th></th>
+                <th>이름</th>
+                <th>날짜</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
         <?php
         while (($file = readdir($dh)) !== false) {
             if ($file === '.' || $file === '..' || substr($file, 0, 1) === '.') {
@@ -64,7 +78,7 @@ if (is_dir($dir)) {
         foreach ($file_list as $info) {
             print_one_file($info);
         }
-        ?></table><?php
+        ?></tbody></table><?php
     }
 } else {
     echo "$dir is not a real directory : " . __FILE__ . " : " . __LINE__;
@@ -75,5 +89,10 @@ if (is_dir($dir)) {
     $('.js-delete-file').click(function(){
         $('#delete-file').find('[name="path"]').val($(this).data('path'));
         $('#delete-file').find('.modal-body p').text("다음 파일을 삭제합니다 : " + $(this).data('title'));
+    });
+    $('#list-table').dynatable({
+        features: {
+            paginate: false
+        }
     });
 </script>
