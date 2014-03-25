@@ -15,7 +15,8 @@ if (is_dir($dir)) {
             if (is_file($full_path) AND is_target_ext($file)) {
                 $file_list[] = array(
                     'path' => 'view:' . $parsed['full_path'] . '/' . $file,
-                    'title' => get_filename_or_md_headline($dir, $file)
+                    'title' => get_filename_or_md_headline($dir, $file),
+                    'date' => get_date($full_path)
                 );
             }
             if (is_dir($full_path)) {
@@ -88,6 +89,7 @@ if (is_dir($dir)) {
                 <a class="doc-file"
                    href="?path=<?php echo $info['path'] ?>">
                     <?php echo $info['title'] ?>
+                    <small class="text-muted"><?php  echo $info['date'] ?></small>
                 </a>
                 <a class="glyphicon glyphicon-trash js-delete-file" data-toggle="modal" data-target="#delete-file"
                    data-title="<?php echo htmlspecialchars($info['title']) ?>"

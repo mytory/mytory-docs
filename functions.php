@@ -128,3 +128,26 @@ function delete_file(){
     }
     header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
 }
+
+function get_date($full_path){
+
+    $content = file_get_contents($full_path);
+
+    preg_match('/- {0,1}[D|d]ate {0,1}:(.*)\n/', $content, $match_date);
+    preg_match('/- {0,1}날짜 {0,1}:(.*)\n/', $content, $match_날짜);
+    preg_match('/- {0,1}일시 {0,1}:(.*)\n/', $content, $match_일시);
+
+    if(trim($match_date[1])){
+        return trim($match_date[1]);
+    }
+
+    if(trim($match_날짜[1])){
+        return trim($match_날짜[1]);
+    }
+
+    if(trim($match_일시[1])){
+        return trim($match_일시[1]);
+    }
+
+    return filectime($full_path);
+}
