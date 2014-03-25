@@ -28,10 +28,13 @@
                 <?php } ?>
             </ul>
             <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
-                <span class="navbar-text navbar-left">파일경로</span>
+                <span class="navbar-text navbar-left">
+                    <label for="file_path">파일경로</label>
+                </span>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input readonly class="form-control" type="text" value='"<?php echo $parsed['real_full_file'] ?>"'>
+                        <input readonly class="form-control" type="text" value='"<?php echo $parsed['real_full_file'] ?>"'
+                               id="file_path">
                     </div>
                 </form>
             <?php } ?>
