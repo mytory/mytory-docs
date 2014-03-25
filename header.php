@@ -31,7 +31,7 @@
                 <span class="navbar-text navbar-left">파일경로</span>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input readonly class="form-control" type="text" value="<?php echo $parsed['real_full_file'] ?>">
+                        <input readonly class="form-control" type="text" value='"<?php echo $parsed['real_full_file'] ?>"'>
                     </div>
                 </form>
             <?php } ?>
