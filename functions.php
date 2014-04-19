@@ -133,9 +133,10 @@ function get_date($full_path){
 
     $content = file_get_contents($full_path);
 
-    preg_match('/- {0,1}[D|d]ate {0,1}:(.*)\n/', $content, $match_date);
-    preg_match('/- {0,1}날짜 {0,1}:(.*)\n/', $content, $match_날짜);
-    preg_match('/- {0,1}일시 {0,1}:(.*)\n/', $content, $match_일시);
+    preg_match('/[D|d]ate {0,1}:(.*)\n/', $content, $match_date);
+    preg_match('/날짜 {0,1}:(.*)\n/', $content, $match_날짜);
+    preg_match('/일시 {0,1}:(.*)\n/', $content, $match_일시);
+    preg_match('/\n([0-9]{4}-[0-9]{2}-[0-9]{2}) */', $content, $match_only_date);
 
     if(trim($match_date[1])){
         return trim($match_date[1]);
@@ -149,7 +150,11 @@ function get_date($full_path){
         return trim($match_일시[1]);
     }
 
-    return filectime($full_path);
+    if(trim($match_only_date[1])){
+        return trim($match_only_date[1]);
+    }
+
+    return date('Y-m-d', filectime($full_path));
 }
 
 function print_one_dir($name, $href){
