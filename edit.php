@@ -1,7 +1,8 @@
 <?php 
 $content = file_get_contents($parsed['real_full_file']);
+$filectime = filectime($parsed['real_full_file']);
 ?>
-<div id="epiceditor" class="epiceditor"><?php echo $content ?></div>
+<textarea id="epiceditor" class="epiceditor" data-filectime="<?=$filectime?>"><?php echo $content ?></textarea>
 <div class="msg"></div>
 <div class="msg2"></div>
 <script src="lib/EpicEditor/js/epiceditor.min.js"></script>
@@ -9,45 +10,46 @@ $content = file_get_contents($parsed['real_full_file']);
 <script>
 var auto_save_interval, auto_backup_interval;
 var full_file = '<?php echo $parsed['full_file'] ?>';
-var epic = new EpicEditor({
-    clientSideStorage: false,
-	file: {
-		name: full_file,
-		defaultContent: document.getElementById('epiceditor').innerHTML,
-		autoSave: 100
-	},
-	basePath: 'lib/EpicEditor',
-	theme: {
-		base: '/themes/base/epiceditor.css',
-		preview: '/themes/preview/preview-dark.css',
-		editor: '/themes/editor/epic-dark.css'
-	}
-}).load();
-
-var content_saved_md5 = CryptoJS.MD5(epic.getFiles()[full_file].content).toString();
+// var epic = new EpicEditor({
+//     clientSideStorage: false,
+// 	file: {
+// 		name: full_file,
+// 		defaultContent: document.getElementById('epiceditor').innerHTML,
+// 		autoSave: false
+// 	},
+// 	basePath: 'lib/EpicEditor',
+// 	theme: {
+// 		base: '/themes/base/epiceditor.css',
+// 		preview: '/themes/preview/preview-dark.css',
+// 		editor: '/themes/editor/epic-dark.css'
+// 	}
+// }).load();
 
 function auto_save(){
-    var content = epic.getFiles()[full_file].content;
 	$.post('save.php', {
-        content_saved_md5: content_saved_md5,
-		content: content,
-		path: '<?php echo $_GET['path'] ?>'
+        content: $('#epiceditor').val(),
+        filectime: $('#epiceditor').data('filectime'),
+        real_full_file: '<?php echo $parsed['real_full_file'] ?>'
 	}, function(data){
 		if(data.code == 'fail'){
 			$('.msg').text(data.msg);
+            console.log(data.filectime);
+            $('#epiceditor').data('filectime', data.filectime);
         }else if(data.code == 'file changed'){
-            $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
-            location.reload();
+            // $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
+            console.log("real", data.real_filectime, "editor", data.editor_filectime);
+            $('.msg').text('File updated externally.');
+            // location.reload();
 		}else{
-            content_saved_md5 = data.content_saved_md5;
-			$('.msg').text(new Date().toString() + ' - 저장');
+            $('#epiceditor').data('filectime', data.filectime);
+            $('.msg').text(new Date().toString() + ' - 저장');
 		}
 	}, 'json');
 }
 
 function auto_backup(){
     $.post('backup.php', {
-        content: epic.getFiles()[full_file].content,
+        content: $('#epiceditor').val(),
         path: '<?php echo $_GET['path'] ?>'
     }, function(data){
         if(data.code == 'fail'){
