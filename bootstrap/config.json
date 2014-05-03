@@ -1,6 +1,6 @@
 {
   "vars": {
-    "@font-family-sans-serif": "Ubuntu,Arial,'Apple SD Gothic Neo','NanumBarunGothic','Malgun Gothic','NanumGothic',sans-serif",
+    "@font-family-sans-serif": "Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif",
     "@font-size-base": "18px",
     "@font-size-h1": "floor(@font-size-base * 1.5)",
     "@font-size-h2": "floor(@font-size-base * 1.25)",

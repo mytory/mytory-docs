@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body, h1, h2, h3, h4, h5, h6 {
+    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+}
 a {
     text-decoration: none;
 }

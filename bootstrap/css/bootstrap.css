@@ -265,7 +265,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Ubuntu, Arial, 'Apple SD Gothic Neo', 'NanumBarunGothic', 'Malgun Gothic', 'NanumGothic', sans-serif;
+  font-family: Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif;
   font-size: 18px;
   line-height: 1.428571429;
   color: #333333;
@@ -347,7 +347,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: Ubuntu, Arial, 'Apple SD Gothic Neo', 'NanumBarunGothic', 'Malgun Gothic', 'NanumGothic', sans-serif;
+  font-family: Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif;
   font-weight: bold;
   line-height: 1.1;
   color: inherit;
