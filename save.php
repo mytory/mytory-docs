@@ -1,7 +1,6 @@
 <?php
 include 'config.php';
 include 'functions.php';
-
 $parsed = parse_path();
 
 $current_filemtime = $_REQUEST['current_filemtime'];
@@ -41,5 +40,5 @@ fclose($handle);
 echo json_encode(array(
 	'code' => 'success',
 	'current_filemtime' => $current_filemtime,
-	'real_filemtime' => $real_filemtime,
+	'real_filemtime' => time(),
 ));

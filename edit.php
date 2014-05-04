@@ -45,24 +45,32 @@ $content = file_get_contents($parsed['real_full_file']);
 <script>
 var auto_save_interval, 
     auto_backup_interval, 
+    prev_content = $('#editor').val(),
     full_file = '<?php echo $parsed['full_file'] ?>',
     current_filemtime = '<?php echo filemtime($parsed['real_full_file']) ?>';
 
 function auto_save(){
     var content = $('#editor').val();
-    console.log('current', current_filemtime);
+    if(prev_content == content){
+        auto_save_interval = setTimeout(auto_save, 1000);
+        return false;
+    }else{
+        prev_content = content;
+    }
 	$.post('save.php', {
         current_filemtime: current_filemtime,
 		content: content,
 		path: '<?php echo $_GET['path'] ?>'
 	}, function(data){
+        auto_save_interval = setTimeout(auto_save, 1000);
 		if(data.code == 'fail'){
 			$('.msg').text(data.msg);
         }else if(data.code == 'file changed'){
-            $('.msg').text(data.msg);
-            console.log('current', data.current_filemtime, 'real', data.real_filemtime);
-            // $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
-            // location.reload();
+            if(confirm("파일이 밖에서 변경됐습니다. 다시 로드할까요?")){
+                location.reload();
+            }else{
+                current_filemtime = parseInt(data.real_filemtime) + 1
+            }
 		}else{
             current_filemtime = data.real_filemtime;
 			$('.msg').text(new Date().toString() + ' - 저장');
@@ -84,20 +92,12 @@ function auto_backup(){
 }
 
 function init_auto_save_backup(){
-    auto_save_interval = setInterval(auto_save, 1000);
+    auto_save_interval = setTimeout(auto_save, 1000);
     auto_backup();
     auto_backup_interval = setInterval(auto_backup, 60*5*1000);
 }
 
-function remove_auto_save_backup(){
-    clearInterval(auto_save_interval);
-    clearInterval(auto_backup_interval);
-}
-
 init_auto_save_backup();
-
-// $(window).blur(remove_auto_save_backup);
-// $(window).focus(init_auto_save_backup);
 
 $('#file_path').click(function(){
     $(this).select();
