@@ -1,45 +1,70 @@
 <?php 
 $content = file_get_contents($parsed['real_full_file']);
 ?>
-<div id="epiceditor" class="epiceditor"><?php echo $content ?></div>
+<style>
+    body {
+        background-color: rgb(41, 41, 41);
+    }
+    .navbar {
+        background-color: rgb(41, 41, 41);
+        border-color: rgb(50, 50, 50);
+    }
+    .navbar-default .navbar-nav>li>a:hover {
+        color: rgb(200, 200, 200);
+    }
+    .navbar .form-control[readonly] {
+        background-color: rgb(41, 41, 41);
+        color: rgb(100, 100, 100);
+        border-color: rgb(50, 50, 50);
+    }
+    ::-webkit-scrollbar              {
+        background-color: rgb(41, 41, 41);
+    }
+    ::-webkit-scrollbar-button       {
+        background-color: rgb(50, 50, 50);
+    }
+    ::-webkit-scrollbar-track        {
+        background-color: rgb(41, 41, 41);
+    }
+    ::-webkit-scrollbar-track-piece  {
+        background-color: rgb(41, 41, 41);
+    }
+    ::-webkit-scrollbar-thumb        {
+        background-color: rgb(50, 50, 50);
+    }
+    ::-webkit-scrollbar-corner       {
+        background-color: rgb(50, 50, 50);
+    }
+    ::-webkit-resizer                {
+        background-color: rgb(50, 50, 50);
+    }
+</style>
+<textarea id="editor" class="editor"><?php echo $content ?></textarea>
 <div class="msg"></div>
 <div class="msg2"></div>
-<script src="lib/EpicEditor/js/epiceditor.min.js"></script>
-<script src="lib/md5.js"></script>
 <script>
-var auto_save_interval, auto_backup_interval;
-var full_file = '<?php echo $parsed['full_file'] ?>';
-var epic = new EpicEditor({
-    clientSideStorage: false,
-	file: {
-		name: full_file,
-		defaultContent: document.getElementById('epiceditor').innerHTML,
-		autoSave: 100
-	},
-	basePath: 'lib/EpicEditor',
-	theme: {
-		base: '/themes/base/epiceditor.css',
-		preview: '/themes/preview/preview-dark.css',
-		editor: '/themes/editor/epic-dark.css'
-	}
-}).load();
-
-var content_saved_md5 = CryptoJS.MD5(epic.getFiles()[full_file].content).toString();
+var auto_save_interval, 
+    auto_backup_interval, 
+    full_file = '<?php echo $parsed['full_file'] ?>',
+    current_filemtime = '<?php echo filemtime($parsed['real_full_file']) ?>';
 
 function auto_save(){
-    var content = epic.getFiles()[full_file].content;
+    var content = $('#editor').val();
+    console.log('current', current_filemtime);
 	$.post('save.php', {
-        content_saved_md5: content_saved_md5,
+        current_filemtime: current_filemtime,
 		content: content,
 		path: '<?php echo $_GET['path'] ?>'
 	}, function(data){
 		if(data.code == 'fail'){
 			$('.msg').text(data.msg);
         }else if(data.code == 'file changed'){
-            $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
-            location.reload();
+            $('.msg').text(data.msg);
+            console.log('current', data.current_filemtime, 'real', data.real_filemtime);
+            // $('body').html('<h1 style="color: white; padding-top: 100px; text-align: center">파일이 밖에서 변경됐습니다.</h1>');
+            // location.reload();
 		}else{
-            content_saved_md5 = data.content_saved_md5;
+            current_filemtime = data.real_filemtime;
 			$('.msg').text(new Date().toString() + ' - 저장');
 		}
 	}, 'json');
@@ -47,7 +72,7 @@ function auto_save(){
 
 function auto_backup(){
     $.post('backup.php', {
-        content: epic.getFiles()[full_file].content,
+        content: $('#editor').val(),
         path: '<?php echo $_GET['path'] ?>'
     }, function(data){
         if(data.code == 'fail'){
@@ -74,6 +99,8 @@ init_auto_save_backup();
 // $(window).blur(remove_auto_save_backup);
 // $(window).focus(init_auto_save_backup);
 
-$('body').css('background', 'rgb(41,41,41)');
+$('#file_path').click(function(){
+    $(this).select();
+});
 
 </script>

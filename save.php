@@ -4,17 +4,15 @@ include 'functions.php';
 
 $parsed = parse_path();
 
-$current_file_content = file_get_contents($parsed['real_full_file']);
-$current_md5 = md5($current_file_content);
-$content_saved_md5 = $_REQUEST['content_saved_md5'];
+$current_filemtime = $_REQUEST['current_filemtime'];
+$real_filemtime = filemtime($parsed['real_full_file']);
 
-if($current_md5 != $content_saved_md5){
+if($real_filemtime > $current_filemtime){
 	echo json_encode(array(
-		'current_md5' => $current_md5,
-		'content_saved_md5' => $content_saved_md5,
+		'current_filemtime' => $current_filemtime,
+		'real_filemtime' => $real_filemtime,
 		'code' => 'file changed',
 		'msg' => '파일이 밖에서 변경됐습니다.',
-		'current_file_content' => $current_file_content,
 	));
 	exit;
 }
@@ -42,5 +40,6 @@ fclose($handle);
 
 echo json_encode(array(
 	'code' => 'success',
-	'content_saved_md5' => md5($_POST['content']),
+	'current_filemtime' => $current_filemtime,
+	'real_filemtime' => $real_filemtime,
 ));

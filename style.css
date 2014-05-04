@@ -10,6 +10,7 @@ a:hover {
     background: #eeeeee;
 }
 
+
 .wrapper {
     max-width: 800px;
     margin: 0 auto;
@@ -27,8 +28,17 @@ a:hover {
     color: black;
 }
 
-.epiceditor {
+.editor {
     height: 600px;
+    width: 100%;
+    color: white;
+    background: rgb(41, 41, 41);
+    border: 0;
+    font-family: nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
+    padding-bottom: 500px;
+}
+.editor:focus {
+    outline: none;
 }
 
 .content img {

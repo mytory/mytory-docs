@@ -63,7 +63,7 @@ function parse_path(){
 
 	$root = array_shift($temp2);
 	if( ! isset($doc_roots[$root])){
-		echo "잘못된 경로 type1 : " . __FILE__ . " : " . __LINE__;
+		echo "잘못된 경로 type1 : " . __FILE__ . " : " . __LINE__ . " : path는 {$_REQUEST['path']}, root는 {$root}";
 		exit;
 	}
 
