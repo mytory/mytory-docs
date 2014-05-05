@@ -66,3 +66,21 @@ th a:hover {
 .table {
     clear: both;
 }
+
+@media print {
+    p {
+        font-size: 11pt;
+    }
+    h1 {
+        font-size: 20pt;
+    }
+    h2 {
+        font-size: 15pt;
+    }
+    h3, h4, h5, h6 {
+        font-size: 12pt;
+    }
+    h4, h5, h6 {
+        font-weight: normal;
+    }
+}
