@@ -40,8 +40,10 @@ $content = file_get_contents($parsed['real_full_file']);
     }
 </style>
 <textarea id="editor" class="editor"><?php echo $content ?></textarea>
-<div class="msg"></div>
-<div class="msg2"></div>
+<div class="msges">
+    <div class="msg"></div>
+    <div class="msg2"></div>
+</div>
 <script>
 var auto_save_interval, 
     auto_backup_interval, 
@@ -75,6 +77,7 @@ function auto_save(){
             current_filemtime = data.real_filemtime;
 			$('.msg').text(new Date().toString() + ' - 저장');
 		}
+        adjust_editor_height();
 	}, 'json');
 }
 
@@ -88,6 +91,7 @@ function auto_backup(){
         }else{
             $('.msg2').text(new Date().toString() + ' - 백업');
         }
+        adjust_editor_height();
     }, 'json');
 }
 
@@ -97,7 +101,24 @@ function init_auto_save_backup(){
     auto_backup_interval = setInterval(auto_backup, 60*5*1000);
 }
 
+function adjust_editor_height(){
+    var window_height,
+        editor_start_point,
+        msg_area_height;
+
+    window_height = $(window).height();
+    editor_start_point = $('.editor').offset().top;
+    msg_area_height = $('.msges').height();
+
+    editor_height = window_height - editor_start_point - msg_area_height;
+
+    $('#editor').outerHeight(editor_height);
+}
+
 init_auto_save_backup();
+
+$(document).ready(adjust_editor_height);
+$(window).resize(adjust_editor_height);
 
 $('#file_path').click(function(){
     $(this).select();

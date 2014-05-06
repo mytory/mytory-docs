@@ -40,6 +40,9 @@ a:hover {
 .editor:focus {
     outline: none;
 }
+.msges {
+    color: #555;
+}
 
 .content img {
     max-width: 100%;
