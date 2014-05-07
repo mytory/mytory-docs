@@ -16,6 +16,9 @@
                 <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
                     <li><a href="?path=list:<?php echo $parsed['full_path'] ?>">목록</a></li>
                 <?php } ?>
+                <?php if(get_cmd_type() == 'edit'){ ?>
+                    <li><a href="?path=view:<?php echo $parsed['full_file'] ?>">보기</a></li>
+                <?php } ?>
                 <?php if(get_cmd_type() == 'view'){ ?>
                     <li><a href="?path=edit:<?php echo $parsed['full_file']?>">수정</a></li>
                 <?php } ?>
