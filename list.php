@@ -94,5 +94,7 @@ if (is_dir($dir)) {
         features: {
             paginate: false
         }
-    });
+    }).data('dynatable');
+    Dynatable.sorts.add('날짜',-1);
+    Dynatable.process();
 </script>
