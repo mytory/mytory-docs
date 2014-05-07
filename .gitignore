@@ -4,3 +4,4 @@ custom-theme/
 docs/
 .idea
 backup/*
+*.DS_Store

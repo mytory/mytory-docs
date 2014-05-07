@@ -72,9 +72,14 @@ th a:hover {
 
 @media print {
     * {
-        font-size: 11pt;
+        font-size: 10.5pt;
+    }
+    p {
+        margin: 0;
+        text-indent: 1em;
     }
     ul {
+        margin: 1em 0;
         padding-left: 1.5em;
     }
     h1 {

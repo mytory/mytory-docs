@@ -90,7 +90,7 @@ if (is_dir($dir)) {
         $('#delete-file').find('[name="path"]').val($(this).data('path'));
         $('#delete-file').find('.modal-body p').text("다음 파일을 삭제합니다 : " + $(this).data('title'));
     });
-    $('#list-table').dynatable({
+    var Dynatable = $('#list-table').dynatable({
         features: {
             paginate: false
         }
