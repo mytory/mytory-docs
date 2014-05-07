@@ -65,6 +65,7 @@ if(get_cmd_type() == 'edit'){
 <?php } ?>
 </div>
 </div>
+<script src="script.js"></script>
 <?php foreach ($js_list as $js_file) { ?>
 	<script src="<?php echo $js_file ?>"></script>
 <?php } ?>
