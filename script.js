@@ -17,4 +17,8 @@ $(document).ready(function(){
         Dynatable.sorts.add('날짜',-1);
         Dynatable.process();
     }
+
+    if($('.content').length > 0){
+        $('title').text($('h1').first().text() + ' : Mytory Docs');
+    }
 });
