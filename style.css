@@ -82,6 +82,9 @@ th a:hover {
         margin: 1em 0;
         padding-left: 1.5em;
     }
+    h1:first-child {
+        margin-top: 0;
+    }
     h1 {
         font-size: 20pt;
     }
@@ -93,5 +96,8 @@ th a:hover {
     }
     h4, h5, h6 {
         font-weight: normal;
+    }
+    .content {
+        margin: 0;
     }
 }
