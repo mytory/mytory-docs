@@ -13,7 +13,7 @@ function check_config_error(){
 function get_filename_or_md_headline($dir, $file){
 	$full_path = realpath($dir . '/' . $file);
 
-	$content = file_get_contents($full_path);
+	$content = get_md_content($full_path);
 
 	preg_match('/^#(.*)#*\n|(.*)\n={3,}/', $content, $match);
 
@@ -192,4 +192,22 @@ function print_one_file($info){
         </td>
     </tr>
     <?php
+}
+
+function get_os_encoding(){
+    if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'window')){
+        return 'euc-kr';
+    }else{
+        return 'utf-8';
+    }
+}
+
+function get_md_content($real_full_file){
+    $content = file_get_contents($real_full_file);
+    $os_encoding = get_os_encoding();
+    $text_encoding = mb_detect_encoding($content);
+    if($os_encoding != $text_encoding){
+        $content = iconv($text_encoding, $os_encoding . '//IGNORE', $content);
+    }
+    return $content;
 }

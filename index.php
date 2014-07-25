@@ -5,8 +5,8 @@ if( ! is_file('config.php')){
 		exit;
 	}
 }
-include 'config.php'; 
 include 'functions.php';
+include 'config.php'; 
 require_once 'lib/php-markdown/markdown.php';
 check_config_error();
 $parsed = parse_path();
@@ -22,7 +22,7 @@ if(get_cmd_type() == 'new-file'){
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="<?= get_os_encoding() ?>">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="favicon.png">

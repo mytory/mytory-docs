@@ -1,5 +1,6 @@
 <?php 
-$html = Markdown(file_get_contents($parsed['real_full_file']));
+$content = get_md_content($parsed['real_full_file']);
+$html = Markdown($content);
 $html = str_replace('<img src="http://', '<imgsrchttp', $html);
 $html = str_replace('<img src="https://', '<imgsrchttps', $html);
 $html_for_image = str_replace('<img src="', '<img src="image.php?path=image:' . $parsed['full_path'] . '/' , $html);

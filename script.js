@@ -6,7 +6,7 @@ $(document).ready(function(){
             e.preventDefault();
             var path = $(this).data('path');
             $('#delete-file').find('[name="path"]').val(path);
-            $('#delete-file').find('.modal-body p').text("다음 파일을 삭제합니다 : " + $(this).data('title'));
+            $('#delete-file').find('.modal-body p').text("Delete target : " + $(this).data('title'));
         });
 
         var Dynatable = $('#list-table').dynatable({
@@ -14,7 +14,7 @@ $(document).ready(function(){
                 paginate: false
             }
         }).data('dynatable');
-        Dynatable.sorts.add('날짜',-1);
+        Dynatable.sorts.add('Date',-1);
         Dynatable.process();
     }
 
