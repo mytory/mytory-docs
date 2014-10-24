@@ -49,10 +49,24 @@ a:hover {
     height: auto;
 }
 
+.content p {
+    clear: both;
+}
+
 .content blockquote p {
     font-size: 1em;
     line-height: 25.71428680419922px;
     color: #777;
+}
+
+.doc-info {
+    margin-bottom: 1em;
+    text-align: right;
+}
+
+.doc-info li {
+    margin-right: 1em;
+    display: inline-block;
 }
 
 th a {
@@ -71,8 +85,19 @@ th a:hover {
 }
 
 @media print {
+	body {
+		line-height: 1.6;
+	}
+	body, h1, h2, h3, h4, h5, h6 {
+		font-family: '바탕', '나눔명조'!important;
+	}
+	strong {
+		font-family: 'NanumBarunGothic'!important;	
+		font-weight: normal;
+	}
     * {
         font-size: 10.5pt;
+        color: black;
     }
     p {
         margin: 0;
@@ -81,6 +106,9 @@ th a:hover {
     ul {
         margin: 1em 0;
         padding-left: 1.5em;
+    }
+    ul ul {
+        margin: 0;
     }
     h1:first-child {
         margin-top: 0;
