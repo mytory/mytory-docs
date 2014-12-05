@@ -18,7 +18,8 @@ $(document).ready(function(){
         Dynatable.process();
     }
 
-    if($('.content').length > 0){
+    if($('.l-view').length > 0){
         $('title').text($('h1').first().text() + ' : Mytory Docs');
+        $('table').addClass('table');
     }
 });
