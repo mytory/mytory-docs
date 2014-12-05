@@ -15,8 +15,8 @@ if (is_dir($dir)) {
         <thead>
             <tr>
                 <th></th>
-                <th>이름</th>
-                <th>날짜</th>
+                <th>Name</th>
+                <th>Date</th>
                 <th></th>
             </tr>
         </thead>
@@ -51,10 +51,10 @@ if (is_dir($dir)) {
                 $parent_path = 'list:' . $parsed['root'];
             }
 
-            print_one_dir('상위폴더', "?path={$parent_path}");
+            print_one_dir('Parent Folder', "?path={$parent_path}");
         } else {
 
-            print_one_dir('최상위', BASE_URL);
+            print_one_dir('Root Folder', BASE_URL);
         }
 
         uasort($dir_list, function ($a, $b) {

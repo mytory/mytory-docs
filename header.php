@@ -3,7 +3,7 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#main-menu">
-                <span class="sr-only">메뉴 열기</span>
+                <span class="sr-only">Open Menu</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -14,25 +14,25 @@
         <div class="collapse navbar-collapse" id="main-menu">
             <ul class="nav navbar-nav">
                 <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
-                    <li><a href="?path=list:<?php echo $parsed['full_path'] ?>">목록</a></li>
+                    <li><a href="?path=list:<?php echo $parsed['full_path'] ?>">List</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'edit'){ ?>
-                    <li><a href="?path=view:<?php echo $parsed['full_file'] ?>">보기</a></li>
+                    <li><a href="?path=view:<?php echo $parsed['full_file'] ?>">View</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'view'){ ?>
-                    <li><a href="?path=edit:<?php echo $parsed['full_file']?>">수정</a></li>
+                    <li><a href="?path=edit:<?php echo $parsed['full_file']?>">Update</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'list'){ ?>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#new-file" onclick="setTimeout(function(){$('#filename').focus()}, 1000)">
-                            새 파일
+                            New File
                         </a>
                     </li>
                 <?php } ?>
             </ul>
             <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
                 <span class="navbar-text navbar-left">
-                    <label for="file_path">파일경로</label>
+                    <label for="file_path">File Path</label>
                 </span>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
@@ -51,19 +51,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="label-new-file">파일명을 입력해 주세요.</h4>
+                <h4 class="modal-title" id="label-new-file">Enter file name.</h4>
             </div>
             <form role="form" action="<?php echo BASE_URL ?>">
                 <div class="modal-body">
                     <input name="path" type="hidden" value="new-file:<?php echo $parsed['full_path'] ?>"/>
                     <div class="form-group">
-                        <label for="filename">파일명</label>
+                        <label for="filename">File name</label>
                         <input type="text" class="form-control" id="filename" name="filename" placeholder="new file.md">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                    <button type="submit" class="btn btn-primary">생성</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
@@ -76,7 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="label-delete-file">정말로 삭제할까요?</h4>
+                <h4 class="modal-title" id="label-delete-file">Really?</h4>
             </div>
             <form role="form" action="<?php echo BASE_URL ?>">
                 <div class="modal-body">
@@ -84,8 +84,8 @@
                     <input name="path" type="hidden" value=""/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                    <button type="submit" class="btn btn-danger">삭제</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
