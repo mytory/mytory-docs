@@ -14,7 +14,7 @@ $(document).ready(function(){
                 paginate: false
             }
         }).data('dynatable');
-        Dynatable.sorts.add('Date',-1);
+        Dynatable.sorts.add('date',-1);
         Dynatable.process();
     }
 
