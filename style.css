@@ -97,16 +97,16 @@ th a:hover {
 }
 
 @media print {
-	body {
-		line-height: 1.7;
-	}
-	body, h1, h2, h3, h4, h5, h6 {
-		font-family: '바탕', '나눔명조'!important;
-	}
-	strong {
-		font-family: 'NanumBarunGothic'!important;	
-		font-weight: normal;
-	}
+    body {
+        line-height: 1.7;
+    }
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: '바탕', '나눔명조'!important;
+    }
+    strong {
+        font-family: 'NanumBarunGothic'!important;    
+        font-weight: normal;
+    }
     * {
         font-size: 10.5pt;
         color: black;
@@ -143,5 +143,11 @@ th a:hover {
     blockquote {
         border: none;
         font-size: 0.95em;
+    }
+    .content img {
+    	max-width: 80%;
+        page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-inside: avoid; /* or 'auto' */
     }
 }
