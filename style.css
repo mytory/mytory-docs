@@ -49,10 +49,36 @@ a:hover {
     height: auto;
 }
 
+.content p {
+    clear: both;
+}
+
+.content blockquote {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
 .content blockquote p {
     font-size: 1em;
     line-height: 25.71428680419922px;
     color: #777;
+}
+.content blockquote p:first-child {
+    margin-top: 0;
+}
+.content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.doc-info {
+    margin-bottom: 1em;
+    text-align: right;
+}
+
+.doc-info li {
+    margin-right: 1em;
+    display: inline-block;
 }
 
 th a {
@@ -71,8 +97,19 @@ th a:hover {
 }
 
 @media print {
+    body {
+        line-height: 1.7;
+    }
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: '바탕', '나눔명조'!important;
+    }
+    strong {
+        font-family: 'NanumBarunGothic'!important;    
+        font-weight: normal;
+    }
     * {
         font-size: 10.5pt;
+        color: black;
     }
     p {
         margin: 0;
@@ -102,5 +139,15 @@ th a:hover {
     }
     .content {
         margin: 0;
+    }
+    blockquote {
+        border: none;
+        font-size: 0.95em;
+    }
+    .content img {
+    	max-width: 80%;
+        page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-inside: avoid; /* or 'auto' */
     }
 }

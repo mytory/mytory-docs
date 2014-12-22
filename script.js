@@ -14,11 +14,12 @@ $(document).ready(function(){
                 paginate: false
             }
         }).data('dynatable');
-        Dynatable.sorts.add('Date',-1);
+        Dynatable.sorts.add('date',-1);
         Dynatable.process();
     }
 
-    if($('.content').length > 0){
+    if($('.l-view').length > 0){
         $('title').text($('h1').first().text() + ' : Mytory Docs');
+        $('table').addClass('table');
     }
 });
