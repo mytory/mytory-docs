@@ -96,6 +96,11 @@ th a:hover {
     clear: both;
 }
 
+strike {
+    font-size: 0.95em;
+    color: #888;
+}
+
 @media print {
     body {
         line-height: 1.7;
@@ -104,12 +109,14 @@ th a:hover {
         font-family: '바탕', '나눔명조'!important;
     }
     strong {
-        font-family: 'NanumBarunGothic'!important;    
-        font-weight: normal;
+        font-family: 'NanumBarunGothic'!important;
     }
     * {
         font-size: 10.5pt;
         color: black;
+    }
+    strike {
+        font-size: 0.95em;
     }
     p {
         margin: 0;
