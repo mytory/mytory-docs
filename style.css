@@ -150,6 +150,7 @@ strike {
     blockquote {
         border: none;
         font-size: 0.95em;
+        page-break-inside: auto;
     }
     .content img {
     	max-width: 80%;
