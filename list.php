@@ -26,6 +26,10 @@ if (is_dir($dir)) {
             if ($file === '.' || $file === '..' || substr($file, 0, 1) === '.') {
                 continue;
             }
+            $file_encoding = mb_detect_encoding($file);
+            if(strtolower($file_encoding) != 'utf-8'){
+                $file = iconv($file_encoding, 'utf-8//IGNORE', $file);
+            }
             $full_path = $dir . '/' . $file;
             if (is_file($full_path) AND is_target_ext($file)) {
                 $file_list[] = array(

@@ -202,20 +202,11 @@ function print_one_file($info){
     <?php
 }
 
-function get_os_encoding(){
-    if(strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'window')){
-        return 'euc-kr';
-    }else{
-        return 'utf-8';
-    }
-}
-
 function get_md_content($real_full_file){
     $content = file_get_contents($real_full_file);
-    $os_encoding = get_os_encoding();
     $text_encoding = mb_detect_encoding($content);
-    if($os_encoding != $text_encoding){
-        $content = iconv($text_encoding, $os_encoding . '//IGNORE', $content);
+    if(strtolower($text_encoding) == 'euc-kr'){
+        $content = iconv($text_encoding, 'UTF-8' . '//IGNORE', $content);
     }
     return $content;
 }

@@ -22,7 +22,7 @@ if(get_cmd_type() == 'new-file'){
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="<?= get_os_encoding() ?>">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="favicon.png">
