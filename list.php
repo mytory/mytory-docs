@@ -31,13 +31,22 @@ if (is_dir($dir)) {
                 $file = iconv($file_encoding, 'utf-8//IGNORE', $file);
             }
             $full_path = $dir . '/' . $file;
-            if (is_file($full_path) AND is_target_ext($file)) {
-                $file_list[] = array(
+            $file_info = array();
+            if (is_file($full_path)) {
+                $file_info = array(
+                    'full_path' => $full_path, 
                     'path' => 'view:' . $parsed['full_path'] . '/' . $file,
                     'title' => get_filename_or_md_headline($dir, $file),
                     'date' => get_date($full_path)
                 );
             }
+            if(is_target_ext($file)){
+                $file_info['is_markdown'] = true;
+            }else{
+                $file_info['is_markdown'] = false;
+            }
+            $file_list[] = $file_info;
+
             if (is_dir($full_path)) {
                 $dir_list[] = array(
                     'path' => 'list:' . $parsed['full_path'] . '/' . $file,

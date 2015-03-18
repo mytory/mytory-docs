@@ -37,7 +37,7 @@ $doc_roots = array(
 );
 
 // extension
-$ext_list = array(
+$markdown_ext_list = array(
 	'md',
 	'txt',
 	// ... 

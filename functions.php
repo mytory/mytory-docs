@@ -39,8 +39,8 @@ function get_parent_folder($relative_path){
 }
 
 function is_target_ext($full_path){
-	global $ext_list;
-	return in_array(pathinfo($full_path, PATHINFO_EXTENSION), $ext_list);
+	global $markdown_ext_list;
+	return in_array(pathinfo($full_path, PATHINFO_EXTENSION), $markdown_ext_list);
 }
 
 function get_cmd_type(){
@@ -106,11 +106,11 @@ function parse_path(){
 }
 
 function new_file(){
-    global $parsed, $ext_list;
+    global $parsed, $markdown_ext_list;
 
     $pathinfo = pathinfo($_REQUEST['filename']);
-    if( ! in_array($pathinfo['extension'], $ext_list)){
-        $_REQUEST['filename'] .=  '.' . $ext_list[0];
+    if( ! in_array($pathinfo['extension'], $markdown_ext_list)){
+        $_REQUEST['filename'] .=  '.' . $markdown_ext_list[0];
     }
 
     $new_file = $parsed['real_full_path'] . DIRECTORY_SEPARATOR . $_REQUEST['filename'];
@@ -185,10 +185,17 @@ function print_one_file($info){
     <tr class="doc-row">
         <td></td>
         <td>
-            <a class="doc-file"
-               href="?path=<?php echo $info['path'] ?>">
-                <?php echo $info['title'] ?>
-            </a>
+            <?php if($info['is_markdown']){ ?>
+                <a class="doc-file"
+                   href="?path=<?php echo $info['path'] ?>">
+                    <?= $info['title'] ?>
+                </a>
+            <?php } else { ?>
+                <a class="doc-file  js-prompt" href="#" 
+                   data-prompt="<?= $info['full_path'] ?>">
+                    <?= $info['title'] ?>
+                </a>
+            <?php } ?>
         </td>
         <td>
             <?php echo $info['date'] ?>

@@ -22,4 +22,9 @@ $(document).ready(function(){
         $('title').text($('h1').first().text() + ' : Mytory Docs');
         $('table').addClass('table');
     }
+
+    $('.js-prompt').click(function(){
+        var text = $(this).data('prompt');
+        prompt('This is full path. Copy and paste.', text);
+    });
 });
