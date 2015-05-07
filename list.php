@@ -39,13 +39,15 @@ if (is_dir($dir)) {
                     'title' => get_filename_or_md_headline($dir, $file),
                     'date' => get_date($full_path)
                 );
+
+                if(is_target_ext($file)){
+                    $file_info['is_markdown'] = true;
+                }else{
+                    $file_info['is_markdown'] = false;
+                }
+                $file_list[] = $file_info;
             }
-            if(is_target_ext($file)){
-                $file_info['is_markdown'] = true;
-            }else{
-                $file_info['is_markdown'] = false;
-            }
-            $file_list[] = $file_info;
+
 
             if (is_dir($full_path)) {
                 $dir_list[] = array(
