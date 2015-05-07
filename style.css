@@ -35,7 +35,6 @@ a:hover {
     background: rgb(41, 41, 41);
     border: 0;
     font-family: nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
-    padding-bottom: 500px;
 }
 .editor:focus {
     outline: none;
