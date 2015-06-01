@@ -59,7 +59,7 @@ if(get_cmd_type() == 'edit'){
 	// 최상위 
 	?><ul><?php
 		foreach ($doc_roots as $name => $dir) { ?>
-		<li><a href="?path=list:<?php echo $name ?>"><?php echo $name?></a></li>	
+			<li><a href="?path=list:<?php echo $name ?>"><?php echo $name?></a></li>	
 		<?php } ?>
 	</ul>
 <?php } ?>

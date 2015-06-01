@@ -48,7 +48,6 @@ if (is_dir($dir)) {
                 $file_list[] = $file_info;
             }
 
-
             if (is_dir($full_path)) {
                 $dir_list[] = array(
                     'path' => 'list:' . $parsed['full_path'] . '/' . $file,
@@ -80,10 +79,10 @@ if (is_dir($dir)) {
         });
 
         uasort($file_list, function ($a, $b) {
-            if ($a['title'] == $b['title']) {
+            if ($a['date'] == $b['date']) {
                 return 0;
             }
-            return ($a['title'] < $b['title']) ? -1 : 1;
+            return ($a['date'] < $b['date']) ? 1 : -1;
         });
 
         foreach ($dir_list as $info) {

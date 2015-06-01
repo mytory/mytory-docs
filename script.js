@@ -14,8 +14,6 @@ $(document).ready(function(){
                 paginate: false
             }
         }).data('dynatable');
-        Dynatable.sorts.add('date',-1);
-        Dynatable.process();
     }
 
     if($('.l-view').length > 0){
