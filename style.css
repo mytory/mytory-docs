@@ -1,6 +1,10 @@
 @charset "UTF-8";
-body, h1, h2, h3, h4, h5, h6 {
+body {
     line-height: 1.8;
+    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
     font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
 }
 blockquote p, dt, dd {
@@ -107,11 +111,15 @@ strike {
     body {
         line-height: 1.7;
     }
-    body, h1, h2, h3, h4, h5, h6 {
-        font-family: '바탕', '나눔명조'!important;
+    body {
+        font-family: 'Droid Serif', '바탕', '나눔명조'!important;
     }
-    strong {
-        font-family: 'NanumBarunGothic'!important;
+    h1, h2, h3, h4, h5, h6, strong {
+        font-family: 'Ubuntu', 'NanumBarunGothic'!important;
+    }
+    h1:first-child {
+        margin-top: 0;
+        margin-bottom: 1.5em;
     }
     * {
         font-size: 10.5pt;
@@ -123,6 +131,9 @@ strike {
     p {
         margin: 0;
         text-indent: 1em;
+    }
+    li p {
+        text-indent: 0;
     }
     ul, ol {
         margin: 1em 0;
