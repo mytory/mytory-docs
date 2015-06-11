@@ -7,7 +7,9 @@ if( ! is_file('config.php')){
 }
 include 'functions.php';
 include 'config.php'; 
-require_once 'lib/php-markdown/markdown.php';
+require_once 'lib/parsedown/Parsedown.php';
+require_once 'lib/parsedown-extra/ParsedownExtra.php';
+$ParsedownExtra = new ParsedownExtra();
 check_config_error();
 $parsed = parse_path();
 
