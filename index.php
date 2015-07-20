@@ -67,6 +67,9 @@ if(get_cmd_type() == 'edit'){
 <?php } ?>
 </div>
 </div>
+<div class="footer">
+	Mytory Docs
+</div>
 <script src="script.js"></script>
 <?php foreach ($js_list as $js_file) { ?>
 	<script src="<?php echo $js_file ?>"></script>

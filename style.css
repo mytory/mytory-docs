@@ -1,11 +1,11 @@
 @charset "UTF-8";
 body {
     line-height: 1.8;
-    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
 }
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
-    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
 }
 h4, h5, h6 {
 	font-size: 1em;
@@ -29,6 +29,15 @@ a:hover {
 
 .header {
     padding-top: 1em;
+}
+
+.footer {
+    background-color: #f6f6f6;
+    color: #888;
+    font-family: monospace;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 2em;
 }
 
 .directory {
@@ -179,5 +188,8 @@ strike {
         page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
         page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
         page-break-inside: avoid; /* or 'auto' */
+    }
+    .footer {
+        display: none;
     }
 }
