@@ -112,10 +112,13 @@ strike {
 
 @media print {
     body {
-        line-height: 1.7;
+        line-height: 1.8;
     }
     body, h4, h5, h6 {
-        font-family: 'Droid Serif', '바탕', '나눔명조', serif!important;
+        font-family: 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif!important;
+    }
+    body {
+        font-weight: lighter;
     }
     h1, h2, h3, strong {
         font-family: 'Ubuntu', 'NanumBarunGothic', sans-serif!important;
