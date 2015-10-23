@@ -7,11 +7,11 @@ pre {
 }
 body {
     line-height: 1.8;
-    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
 }
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
-    font-family:Ubuntu, Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
 }
 h4, h5, h6 {
 	font-size: 1em;
@@ -52,6 +52,15 @@ a:hover {
     padding-top: 1em;
 }
 
+.footer {
+    background-color: #f6f6f6;
+    color: #888;
+    font-family: monospace;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 2em;
+}
+
 .directory {
     color: #4a8ec2;
 }
@@ -78,6 +87,12 @@ a:hover {
 .content img {
     max-width: 100%;
     height: auto;
+}
+
+.content em {
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: underline;
 }
 
 .content p {
@@ -133,17 +148,18 @@ strike {
 
 @media print {
     body {
-        line-height: 1.7;
         font-size: 10.5pt;
+        font-weight: lighter;
     }
     body, a, .content blockquote p, .content blockquote li {
         color: black;
+        line-height: 1.8;
     }
     body, h4, h5, h6 {
-        font-family: 'Ubuntu', 'KoPubBatang Light', '나눔명조', serif!important;
+        font-family: 'KoPubBatang Light', 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif!important;
     }
-    h1, h2, h3, strong {
-        font-family: 'Ubuntu', 'NanumBarunGothic', sans-serif!important;
+    h1, h2, h3, strong, em {
+        font-family: 'KoPubDotum Light', 'Ubuntu', 'NanumBarunGothic', sans-serif!important;
     }
     h1:first-child {
         margin-top: 0;
@@ -158,6 +174,7 @@ strike {
     p {
         margin: 0;
         text-indent: 1em;
+        text-align: justify;
     }
     p > img {
         margin: 1em 0 1em -1em;
@@ -210,5 +227,8 @@ strike {
     }
     .page-break {
         page-break-after: always;
+    }
+    .footer {
+        display: none;
     }
 }
