@@ -12,20 +12,43 @@ function check_config_error(){
 
 function get_filename_or_md_headline($dir, $file){
 	$full_path = realpath($dir . '/' . $file);
+    $filename_utf8 = detect_and_convert_utf8($file);
 
-    if( ! is_text_file($file)){
-        return $file;
+    if( ! is_text_file($full_path)){
+        return $filename_utf8;
     }
 
 	$content = get_md_content($full_path);
+    $content = detect_and_convert_utf8($content);
 
 	preg_match('/^#(.*)#*\n|(.*)\n={3,}/', $content, $match);
 
 	if(empty($match)){
-		return $file;
+		return $filename_utf8;
 	}else{
 		return trim($match[1] ? $match[1] : $match[2]);
 	}
+}
+
+function detect_and_convert_utf8($string){
+    $encoding = mb_detect_encoding($string);
+    if(strtolower($encoding) != 'utf-8'){
+        $string = iconv($encoding, 'utf-8//IGNORE', $string);
+    }
+    return $string;
+}
+
+function convert_to_os_encoding($string){
+    $tmp = explode(";", setlocale(LC_ALL, 0));
+    $tmp = explode("=", $tmp[1]);
+    $os_encoding = $tmp[1];
+    if($os_encoding == 'Korean_Korea.949'){
+        $os_encoding = 'cp949';
+    }
+    if(strtolower($os_encoding) != 'utf-8'){
+        $string = iconv('utf-8', $os_encoding, $string);
+    }
+    return $string;
 }
 
 function get_parent_folder($relative_path){
@@ -59,6 +82,8 @@ function parse_path(){
 	}
 
 	global $doc_roots;
+
+    $_REQUEST['path'] = convert_to_os_encoding($_REQUEST['path']);
 
 	$temp = explode(':', $_REQUEST['path']);
 	array_shift($temp);
@@ -187,12 +212,12 @@ function print_one_file($info){
         <td>
             <?php if($info['is_markdown']){ ?>
                 <a class="doc-file"
-                   href="?path=<?php echo $info['path'] ?>">
+                   href="?path=<?= detect_and_convert_utf8($info['path']) ?>">
                     <?= $info['title'] ?>
                 </a>
             <?php } else { ?>
                 <a class="doc-file  js-prompt" href="#" 
-                   data-prompt="<?= $info['full_path'] ?>">
+                   data-prompt="<?= detect_and_convert_utf8($info['full_path']) ?>">
                     <?= $info['title'] ?>
                 </a>
             <?php } ?>
