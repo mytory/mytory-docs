@@ -61,6 +61,11 @@ a:hover {
     padding: 2em;
 }
 
+.footer--edit {
+    background-color: transparent;
+    color: #888;
+}
+
 .directory {
     color: #4a8ec2;
 }

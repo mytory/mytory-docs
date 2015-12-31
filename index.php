@@ -67,7 +67,7 @@ if(get_cmd_type() == 'edit'){
 <?php } ?>
 </div>
 </div>
-<div class="footer">
+<div class="footer <?= get_cmd_type() == 'edit' ? 'footer--edit' : '' ?>">
 	Mytory Docs
 </div>
 <script src="script.js"></script>
