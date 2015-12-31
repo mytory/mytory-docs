@@ -39,9 +39,15 @@ function detect_and_convert_utf8($string){
 }
 
 function convert_to_os_encoding($string){
-    $tmp = explode(";", setlocale(LC_ALL, 0));
-    $tmp = explode("=", $tmp[1]);
-    $os_encoding = $tmp[1];
+    if(PHP_OS == 'Linux'){
+        $tmp = explode('.', setlocale(LC_CTYPE, 0));
+        $os_encoding = $tmp[1];
+    }else if(PHP_OS == 'WINNT'){
+        $tmp = explode(";", setlocale(LC_ALL, 0));
+        $tmp = explode("=", $tmp[1]);
+        $os_encoding = $tmp[1];
+    }
+    
     if($os_encoding == 'Korean_Korea.949'){
         $os_encoding = 'cp949';
     }
