@@ -9,12 +9,12 @@ pre {
 
 body {
     line-height: 1.8;
-    font-family: Arial, 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: Arial, 'KoPubBatang Light', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, strong, em {
     line-height: 1.2;
-    font-family: Arial, 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: Arial, 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
 }
 
 h4, h5, h6 {
@@ -210,11 +210,11 @@ strike {
         line-height: 1.8;
     }
 
-    body, h4, h5, h6 {
+    body {
         font-family: 'KoPubBatang Light', 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif !important;
     }
 
-    h1, h2, h3, strong, em {
+    h1, h2, h3, h4, h5, h6, strong, em {
         font-family: 'KoPubDotum Light', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
     }
 
