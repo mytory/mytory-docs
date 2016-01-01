@@ -1,3 +1,7 @@
+<?php
+$full_path_for_url = convert_from_os_to_utf8($parsed['full_path']);
+$full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
+?>
 <div class="header">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -14,13 +18,13 @@
         <div class="collapse navbar-collapse" id="main-menu">
             <ul class="nav navbar-nav">
                 <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
-                    <li><a href="?path=list:<?php echo $parsed['full_path'] ?>">List</a></li>
+                    <li><a href="?path=list:<?php echo $full_path_for_url ?>">List</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'edit'){ ?>
-                    <li><a href="?path=view:<?php echo $parsed['full_file'] ?>">View</a></li>
+                    <li><a href="?path=view:<?php echo $full_file_for_url ?>">View</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'view'){ ?>
-                    <li><a href="?path=edit:<?php echo $parsed['full_file']?>">Update</a></li>
+                    <li><a href="?path=edit:<?php echo $full_file_for_url?>">Update</a></li>
                 <?php } ?>
                 <?php if(get_cmd_type() == 'list'){ ?>
                     <li>
@@ -36,7 +40,7 @@
                 </span>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input readonly class="form-control" type="text" value='"<?php echo $parsed['real_full_file'] ?>"'
+                        <input readonly class="form-control" type="text" value='"<?= convert_from_os_to_utf8($parsed['real_full_file']) ?>"'
                                id="file_path">
                     </div>
                 </form>
@@ -55,7 +59,7 @@
             </div>
             <form role="form" action="<?php echo BASE_URL ?>">
                 <div class="modal-body">
-                    <input name="path" type="hidden" value="new-file:<?php echo $parsed['full_path'] ?>"/>
+                    <input name="path" type="hidden" value="new-file:<?php echo $full_path_for_url ?>"/>
                     <div class="form-group">
                         <label for="filename">File name</label>
                         <input type="text" class="form-control" id="filename" name="filename" placeholder="new file.md">
