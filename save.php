@@ -40,5 +40,5 @@ fclose($handle);
 echo json_encode(array(
 	'code' => 'success',
 	'current_filemtime' => $current_filemtime,
-	'real_filemtime' => $time + 1,
+	'real_filemtime' => time() + 1,
 ));
