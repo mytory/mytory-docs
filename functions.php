@@ -2,10 +2,9 @@
 
 function check_config_error(){
 	global $doc_roots;
-	foreach($doc_roots as $root){
+	foreach($doc_roots as $name => $root){
 		if( ! $result = is_dir($root)){
-            echo "$root is not a real directory or server has not permission: " . __FILE__ . " : " . __LINE__;
-			exit;
+            unset($doc_roots[$name]);
 		}
 	}
 }
