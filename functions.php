@@ -14,6 +14,11 @@ function get_filename_or_md_headline($dir, $file){
 
     if( ! is_text_file($full_path)){
         $file_for_display = convert_from_os_to_utf8($file);
+        if(strtotime(substr($file_for_display, 0, 10))){
+            $title = trim(substr(pathinfo($file_for_display, PATHINFO_FILENAME), 10));
+            $extension = strtoupper(pathinfo($file_for_display, PATHINFO_EXTENSION));
+            return "<small><span class='label  label-info'>$extension</span></small> $title";
+        }
         return $file_for_display;
     }
 
@@ -159,6 +164,10 @@ function delete_file(){
 function get_date($full_path){
 
     if( ! is_text_file($full_path)){
+        $file_for_display = pathinfo(convert_from_os_to_utf8($full_path), PATHINFO_FILENAME);
+        if(strtotime(substr($file_for_display, 0, 10))){
+            return date('Y-m-d', strtotime(substr($file_for_display, 0, 10)));
+        }
         return date('Y-m-d', filectime($full_path));
     }
 
