@@ -2,38 +2,79 @@
 html {
     font-size: 100%;
 }
+
 pre {
     font-size: inherit;
 }
+
 body {
     line-height: 1.8;
-    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family: Arial, 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
 }
+
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
-    font-family:Arial,'Apple SD Gothic Neo','애플 SD 고딕 Neo','NanumBarunGothic','NanumBarunGothicOTF','나눔바른고딕','나눔바른고딕OTF','Malgun Gothic','맑은 고딕','NanumGothic','NanumGothicOTF', '나눔고딕','나눔고딕OTF',sans-serif!important;
+    font-family: Arial, 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
 }
+
 h4, h5, h6 {
-	font-size: 1em;
+    font-size: 1em;
 }
 
-body {counter-reset: h2}
-h2 {counter-reset: h3}
-h3 {counter-reset: h4}
-h4 {counter-reset: h5}
-h5 {counter-reset: h6}
+body {
+    counter-reset: h2
+}
 
-h2:before {counter-increment: h2; content: counter(h2) ". "}
-h3:before {counter-increment: h3; content: "(" counter(h3) ") "}
-h4:before {counter-increment: h4; content: counter(h4) ") "}
-h5:before {counter-increment: h5; content: counter(h4) "." counter(h5) ") "}
-h6:before {counter-increment: h6; content: counter(h4) "." counter(h5) "." counter(h6) ") "}
+h2 {
+    counter-reset: h3
+}
 
-h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before { content: ""; counter-increment: none }
+h3 {
+    counter-reset: h4
+}
+
+h4 {
+    counter-reset: h5
+}
+
+h5 {
+    counter-reset: h6
+}
+
+h2:before {
+    counter-increment: h2;
+    content: counter(h2) ". "
+}
+
+h3:before {
+    counter-increment: h3;
+    content: "(" counter(h3) ") "
+}
+
+h4:before {
+    counter-increment: h4;
+    content: counter(h4) ") "
+}
+
+h5:before {
+    counter-increment: h5;
+    content: counter(h4) "." counter(h5) ") "
+}
+
+h6:before {
+    counter-increment: h6;
+    content: counter(h4) "." counter(h5) "." counter(h6) ") "
+}
+
+h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before {
+    content: "";
+    counter-increment: none
+}
 
 blockquote p, dt, dd {
     line-height: inherit;
 }
+
 a {
     text-decoration: none;
 }
@@ -41,7 +82,6 @@ a {
 a:hover {
     background: #eeeeee;
 }
-
 
 .wrapper {
     max-width: 800px;
@@ -82,9 +122,11 @@ a:hover {
     border: 0;
     font-family: nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
 .editor:focus {
     outline: none;
 }
+
 .msges {
     color: #555;
 }
@@ -110,13 +152,16 @@ a:hover {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
 .content blockquote p, .content blockquote li {
     font-size: 1em;
     color: #777;
 }
+
 .content blockquote p:first-child {
     margin-top: 0;
 }
+
 .content blockquote p:last-child {
     margin-bottom: 0;
 }
@@ -134,14 +179,17 @@ a:hover {
 th a {
     color: #4A8EC2;
 }
+
 th a:hover {
     color: #4A8EC2;
     text-decoration: underline;
 }
+
 .dynatable-search {
     position: static;
     float: right;
 }
+
 .table {
     clear: both;
 }
@@ -156,83 +204,106 @@ strike {
         font-size: 10.5pt;
         font-weight: lighter;
     }
+
     body, a, .content blockquote p, .content blockquote li {
         color: black;
         line-height: 1.8;
     }
+
     body, h4, h5, h6 {
-        font-family: 'KoPubBatang Light', 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif!important;
+        font-family: 'KoPubBatang Light', 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif !important;
     }
+
     h1, h2, h3, strong, em {
-        font-family: 'KoPubDotum Light', 'Ubuntu', 'NanumBarunGothic', sans-serif!important;
+        font-family: 'KoPubDotum Light', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
     }
+
     h1:first-child {
         margin-top: 0;
         margin-bottom: 1.5em;
     }
+
     a:after {
-        content: ''!important;
+        content: '' !important;
     }
+
     strike {
         font-size: 0.95em;
     }
+
     p {
         margin: 0;
         text-indent: 1em;
         text-align: justify;
     }
+
     p > img {
         margin: 1em 0 1em -1em;
     }
+
     pre {
         margin: 1em 0;
         border: 1px solid #000;
     }
+
     li p {
         text-indent: 0;
     }
+
     ul, ol {
         margin: 1em 0;
         padding-left: 1.5em;
     }
+
     ul ul, ul ol, ol ul, ol ol {
         margin: 0;
     }
+
     h1:first-child {
         margin-top: 0;
     }
+
     h1 {
         font-size: 20pt;
     }
+
     h2 {
         font-size: 15pt;
     }
+
     h3, h4, h5, h6 {
         font-size: 12pt;
     }
+
     h4, h5, h6 {
         font-weight: normal;
     }
+
     hr {
         border-top-color: #000;
     }
+
     .content {
         margin: 0;
     }
+
     blockquote {
         border: none;
         font-size: 0.95em;
         page-break-inside: auto;
     }
+
     .content img {
-    	max-width: 80%;
+        max-width: 80%;
         page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
         page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
         page-break-inside: avoid; /* or 'auto' */
     }
+
     .page-break {
         page-break-after: always;
     }
+
     .footer {
         display: none;
     }
