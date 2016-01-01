@@ -74,7 +74,7 @@ function auto_save(){
                 current_filemtime = parseInt(data.real_filemtime) + 1
             }
 		}else{
-            current_filemtime = data.real_filemtime;
+            current_filemtime = parseInt(data.real_filemtime);
 			$('.msg').text(new Date().toString() + ' - 저장');
 		}
         adjust_editor_height();
