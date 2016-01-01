@@ -195,8 +195,8 @@ function print_one_dir($name, $href){
         <td>
             <span class="glyphicon glyphicon-folder-open"></span>
         </td>
-        <td><a class="directory" href="<?php echo $href ?>">
-                <?php echo $name ?>
+        <td><a class="directory" href="<?php echo convert_from_os_to_utf8($href) ?>">
+                <?php echo convert_from_os_to_utf8($name) ?>
             </a></td>
         <td></td>
         <td></td>
