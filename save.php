@@ -37,8 +37,11 @@ if( ! fwrite($handle, $_POST['content'])){
 
 fclose($handle);
 
+$time = time();
+touch($parsed['real_full_file'], $time);
 echo json_encode(array(
 	'code' => 'success',
 	'current_filemtime' => $current_filemtime,
-	'real_filemtime' => time() + 1,
+	'real_filemtime' => $time+1,
 ));
+
