@@ -14,7 +14,8 @@ function get_filename_or_md_headline($dir, $file){
 	$full_path = realpath($dir . '/' . $file);
 
     if( ! is_text_file($full_path)){
-        return $file;
+        $file_for_display = convert_from_os_to_utf8($file);
+        return $file_for_display;
     }
 
 	$content = get_md_content($full_path);
