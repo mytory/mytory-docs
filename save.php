@@ -21,7 +21,7 @@ if( ! $handle){
 	echo json_encode(array(
 		'code' => 'fail',
 		'msg' => 'Fail to open.',
-		'real_full_file' => $parsed['real_full_file']
+		'real_full_file' => $parsed['real_full_file'],
 	));
 	exit;
 }
@@ -30,15 +30,18 @@ if( ! fwrite($handle, $_POST['content'])){
 	echo json_encode(array(
 		'code' => 'fail',
 		'msg' => 'Fail to write.',
-		'content' => $_POST['content']
+		'content' => $_POST['content'],
 	));
 	exit;	
 }
 
 fclose($handle);
 
+$time = time();
+touch($parsed['real_full_file'], $time);
 echo json_encode(array(
 	'code' => 'success',
 	'current_filemtime' => $current_filemtime,
-	'real_filemtime' => time(),
+	'real_filemtime' => $time+1,
 ));
+

@@ -2,59 +2,56 @@
 
 function check_config_error(){
 	global $doc_roots;
-	foreach($doc_roots as $root){
+	foreach($doc_roots as $name => $root){
 		if( ! $result = is_dir($root)){
-            echo "$root is not a real directory or server has not permission: " . __FILE__ . " : " . __LINE__;
-			exit;
+            unset($doc_roots[$name]);
 		}
 	}
 }
 
 function get_filename_or_md_headline($dir, $file){
 	$full_path = realpath($dir . '/' . $file);
-    $filename_utf8 = detect_and_convert_utf8($file);
 
     if( ! is_text_file($full_path)){
-        return $filename_utf8;
+        $file_for_display = convert_from_os_to_utf8($file);
+        if(strtotime(substr($file_for_display, 0, 10))){
+            $title = trim(substr(pathinfo($file_for_display, PATHINFO_FILENAME), 10));
+            $extension = strtoupper(pathinfo($file_for_display, PATHINFO_EXTENSION));
+            return "<small><span class='label  label-info'>$extension</span></small> $title";
+        }
+        return $file_for_display;
     }
 
 	$content = get_md_content($full_path);
-    $content = detect_and_convert_utf8($content);
 
 	preg_match('/^#(.*)#*\n|(.*)\n={3,}/', $content, $match);
 
 	if(empty($match)){
-		return $filename_utf8;
+		return $file;
 	}else{
 		return trim($match[1] ? $match[1] : $match[2]);
 	}
 }
 
-function detect_and_convert_utf8($string){
-    $encoding = mb_detect_encoding($string);
-    if(strtolower($encoding) != 'utf-8'){
-        $string = iconv($encoding, 'utf-8//IGNORE', $string);
+function convert_from_os_to_utf8($string){
+    if(strtolower(OS_ENCODING) != 'utf-8'){
+        $string = iconv(OS_ENCODING, 'utf-8//IGNORE', $string);
     }
     return $string;
 }
 
 function convert_to_os_encoding($string){
-    if(PHP_OS == 'Linux'){
-        $tmp = explode('.', setlocale(LC_CTYPE, 0));
-        $os_encoding = $tmp[1];
-    }else if(PHP_OS == 'WINNT'){
-        $tmp = explode(";", setlocale(LC_ALL, 0));
-        $tmp = explode("=", $tmp[1]);
-        $os_encoding = $tmp[1];
+    $string_encoding = mb_detect_encoding($string);
+
+    $os_encoding = OS_ENCODING;
+
+    if(strtolower($string_encoding) != strtolower($os_encoding)){
+        $string_converted = iconv($string_encoding, $os_encoding, $string);
+    }else{
+        $string_converted = $string;
     }
-    
-    if($os_encoding == 'Korean_Korea.949'){
-        $os_encoding = 'cp949';
-    }
-    if(strtolower($os_encoding) != 'utf-8'){
-        $string = iconv('utf-8', $os_encoding, $string);
-    }
-    return $string;
+
+    return $string_converted;
 }
 
 function get_parent_folder($relative_path){
@@ -167,6 +164,10 @@ function delete_file(){
 function get_date($full_path){
 
     if( ! is_text_file($full_path)){
+        $file_for_display = pathinfo(convert_from_os_to_utf8($full_path), PATHINFO_FILENAME);
+        if(strtotime(substr($file_for_display, 0, 10))){
+            return date('Y-m-d', strtotime(substr($file_for_display, 0, 10)));
+        }
         return date('Y-m-d', filectime($full_path));
     }
 
@@ -202,8 +203,8 @@ function print_one_dir($name, $href){
         <td>
             <span class="glyphicon glyphicon-folder-open"></span>
         </td>
-        <td><a class="directory" href="<?php echo $href ?>">
-                <?php echo $name ?>
+        <td><a class="directory" href="<?php echo convert_from_os_to_utf8($href) ?>">
+                <?php echo convert_from_os_to_utf8($name) ?>
             </a></td>
         <td></td>
         <td></td>
@@ -218,12 +219,12 @@ function print_one_file($info){
         <td>
             <?php if($info['is_markdown']){ ?>
                 <a class="doc-file"
-                   href="?path=<?= detect_and_convert_utf8($info['path']) ?>">
+                   href="?path=<?= convert_from_os_to_utf8($info['path']) ?>">
                     <?= $info['title'] ?>
                 </a>
             <?php } else { ?>
                 <a class="doc-file  js-prompt" href="#" 
-                   data-prompt="<?= detect_and_convert_utf8($info['full_path']) ?>">
+                   data-prompt="<?= convert_from_os_to_utf8($info['full_path']) ?>">
                     <?= $info['title'] ?>
                 </a>
             <?php } ?>
