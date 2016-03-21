@@ -124,7 +124,7 @@ a:hover {
     color: white;
     background: rgb(41, 41, 41);
     border: 0;
-    font-family: nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: d2coding, nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .editor:focus {
