@@ -1,6 +1,21 @@
 <div class="l-view">
-<?php 
+<?php
 $content = get_md_content($parsed['real_full_file']);
+$metadata = get_yaml_metadata($content);
+if($metadata['title']){
+    ?>
+    <h1><?= $metadata['title'] ?></h1>
+    <?php
+}
+if($metadata['tags']){
+    ?>
+    <ul>
+        <?php foreach ($metadata['tags'] as $tag) { ?>
+            <li><?= $tag ?></li>
+        <?php } ?>
+    </ul>
+    <?php
+}
 $html = $ParsedownExtra->text($content);
 $html = str_replace('<img src="http://', '<imgsrchttp', $html);
 $html = str_replace('<img src="https://', '<imgsrchttps', $html);

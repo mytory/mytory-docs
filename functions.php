@@ -247,7 +247,34 @@ function get_md_content($real_full_file){
     if(strtolower($text_encoding) == 'euc-kr'){
         $content = iconv($text_encoding, 'UTF-8' . '//IGNORE', $content);
     }
+    $content = str_replace(array("\r\n", "\r"), array("\n"), $content);
     return $content;
+}
+
+include "lib/yaml-3.1.0/Yaml.php";
+include "lib/yaml-3.1.0/Unescaper.php";
+include "lib/yaml-3.1.0/Inline.php";
+include "lib/yaml-3.1.0/Parser.php";
+include "lib/yaml-3.1.0/Exception/ExceptionInterface.php";
+include "lib/yaml-3.1.0/Exception/RuntimeException.php";
+include "lib/yaml-3.1.0/Exception/DumpException.php";
+include "lib/yaml-3.1.0/Exception/ParseException.php";
+use Symfony\Component\Yaml\Yaml;
+/**
+ * for compatibility with jekyll
+ * @param $content
+ * @return string
+ */
+function get_yaml_metadata($content){
+    if(empty($content)){
+        return array();
+    }
+    preg_match_all('/(?<yaml>^-{3,}\n.*)\n-{3,}\n/s', $content, $matches);
+    $metadata = array();
+    if(!empty($matches['yaml'][0])){
+        $metadata = Yaml::parse($matches['yaml'][0]);
+    }
+    return $metadata;
 }
 
 function is_text_file($file){
