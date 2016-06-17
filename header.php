@@ -26,6 +26,9 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
                 <?php if(get_cmd_type() == 'view'){ ?>
                     <li><a href="?path=edit:<?php echo $full_file_for_url?>">Update</a></li>
                 <?php } ?>
+                <?php if(get_cmd_type() == 'view'){ ?>
+                    <li><button class="btn btn-default btn-xs" type="button" onclick="$('body').toggleClass('has-counter')">제목 번호</button></li>
+                <?php } ?>
                 <?php if(get_cmd_type() == 'list'){ ?>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#new-file" onclick="setTimeout(function(){$('#filename').focus()}, 1000)">
@@ -41,7 +44,7 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
                         <input readonly class="form-control" type="text" value='"<?= convert_from_os_to_utf8($parsed['real_full_file']) ?>"'
-                               id="file_path">
+                               id="file_path" size="10">
                     </div>
                 </form>
             <?php } ?>
