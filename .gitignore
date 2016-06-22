@@ -5,3 +5,4 @@ docs/
 .idea
 backup/*
 *.DS_Store
+.phpintel/
