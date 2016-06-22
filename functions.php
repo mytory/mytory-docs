@@ -223,7 +223,7 @@ function print_one_file($info){
                     <?= $info['title'] ?>
                 </a>
             <?php } else { ?>
-                <a class="doc-file  js-prompt" href="#" 
+                <a class="doc-file  js-prompt" href="#"
                    data-prompt="<?= convert_from_os_to_utf8($info['full_path']) ?>">
                     <?= $info['title'] ?>
                 </a>
@@ -265,13 +265,14 @@ use Symfony\Component\Yaml\Yaml;
  * @param $content
  * @return string
  */
-function get_yaml_metadata($content){
+function get_yaml_metadata(&$content){
     if(empty($content)){
         return array();
     }
     preg_match_all('/(?<yaml>^-{3,}\n.*)\n-{3,}\n/s', $content, $matches);
     $metadata = array();
     if(!empty($matches['yaml'][0])){
+        $content = str_replace($matches['yaml'][0], '', $content);
         $metadata = Yaml::parse($matches['yaml'][0]);
     }
     return $metadata;

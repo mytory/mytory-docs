@@ -2,20 +2,35 @@
 <?php
 $content = get_md_content($parsed['real_full_file']);
 $metadata = get_yaml_metadata($content);
-if($metadata['title']){
-    ?>
-    <h1><?= $metadata['title'] ?></h1>
-    <?php
-}
-if($metadata['tags']){
-    ?>
+if($metadata['title']){ ?>
+    <div class="page-header">
+        <h1><?= $metadata['title'] ?></h1>
+    </div>
+<?php } ?>
     <ul>
-        <?php foreach ($metadata['tags'] as $tag) { ?>
-            <li><?= $tag ?></li>
+        <?php
+        foreach ($metadata as $key => $data) {
+            if ($key == 'title') { continue; }
+            ?>
+            <li>
+                <b><?= $key ?>:</b>
+                <?php
+                if (is_array($data)) {
+                    ?>
+                    <ul>
+                        <?php foreach ($data as $v) { ?>
+                            <li><?= $v ?></li>
+                        <?php } ?>
+                    </ul>
+                    <?php
+                } else {
+                    echo $data;
+                }
+                ?>
+            </li>
         <?php } ?>
     </ul>
-    <?php
-}
+<?php
 $html = $ParsedownExtra->text($content);
 $html = str_replace('<img src="http://', '<imgsrchttp', $html);
 $html = str_replace('<img src="https://', '<imgsrchttps', $html);
