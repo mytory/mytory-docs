@@ -27,7 +27,7 @@ function get_filename_or_md_headline($dir, $file){
 	preg_match('/^#(.*)#*\n|(.*)\n={3,}/', $content, $match);
 
 	if(empty($match)){
-		return $file;
+		return urldecode($file);
 	}else{
 		return trim($match[1] ? $match[1] : $match[2]);
 	}
