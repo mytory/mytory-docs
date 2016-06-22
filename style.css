@@ -122,8 +122,8 @@ a:hover {
     height: 600px;
     width: 100%;
     color: white;
-    background: rgb(41, 41, 41);
     border: 0;
+    background: rgb(41, 41, 41);
     font-family: d2coding, nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
@@ -201,6 +201,10 @@ th a:hover {
 strike {
     font-size: 0.95em;
     color: #888;
+}
+
+ol p+ul, ol p+ol, ul p+ul, ul p+ol {
+  margin-bottom: 12.5px;
 }
 
 @media print {
