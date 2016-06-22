@@ -17,33 +17,39 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="main-menu">
             <ul class="nav navbar-nav">
-                <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
+                <?php if (get_cmd_type() == 'edit' OR get_cmd_type() == 'view') { ?>
                     <li><a href="?path=list:<?php echo $full_path_for_url ?>">List</a></li>
                 <?php } ?>
-                <?php if(get_cmd_type() == 'edit'){ ?>
+                <?php if (get_cmd_type() == 'edit') { ?>
                     <li><a href="?path=view:<?php echo $full_file_for_url ?>">View</a></li>
                 <?php } ?>
-                <?php if(get_cmd_type() == 'view'){ ?>
-                    <li><a href="?path=edit:<?php echo $full_file_for_url?>">Update</a></li>
+                <?php if (get_cmd_type() == 'view') { ?>
+                    <li><a href="?path=edit:<?php echo $full_file_for_url ?>">Update</a></li>
                 <?php } ?>
-                <?php if(get_cmd_type() == 'view'){ ?>
-                    <li><button class="btn btn-default btn-xs" type="button" onclick="$('body').toggleClass('has-counter')">제목 번호</button></li>
-                <?php } ?>
-                <?php if(get_cmd_type() == 'list'){ ?>
+                <?php if (get_cmd_type() == 'view') { ?>
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#new-file" onclick="setTimeout(function(){$('#filename').focus()}, 1000)">
+                        <button class="btn btn-default btn-xs" type="button"
+                                onclick="$('body').toggleClass('has-counter')">제목 번호
+                        </button>
+                    </li>
+                <?php } ?>
+                <?php if (get_cmd_type() == 'list') { ?>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#new-file"
+                           onclick="setTimeout(function(){$('#filename').focus()}, 1000)">
                             New File
                         </a>
                     </li>
                 <?php } ?>
             </ul>
-            <?php if(get_cmd_type() == 'edit' OR get_cmd_type() == 'view'){ ?>
+            <?php if (get_cmd_type() == 'edit' OR get_cmd_type() == 'view') { ?>
                 <span class="navbar-text navbar-left">
                     <label for="file_path">File Path</label>
                 </span>
                 <form class="navbar-form navbar-left">
                     <div class="form-group">
-                        <input readonly class="form-control" type="text" value='"<?= convert_from_os_to_utf8($parsed['real_full_file']) ?>"'
+                        <input readonly class="form-control" type="text"
+                               value='"<?= convert_from_os_to_utf8($parsed['real_full_file']) ?>"'
                                id="file_path" size="10">
                     </div>
                 </form>
@@ -63,6 +69,7 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
             <form role="form" action="<?php echo BASE_URL ?>">
                 <div class="modal-body">
                     <input name="path" type="hidden" value="new-file:<?php echo $full_path_for_url ?>"/>
+
                     <div class="form-group">
                         <label for="filename">File name</label>
                         <input type="text" class="form-control" id="filename" name="filename" placeholder="new file.md">
@@ -73,12 +80,15 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
                     <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="delete-file" tabindex="-1" role="dialog" aria-labelledby="label-delete-file" aria-hidden="true">
+<div class="modal fade" id="delete-file" tabindex="-1" role="dialog" aria-labelledby="label-delete-file"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -95,6 +105,8 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </div>
             </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -13,12 +13,12 @@ if (is_dir($dir)) {
             <col width="30%"/>
         </colgroup>
         <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Date</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         <?php
@@ -30,15 +30,15 @@ if (is_dir($dir)) {
             $file_info = array();
             if (is_file($full_path)) {
                 $file_info = array(
-                    'full_path' => $full_path, 
+                    'full_path' => $full_path,
                     'path' => 'view:' . $parsed['full_path'] . '/' . $file,
                     'title' => get_filename_or_md_headline($dir, $file),
                     'date' => get_date($full_path)
                 );
 
-                if(is_target_ext($file)){
+                if (is_target_ext($file)) {
                     $file_info['is_markdown'] = true;
-                }else{
+                } else {
                     $file_info['is_markdown'] = false;
                 }
                 $file_list[] = $file_info;

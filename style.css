@@ -203,8 +203,8 @@ strike {
     color: #888;
 }
 
-ol p+ul, ol p+ol, ul p+ul, ul p+ol {
-  margin-bottom: 12.5px;
+ol p + ul, ol p + ol, ul p + ul, ul p + ol {
+    margin-bottom: 12.5px;
 }
 
 @media print {
