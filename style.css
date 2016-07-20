@@ -136,8 +136,11 @@ a:hover {
 }
 
 .content img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .content em {
