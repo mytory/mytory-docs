@@ -14,7 +14,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, strong, em {
     line-height: 1.2;
-    font-family: 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: 'KoPubDotum bold', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
 }
 
 h4, h5, h6 {
@@ -86,6 +86,12 @@ a {
 a:hover {
     background: #eeeeee;
 }
+
+h1:first-of-type {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
 
 .wrapper {
     max-width: 800px;
@@ -226,10 +232,10 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
     }
 
     h1, h2, h3, h4, h5, h6, strong, em {
-        font-family: 'KoPubDotum Light', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
+        font-family: 'KoPubDotum bold', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
     }
 
-    h1:first-child {
+    h1:first-of-type {
         margin-top: 0;
         margin-bottom: 1.5em;
     }
