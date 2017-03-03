@@ -37,7 +37,7 @@ if (get_cmd_type() == 'new-file') {
     <script src="lib/jquery.min.js"></script>
     <script src="lib/dynatable/jquery.dynatable.js"></script>
 </head>
-<body>
+<body class="has-counter">
 <div class="wrapper">
 
     <?php
