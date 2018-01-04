@@ -3,6 +3,10 @@ html {
     font-size: 100%;
 }
 
+@page {
+    margin: 2cm 2cm;
+}
+
 pre {
     font-size: inherit;
 }
@@ -23,6 +27,11 @@ h4, h5, h6 {
 
 body {
     counter-reset: h1
+}
+
+dfn {
+    text-decoration: underline;
+    font-style: normal;
 }
 
 .has-counter h1 {
