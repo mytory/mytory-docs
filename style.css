@@ -13,7 +13,8 @@ pre {
 
 body {
     line-height: 1.8;
-    font-family: 'KoPubBatang Light', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: 'KoPubBatang Light', 'KoPubBatang_Pro', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-weight: lighter;
 }
 
 h1, h2, h3, h4, h5, h6, strong, em {
