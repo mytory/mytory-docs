@@ -2,7 +2,7 @@
     <?php
     $content = get_md_content($parsed['real_full_file']);
     $metadata = get_yaml_metadata($content);
-    if ($metadata['title']) { ?>
+    if (!empty($metadata['title'])) { ?>
         <div class="page-header">
             <h1><?= $metadata['title'] ?></h1>
         </div>
