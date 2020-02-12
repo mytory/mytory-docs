@@ -227,6 +227,10 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
     margin-bottom: 12.5px;
 }
 
+.footnotes {
+    font-size: 0.9rem;
+}
+
 @media print {
     body {
         font-size: 11pt;
