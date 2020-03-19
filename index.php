@@ -36,6 +36,8 @@ if (get_cmd_type() == 'new-file') {
     <title>Mytory Docs</title>
     <script src="lib/jquery.min.js"></script>
     <script src="lib/dynatable/jquery.dynatable.js"></script>
+
+
 </head>
 <body class="has-counter">
 <div class="wrapper">
@@ -76,5 +78,9 @@ if (get_cmd_type() == 'new-file') {
 <?php foreach ($js_list as $js_file) { ?>
     <script src="<?php echo $js_file ?>"></script>
 <?php } ?>
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
