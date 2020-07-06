@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     if ($('#list-table').length > 0) {
 
         $('#list-table').on('click', '.js-delete-file', function (e) {
@@ -24,5 +23,16 @@ $(document).ready(function () {
     $('.js-prompt').click(function () {
         var text = $(this).data('prompt');
         prompt('This is full path. Copy and paste.', text);
+    });
+});
+
+$(window).load(function () {
+    $('.content img[title]').each(function (i, el) {
+        console.log(el.title)
+        $(el).after($('<span>', {
+            'class': 'caption',
+            text: el.title,
+            'style': 'width: ' + el.offsetWidth + 'px'
+        }))
     });
 });

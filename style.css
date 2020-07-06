@@ -160,6 +160,17 @@ h1:first-of-type {
     margin-left: auto;
 }
 
+.content .caption {
+    display: block;
+    font-size: 0.9em;
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    font-family: KopubWorldDotum, 'KoPubDotum Medium', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
+}
+
 .content em {
     font-style: normal;
     font-weight: normal;
