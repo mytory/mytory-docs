@@ -171,14 +171,25 @@ h1:first-of-type {
     font-family: KopubWorldDotum, 'KoPubDotum Medium', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
 }
 
+.content .right-image {
+    width: 45%;
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+
+.content .right-image img {
+    max-width: 100%;
+}
+
+.content .right-image .caption {
+    max-width: 100%;
+}
+
 .content em {
     font-style: normal;
     font-weight: normal;
     text-decoration: underline;
-}
-
-.content p {
-    clear: both;
 }
 
 .content blockquote {
