@@ -1,6 +1,6 @@
 <?php
-$full_path_for_url = convert_from_os_to_utf8($parsed['full_path']);
-$full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
+$full_path_for_url = (!empty($parsed['full_path'])) ? convert_from_os_to_utf8($parsed['full_path']) : null;
+$full_file_for_url = (!empty($parsed['full_path'])) ? convert_from_os_to_utf8($parsed['full_file']) : null;
 ?>
 <div class="header">
     <nav class="navbar navbar-default" role="navigation">
@@ -17,7 +17,7 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="main-menu">
             <ul class="nav navbar-nav">
-                <?php if (get_cmd_type() == 'edit' OR get_cmd_type() == 'view') { ?>
+                <?php if (get_cmd_type() == 'edit' or get_cmd_type() == 'view') { ?>
                     <li><a href="?path=list:<?php echo $full_path_for_url ?>">List</a></li>
                 <?php } ?>
                 <?php if (get_cmd_type() == 'edit') { ?>
@@ -42,7 +42,7 @@ $full_file_for_url = convert_from_os_to_utf8($parsed['full_file']);
                     </li>
                 <?php } ?>
             </ul>
-            <?php if (get_cmd_type() == 'edit' OR get_cmd_type() == 'view') { ?>
+            <?php if (get_cmd_type() == 'edit' or get_cmd_type() == 'view') { ?>
                 <span class="navbar-text navbar-left">
                     <label for="file_path">File Path</label>
                 </span>
