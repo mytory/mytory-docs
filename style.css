@@ -259,9 +259,13 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
         font-weight: lighter;
     }
 
-    body, a, .content blockquote p, .content blockquote li {
+    body, .content blockquote p, .content blockquote li {
         color: black;
         line-height: 1.8;
+    }
+
+    a {
+        text-decoration: underline;
     }
 
     body {
