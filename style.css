@@ -1,4 +1,9 @@
 @charset "UTF-8";
+:root {
+    --sans-serif: 'KopubWorldDotum', 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
+    --serif: 'KopubWorldBatang', 'KoPubBatang Light', 'KoPubBatang_Pro', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
+  }
+
 html {
     font-size: 100%;
 }
@@ -13,18 +18,29 @@ pre {
 
 body {
     line-height: 1.8;
-    font-family: 'KopubWorldBatang', 'KoPubBatang Light', 'KoPubBatang_Pro', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: var(--serif)!important;
     font-weight: lighter;
     padding: 0 1em;
 }
 
-h1, h2, h3, h4, h5, h6, strong, em {
+h1, h3, h4, h5, h6, strong, em {
     line-height: 1.2;
-    font-family: 'KopubWorldDotum', 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif !important;
+    font-family: var(--sans-serif)!important;
+}
+
+h2 {
+    font-size: 1.6rem;
+    font-weight: normal;
+    line-height: 1.2;
+    font-family: var(--serif)!important;
+}
+
+h3 {
+    font-size: 1.2rem;
 }
 
 h4, h5, h6 {
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 body {
@@ -168,7 +184,7 @@ h1:first-of-type {
     margin-left: auto;
     padding: 5px 10px;
     border: 1px solid #ddd;
-    font-family: KopubWorldDotum, 'KoPubDotum Medium', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
+    font-family: var(--sans-serif) !important;
 }
 
 .content .right-image {
@@ -269,11 +285,11 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
     }
 
     body {
-        font-family: KopubWorldBatang, 'KoPubBatang Light', 'KoPubBatang_Pro', 'Droid Serif', '바탕', '나눔명조', serif !important;
+        font-family: var(--serif) !important;
     }
 
     h1, h2, h3, h4, h5, h6, strong, em {
-        font-family: KopubWorldDotum, 'KoPubDotum Medium', 'Ubuntu', 'NanumBarunGothic', sans-serif !important;
+        font-family: var(--sans-serif) !important;
     }
 
     h1:first-of-type {
@@ -326,15 +342,16 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
     }
 
     h2 {
-        font-size: 15pt;
+        font-size: 16pt;
     }
 
-    h3, h4, h5, h6 {
+    h3 {
         font-size: 12pt;
+        font-weight: normal;
     }
 
     h4, h5, h6 {
-        font-weight: normal;
+        font-size: 11pt;
     }
 
     hr {
