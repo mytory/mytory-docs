@@ -2,7 +2,7 @@
 :root {
     --sans-serif: 'KopubWorldDotum', 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
     --serif: 'KopubWorldBatang', 'KoPubBatang Light', 'KoPubBatang_Pro', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
-  }
+}
 
 html {
     font-size: 100%;
@@ -23,7 +23,13 @@ body {
     padding: 0 1em;
 }
 
-h1, h3, h4, h5, h6, strong, em {
+h1,
+h3,
+h4,
+h5,
+h6,
+strong,
+em {
     line-height: 1.2;
     font-family: var(--sans-serif)!important;
 }
@@ -39,7 +45,9 @@ h3 {
     font-size: 1.2rem;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     font-size: 1rem;
 }
 
@@ -97,12 +105,24 @@ dfn {
     content: counter(h4) "." counter(h5) "." counter(h6) ") "
 }
 
-h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before {
-    content: "";
-    counter-increment: none
+h2.nocount:before,
+h3.nocount:before,
+h4.nocount:before,
+h5.nocount:before,
+h6.nocount:before,
+blockquote h1:before,
+blockquote h2:before,
+blockquote h3:before,
+blockquote h4:before,
+blockquote h5:before,
+blockquote h6:before {
+    content: ""!important;
+    counter-increment: none!important;
 }
 
-blockquote p, dt, dd {
+blockquote p,
+dt,
+dd {
     line-height: inherit;
 }
 
@@ -118,7 +138,6 @@ h1:first-of-type {
     margin-top: 0;
     margin-bottom: 1.5em;
 }
-
 
 .wrapper {
     max-width: 800px;
@@ -215,7 +234,8 @@ h1:first-of-type {
     margin-bottom: 1em;
 }
 
-.content blockquote p, .content blockquote li {
+.content blockquote p,
+.content blockquote li {
     font-size: 1em;
     color: #777;
 }
@@ -261,7 +281,10 @@ strike {
     color: #888;
 }
 
-ol p + ul, ol p + ol, ul p + ul, ul p + ol {
+ol p+ul,
+ol p+ol,
+ul p+ul,
+ul p+ol {
     margin-bottom: 12.5px;
 }
 
@@ -274,111 +297,105 @@ ol p + ul, ol p + ol, ul p + ul, ul p + ol {
         font-size: 11pt;
         font-weight: lighter;
     }
-
-    body, .content blockquote p, .content blockquote li {
+    body,
+    .content blockquote p,
+    .content blockquote li {
         color: black;
         line-height: 1.8;
     }
-
     a {
         text-decoration: underline;
     }
-
     body {
         font-family: var(--serif) !important;
     }
-
-    h1, h2, h3, h4, h5, h6, strong, em {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    em {
         font-family: var(--sans-serif) !important;
     }
-
     h1:first-of-type {
         margin-top: 0;
         margin-bottom: 1.5em;
     }
-
     a:after {
         content: '' !important;
     }
-
     strike {
         font-size: 0.95em;
     }
-
     p {
         margin: 0;
         text-indent: 1em;
         text-align: justify;
     }
-
-    p > img {
+    p>img {
         margin: 1em 0 1em -1em;
     }
-
     pre {
         margin: 1em 0;
         border: 1px solid #000;
     }
-
     li p {
         text-indent: 0;
     }
-
-    ul, ol {
+    ul,
+    ol {
         margin: 1em 0;
         padding-left: 2em;
     }
-
-    ul ul, ul ol, ol ul, ol ol {
+    ul ul,
+    ul ol,
+    ol ul,
+    ol ol {
         margin: 0;
     }
-
     h1:first-child {
         margin-top: 0;
     }
-
     h1 {
         font-size: 20pt;
     }
-
     h2 {
         font-size: 16pt;
     }
-
     h3 {
         font-size: 12pt;
         font-weight: normal;
     }
-
-    h4, h5, h6 {
+    h4,
+    h5,
+    h6 {
         font-size: 11pt;
     }
-
     hr {
         border-top-color: #000;
     }
-
     .content {
         margin: 0;
     }
-
     blockquote {
         border: none;
         font-size: 0.95em;
         page-break-inside: auto;
     }
-
     .content img {
         max-width: 80%;
-        page-break-before: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
-        page-break-after: auto; /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
-        page-break-inside: avoid; /* or 'auto' */
+        page-break-before: auto;
+        /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-after: auto;
+        /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */
+        page-break-inside: avoid;
+        /* or 'auto' */
     }
-
     .page-break {
         page-break-after: always;
     }
-
     .footer {
         display: none;
     }
