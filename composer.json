@@ -1,0 +1,15 @@
+{
+    "name": "mytory/mytory-docs",
+    "description": "mytory markdown 문서 관리 툴",
+    "type": "project",
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.8.1"
+    },
+    "authors": [
+        {
+            "name": "mytory",
+            "email": "mytory@gmail.com"
+        }
+    ]
+}

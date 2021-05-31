@@ -6,3 +6,5 @@ docs/
 backup/*
 *.DS_Store
 .phpintel/
+
+/vendor/

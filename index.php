@@ -1,14 +1,13 @@
 <?php
-if (!is_file('config.php')) {
-    if (!copy('config.sample.php', 'config.php')) {
+if (! is_file('config.php')) {
+    if (! copy('config.sample.php', 'config.php')) {
         echo "It's need config.php file. Rename config.sample.php to config.php";
         exit;
     }
 }
-include 'functions.php';
-include 'config.php';
-require_once 'lib/parsedown/Parsedown.php';
-require_once 'lib/parsedown-extra/ParsedownExtra.php';
+require 'vendor/autoload.php';
+require 'functions.php';
+require 'config.php';
 $ParsedownExtra = new ParsedownExtra();
 check_config_error();
 $parsed = parse_path();
@@ -16,7 +15,7 @@ $parsed = parse_path();
 if (get_cmd_type() == 'new-file') {
     new_file();
     exit;
-} else if (get_cmd_type() == 'delete-file') {
+} elseif (get_cmd_type() == 'delete-file') {
     delete_file();
     exit;
 }
@@ -51,24 +50,21 @@ if (get_cmd_type() == 'new-file') {
         if (get_cmd_type() == 'edit') {
             // 수정
             include $template['edit'];
-
-        } else if (get_cmd_type() == 'view') {
+        } elseif (get_cmd_type() == 'view') {
             // 본문
             include $template['view'];
-
-        } else if (get_cmd_type() == 'list') {
+        } elseif (get_cmd_type() == 'list') {
             // 목록
             include $template['list'];
-
         } else {
-            // 최상위
-            ?>
+            // 최상위?>
             <ul><?php
             foreach ($doc_roots as $name => $dir) { ?>
                 <li><a href="?path=list:<?php echo $name ?>"><?php echo $name ?></a></li>
             <?php } ?>
             </ul>
-        <?php } ?>
+        <?php
+        } ?>
     </div>
 </div>
 <div class="footer <?= get_cmd_type() == 'edit' ? 'footer--edit' : '' ?>">
