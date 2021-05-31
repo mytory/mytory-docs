@@ -4,7 +4,7 @@ function check_config_error()
 {
     global $doc_roots;
     foreach ($doc_roots as $name => $root) {
-        if (!$result = is_dir($root)) {
+        if (! $result = is_dir($root)) {
             unset($doc_roots[$name]);
         }
     }
@@ -12,15 +12,17 @@ function check_config_error()
 
 function get_filename_or_md_headline($dir, $file)
 {
-    $full_path = realpath($dir . '/' . $file);
+    $full_path = realpath($dir.'/'.$file);
 
-    if (!is_text_file($full_path)) {
+    if (! is_text_file($full_path)) {
         $file_for_display = convert_from_os_to_utf8($file);
         if (strtotime(substr($file_for_display, 0, 10))) {
             $title = trim(substr(pathinfo($file_for_display, PATHINFO_FILENAME), 10));
             $extension = strtoupper(pathinfo($file_for_display, PATHINFO_EXTENSION));
+
             return "<small><span class='label  label-info'>$extension</span></small> $title";
         }
+
         return $file_for_display;
     }
 
@@ -40,6 +42,7 @@ function convert_from_os_to_utf8($string)
     if (strtolower(OS_ENCODING) != 'utf-8') {
         $string = iconv(OS_ENCODING, 'utf-8//IGNORE', $string);
     }
+
     return $string;
 }
 
@@ -65,6 +68,7 @@ function get_parent_folder($relative_path)
         return '';
     } else {
         array_pop($temp);
+
         return implode('/', $temp);
     }
 }
@@ -72,24 +76,26 @@ function get_parent_folder($relative_path)
 function is_target_ext($full_path)
 {
     global $markdown_ext_list;
+
     return in_array(pathinfo($full_path, PATHINFO_EXTENSION), $markdown_ext_list);
 }
 
 function get_cmd_type()
 {
-    if (!isset($_REQUEST['path'])) {
-        return null;
+    if (! isset($_REQUEST['path'])) {
+        return;
     }
 
     $temp = explode(':', $_REQUEST['path']);
     $type = $temp[0];
+
     return $type;
 }
 
 function parse_path()
 {
-    if (!isset($_REQUEST['path'])) {
-        return null;
+    if (! isset($_REQUEST['path'])) {
+        return;
     }
 
     global $doc_roots;
@@ -102,16 +108,16 @@ function parse_path()
     $temp2 = explode('/', $full_path);
 
     $root = array_shift($temp2);
-    if (!isset($doc_roots[$root])) {
-        echo "잘못된 경로 type1 : " . __FILE__ . " : " . __LINE__ . " : path는 {$_REQUEST['path']}, root는 {$root}";
+    if (! isset($doc_roots[$root])) {
+        echo '잘못된 경로 type1 : '.__FILE__.' : '.__LINE__." : path는 {$_REQUEST['path']}, root는 {$root}";
         exit;
     }
 
     $root_path = realpath($doc_roots[$root]);
-    $real_full_path = $root_path . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $temp2);
+    $real_full_path = $root_path.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $temp2);
 
-    if (!is_file($real_full_path) AND !is_dir($real_full_path)) {
-        echo '잘못된 경로 type2. ' . $real_full_path . " : " . __FILE__ . " : " . __LINE__;;
+    if (! is_file($real_full_path) and ! is_dir($real_full_path)) {
+        echo '잘못된 경로 type2. '.$real_full_path.' : '.__FILE__.' : '.__LINE__;
         exit;
     }
 
@@ -122,13 +128,13 @@ function parse_path()
         $file = array_pop($temp2);
         $full_file = $full_path;
         $real_full_file = $real_full_path;
-        $full_path = str_replace('/' . $file, '', $full_path);
-        $real_full_path = str_replace(DIRECTORY_SEPARATOR . $file, '', $real_full_path);
+        $full_path = str_replace('/'.$file, '', $full_path);
+        $real_full_path = str_replace(DIRECTORY_SEPARATOR.$file, '', $real_full_path);
     }
 
     $relative_path = implode('/', $temp2);
 
-    return array(
+    return [
         'root' => $root,
         'root_path' => $root_path,
         'relative_path' => $relative_path,
@@ -137,8 +143,7 @@ function parse_path()
         'real_full_path' => $real_full_path,
         'full_file' => $full_file,
         'real_full_file' => $real_full_file,
-    );
-
+    ];
 }
 
 function new_file()
@@ -146,19 +151,19 @@ function new_file()
     global $parsed, $markdown_ext_list;
 
     $pathinfo = pathinfo($_REQUEST['filename']);
-    if (!in_array($pathinfo['extension'], $markdown_ext_list)) {
-        $_REQUEST['filename'] .= '.' . $markdown_ext_list[0];
+    if (! in_array($pathinfo['extension'], $markdown_ext_list)) {
+        $_REQUEST['filename'] .= '.'.$markdown_ext_list[0];
     }
 
-    $new_file = $parsed['real_full_path'] . DIRECTORY_SEPARATOR . $_REQUEST['filename'];
+    $new_file = $parsed['real_full_path'].DIRECTORY_SEPARATOR.$_REQUEST['filename'];
     if (is_file($new_file)) {
-        echo "파일명 중복";
+        echo '파일명 중복';
         exit;
     } else {
         $handle = fopen($new_file, 'w');
-        fwrite($handle, '# ' . $pathinfo['filename']);
+        fwrite($handle, '# '.$pathinfo['filename']);
         fclose($handle);
-        header('location: ' . BASE_URL . '/?path=edit:' . $parsed['full_path'] . '/' . $_REQUEST['filename']);
+        header('location: '.BASE_URL.'/?path=edit:'.$parsed['full_path'].'/'.$_REQUEST['filename']);
     }
 }
 
@@ -168,17 +173,17 @@ function delete_file()
     if (is_file($parsed['real_full_file'])) {
         unlink($parsed['real_full_file']);
     }
-    header('location: ' . BASE_URL . '/?path=list:' . $parsed['full_path']);
+    header('location: '.BASE_URL.'/?path=list:'.$parsed['full_path']);
 }
 
 function get_date($full_path)
 {
-
-    if (!is_text_file($full_path)) {
+    if (! is_text_file($full_path)) {
         $file_for_display = pathinfo(convert_from_os_to_utf8($full_path), PATHINFO_FILENAME);
         if (strtotime(substr($file_for_display, 0, 10))) {
             return date('Y-m-d', strtotime(substr($file_for_display, 0, 10)));
         }
+
         return date('Y-m-d', filectime($full_path));
     }
 
@@ -259,42 +264,36 @@ function get_md_content($real_full_file)
     $content = file_get_contents($real_full_file);
     $text_encoding = mb_detect_encoding($content);
     if (strtolower($text_encoding) == 'euc-kr') {
-        $content = iconv($text_encoding, 'UTF-8' . '//IGNORE', $content);
+        $content = iconv($text_encoding, 'UTF-8'.'//IGNORE', $content);
     }
-    $content = str_replace(array("\r\n", "\r"), array("\n"), $content);
+    $content = str_replace(["\r\n", "\r"], ["\n"], $content);
+
     return $content;
 }
 
-include "lib/yaml-3.1.0/Yaml.php";
-include "lib/yaml-3.1.0/Unescaper.php";
-include "lib/yaml-3.1.0/Inline.php";
-include "lib/yaml-3.1.0/Parser.php";
-include "lib/yaml-3.1.0/Exception/ExceptionInterface.php";
-include "lib/yaml-3.1.0/Exception/RuntimeException.php";
-include "lib/yaml-3.1.0/Exception/DumpException.php";
-include "lib/yaml-3.1.0/Exception/ParseException.php";
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * for compatibility with jekyll
+ * for compatibility with jekyll.
  * @param $content
  * @return string
  */
 function get_yaml_metadata(&$content)
 {
     if (empty($content)) {
-        return array();
+        return [];
     }
     preg_match_all('/(?<yaml>^-{3,}\n.*)\n-{3,}\n/s', $content, $matches);
-    $metadata = array();
-    if (!empty($matches['yaml'][0])) {
+    $metadata = [];
+    if (! empty($matches['yaml'][0])) {
         $content = str_replace($matches['yaml'][0], '', $content);
         $metadata = Yaml::parse($matches['yaml'][0]);
     }
+
     return $metadata;
 }
 
 function is_text_file($file)
 {
-    return in_array(pathinfo($file, PATHINFO_EXTENSION), array('txt', 'md'));
+    return in_array(pathinfo($file, PATHINFO_EXTENSION), ['txt', 'md']);
 }
