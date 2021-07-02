@@ -1,7 +1,9 @@
 @charset "UTF-8";
 :root {
-    --sans-serif: 'KopubWorldDotum', 'KoPubDotum Medium', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
-    --serif: 'KopubWorldBatang', 'KoPubBatang Light', 'KoPubBatang_Pro', 'Apple SD Gothic Neo', '애플 SD 고딕 Neo', 'NanumBarunGothic', 'NanumBarunGothicOTF', '나눔바른고딕', '나눔바른고딕OTF', 'Malgun Gothic', '맑은 고딕', 'NanumGothic', 'NanumGothicOTF', '나눔고딕', '나눔고딕OTF', sans-serif;
+    --sans-serif: "KopubWorldDotum", "KoPubDotum Medium", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "NanumBarunGothicOTF", "나눔바른고딕", "나눔바른고딕OTF", "Malgun Gothic", "맑은 고딕", "NanumGothic", "NanumGothicOTF",
+        "나눔고딕", "나눔고딕OTF", sans-serif;
+    --serif: "KopubWorldBatang", "KoPubBatang Light", "KoPubBatang_Pro", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "NanumBarunGothicOTF", "나눔바른고딕", "나눔바른고딕OTF", "Malgun Gothic", "맑은 고딕", "NanumGothic",
+        "NanumGothicOTF", "나눔고딕", "나눔고딕OTF", sans-serif;
 }
 
 html {
@@ -18,7 +20,7 @@ pre {
 
 body {
     line-height: 1.8;
-    font-family: var(--serif)!important;
+    font-family: var(--serif) !important;
     font-weight: lighter;
     padding: 0 1em;
 }
@@ -31,14 +33,14 @@ h6,
 strong,
 em {
     line-height: 1.2;
-    font-family: var(--sans-serif)!important;
+    font-family: var(--sans-serif) !important;
 }
 
 h2 {
     font-size: 1.6rem;
     font-weight: normal;
     line-height: 1.2;
-    font-family: var(--serif)!important;
+    font-family: var(--serif) !important;
 }
 
 h3 {
@@ -52,7 +54,7 @@ h6 {
 }
 
 body {
-    counter-reset: h1
+    counter-reset: h1;
 }
 
 dfn {
@@ -61,48 +63,48 @@ dfn {
 }
 
 .has-counter h1 {
-    counter-reset: h2
+    counter-reset: h2;
 }
 
 .has-counter h2 {
-    counter-reset: h3
+    counter-reset: h3;
 }
 
 .has-counter h3 {
-    counter-reset: h4
+    counter-reset: h4;
 }
 
 .has-counter h4 {
-    counter-reset: h5
+    counter-reset: h5;
 }
 
 .has-counter h5 {
-    counter-reset: h6
+    counter-reset: h6;
 }
 
 .has-counter h2:before {
     counter-increment: h2;
-    content: counter(h2) ". "
+    content: counter(h2) ". ";
 }
 
 .has-counter h3:before {
     counter-increment: h3;
-    content: "(" counter(h3) ") "
+    content: "(" counter(h3) ") ";
 }
 
 .has-counter h4:before {
     counter-increment: h4;
-    content: counter(h4) ") "
+    content: counter(h4) ") ";
 }
 
 .has-counter h5:before {
     counter-increment: h5;
-    content: counter(h4) "." counter(h5) ") "
+    content: counter(h4) "." counter(h5) ") ";
 }
 
 .has-counter h6:before {
     counter-increment: h6;
-    content: counter(h4) "." counter(h5) "." counter(h6) ") "
+    content: counter(h4) "." counter(h5) "." counter(h6) ") ";
 }
 
 h2.nocount:before,
@@ -116,8 +118,8 @@ blockquote h3:before,
 blockquote h4:before,
 blockquote h5:before,
 blockquote h6:before {
-    content: ""!important;
-    counter-increment: none!important;
+    content: "" !important;
+    counter-increment: none !important;
 }
 
 blockquote p,
@@ -259,11 +261,11 @@ h1:first-of-type {
 }
 
 th a {
-    color: #4A8EC2;
+    color: #4a8ec2;
 }
 
 th a:hover {
-    color: #4A8EC2;
+    color: #4a8ec2;
     text-decoration: underline;
 }
 
@@ -281,10 +283,10 @@ strike {
     color: #888;
 }
 
-ol p+ul,
-ol p+ol,
-ul p+ul,
-ul p+ol {
+ol p + ul,
+ol p + ol,
+ul p + ul,
+ul p + ol {
     margin-bottom: 12.5px;
 }
 
@@ -324,7 +326,7 @@ ul p+ol {
         margin-bottom: 1.5em;
     }
     a:after {
-        content: '' !important;
+        content: "" !important;
     }
     strike {
         font-size: 0.95em;
@@ -334,7 +336,7 @@ ul p+ol {
         text-indent: 1em;
         text-align: justify;
     }
-    p>img {
+    p > img {
         margin: 1em 0 1em -1em;
     }
     pre {

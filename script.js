@@ -27,13 +27,6 @@ $(document).ready(function () {
 });
 
 $(window).load(function () {
-    $('.content img').each(function (i, el) {
-        console.log(el.offsetHeight >= el.offsetWidth);
-        if (el.offsetHeight >= el.offsetWidth) {
-            $(el).parents('p').addClass('right-image');
-        }
-    });
-
     $('.content img[title]').each(function (i, el) {
         $(el).after($('<span>', {
             'class': 'caption',
