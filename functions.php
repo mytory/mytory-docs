@@ -238,7 +238,7 @@ function print_one_file($info)
             <?php if ($info['is_markdown']) { ?>
                 <a class="doc-file"
                    href="?path=<?= convert_from_os_to_utf8($info['path']) ?>">
-                    <?= $info['title'] ?>
+                    <?= $info['title'] ?: pathinfo($info['path'], PATHINFO_BASENAME) ?>
                 </a>
             <?php } else { ?>
                 <a class="doc-file  js-prompt" href="#"
