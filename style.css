@@ -195,6 +195,12 @@ h1:first-of-type {
     display: block;
     margin-right: auto;
     margin-left: auto;
+
+}
+
+h2, h3 {
+    margin-top: 1rem;
+    clear: both;
 }
 
 .content .caption {
