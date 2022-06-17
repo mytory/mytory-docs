@@ -190,7 +190,7 @@ h1:first-of-type {
 }
 
 .content img {
-    max-width: 80%;
+    max-width: 100%;
     height: auto;
     display: block;
     margin-right: auto;
@@ -199,7 +199,7 @@ h1:first-of-type {
 }
 
 h2, h3 {
-    margin-top: 1rem;
+    margin-top: 3rem;
     clear: both;
 }
 
