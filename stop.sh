@@ -1,3 +1,4 @@
 #!/bin/bash
-kill $(cat /tmp/mytorydocs)
-rm /tmp/mytorydocs
+basedir=$(dirname $0)
+kill $(cat $basedir/pid)
+rm $basedir/pid
