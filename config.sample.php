@@ -1,4 +1,6 @@
 <?php
+const OS_ENCODING = 'utf-8';
+
 // auto. If you need, change.
 require_once 'auto_config.php';
 
