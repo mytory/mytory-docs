@@ -12,3 +12,4 @@ backup/*
 run.log
 error.log
 pid
+/.vscode
