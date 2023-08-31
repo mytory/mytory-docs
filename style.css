@@ -187,7 +187,7 @@ h1:first-of-type {
     outline: none;
 }
 
-.msges {
+.messages {
     color: #555;
 }
 
@@ -197,7 +197,6 @@ h1:first-of-type {
     display: block;
     margin-right: auto;
     margin-left: auto;
-
 }
 
 h2, h3 {
