@@ -4,6 +4,7 @@
         "나눔고딕", "나눔고딕OTF", sans-serif;
     --serif: "KopubWorldBatang", "KoPubBatang Light", "KoPubBatang_Pro", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "NanumBarunGothicOTF", "나눔바른고딕", "나눔바른고딕OTF", "Malgun Gothic", "맑은 고딕", "NanumGothic",
         "NanumGothicOTF", "나눔고딕", "나눔고딕OTF", sans-serif;
+    --monospace: d2coding, nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 html {
@@ -15,8 +16,9 @@ html {
     margin: 2cm 2cm;
 }
 
-pre {
+pre, code {
     font-size: inherit;
+    font-family: var(--monospace);
 }
 
 body {
@@ -154,7 +156,7 @@ h1:first-of-type {
 .footer {
     background-color: #f6f6f6;
     color: #888;
-    font-family: monospace;
+    font-family: var(--monospace);
     font-size: 0.8em;
     text-align: center;
     padding: 2em;
@@ -179,14 +181,14 @@ h1:first-of-type {
     color: white;
     border: 0;
     background: rgb(41, 41, 41);
-    font-family: d2coding, nanumgothiccoding, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: var(--monospace);
 }
 
 .editor:focus {
     outline: none;
 }
 
-.msges {
+.messages {
     color: #555;
 }
 
@@ -196,7 +198,6 @@ h1:first-of-type {
     display: block;
     margin-right: auto;
     margin-left: auto;
-
 }
 
 h2, h3 {
@@ -349,6 +350,7 @@ ul p + ol {
     pre {
         margin: 1em 0;
         border: 1px solid #000;
+        font-family: var(--monospace);
     }
     li p {
         text-indent: 0;

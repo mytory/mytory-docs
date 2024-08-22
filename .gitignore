@@ -9,3 +9,7 @@ backup/*
 
 /vendor/
 /.history
+run.log
+error.log
+pid
+/.vscode

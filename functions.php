@@ -5,6 +5,7 @@ function check_config_error()
     global $doc_roots;
     foreach ($doc_roots as $name => $root) {
         if (! $result = is_dir($root)) {
+            error_log("Can't read $root folder(no permission or no folder).");
             unset($doc_roots[$name]);
         }
     }

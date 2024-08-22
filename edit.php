@@ -50,7 +50,7 @@ $content = file_get_contents($parsed['real_full_file']);
     }
 </style>
 <textarea id="editor" class="editor"><?php echo $content ?></textarea>
-<div class="msges">
+<div class="messages">
     <div class="msg"></div>
     <div class="msg2"></div>
 </div>
@@ -118,7 +118,7 @@ $content = file_get_contents($parsed['real_full_file']);
 
         window_height = $(window).height();
         editor_start_point = $('.editor').offset().top;
-        msg_area_height = $('.msges').height();
+        msg_area_height = $('.messages').height();
 
         editor_height = window_height - editor_start_point - msg_area_height;
 

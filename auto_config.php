@@ -1,14 +1,17 @@
 <?php
-// set os_encoding
-if (PHP_OS == 'Linux') {
-    $tmp = explode('.', setlocale(LC_CTYPE, 0));
-    $os_encoding = $tmp[1];
-} else if (substr(PHP_OS, 0, 3) == 'WIN') {
-    $os_encoding = 'CP949';
-} else {
-    $os_encoding = 'utf-8';
+
+if (!defined('OS_ENCODING')) {
+    // set os_encoding
+    if (PHP_OS == 'Linux') {
+        $tmp = explode('.', setlocale(LC_CTYPE, 0));
+        $os_encoding = $tmp[1] ?? 'utf-8';
+    } else if (substr(PHP_OS, 0, 3) == 'WIN') {
+        $os_encoding = 'CP949';
+    } else {
+        $os_encoding = 'utf-8';
+    }
+    define('OS_ENCODING', $os_encoding);
 }
-define('OS_ENCODING', $os_encoding);
 
 // query_string
 if (!isset($_SERVER['QUERY_STRING'])) {
