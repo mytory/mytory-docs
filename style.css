@@ -8,6 +8,7 @@
 
 html {
     font-size: 100%;
+    word-break: keep-all;
 }
 
 @page {
@@ -340,7 +341,7 @@ ul p + ol {
     p {
         margin: 0;
         text-indent: 1em;
-        text-align: justify;
+        text-align: left;
     }
     p > img {
         margin: 1em 0 1em -1em;
