@@ -144,8 +144,9 @@ h1:first-of-type {
 }
 
 .wrapper {
-    max-width: 800px;
+    max-width: 650px;
     margin: 0 auto;
+    word-break: keep-all;
 }
 
 .header {
@@ -385,6 +386,9 @@ ul p + ol {
     }
     hr {
         border-top-color: #000;
+    }
+    .wrapper {
+        max-width: none;
     }
     .content {
         margin: 0;
