@@ -307,6 +307,7 @@ ul p + ol {
     body {
         font-size: 11pt;
         font-weight: lighter;
+        padding: 0;
     }
     body,
     .content blockquote p,
