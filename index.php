@@ -12,6 +12,8 @@ $ParsedownExtra = new ParsedownExtra();
 check_config_error();
 $parsed = parse_path();
 
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 if (get_cmd_type() == 'new-file') {
     new_file();
     exit;
