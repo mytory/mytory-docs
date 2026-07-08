@@ -1,15 +1,40 @@
-css/.sass-cache
+# Config (contains local paths, secrets)
 config.php
-custom-theme/
-docs/
-.idea
-backup/*
-*.DS_Store
-.phpintel/
 
+# Dependencies
 /vendor/
-/.history
-run.log
-error.log
-pid
-/.vscode
+/node_modules/
+
+# Tailwind build output
+/public/assets/build.css
+
+# Search index
+/search.db
+/search.db-journal
+/search.db-wal
+
+# Backups
+/backup/
+
+# Runtime
+/pid
+/run.log
+/error.log
+/scripts/.index-watch.pid
+/scripts/.index-watch.log
+
+# Editor / IDE
+.idea/
+.vscode/
+.phpintel/
+.history/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Old junk (will be removed after migration)
+/css/
+/bootstrap/
+/lib/
+*.sample

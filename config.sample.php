@@ -1,37 +1,29 @@
 <?php
-const OS_ENCODING = 'utf-8';
 
-// auto. If you need, change.
-require_once 'auto_config.php';
+/**
+ * User configuration for Mytory Docs.
+ * Copy this file to config.php and customize.
+ */
 
-// theme
-$css_list = array(
-    "bootstrap/css/bootstrap.min.css",
-    "style.css",
-    // "custom-theme/my-style.css",
-);
-$js_list = array(
-    "bootstrap/js/bootstrap.min.js",
-    //"custom-theme/script.js",
-);
-$template = array(
-    'view' => 'view.php',
-    'list' => 'list.php',
-    'edit' => 'edit.php',
-    'header' => 'header.php',
-);
+declare(strict_types=1);
 
-// docs
-$doc_roots = array(
-    'docs' => './docs',
-    // 'other-folder' => '/home/mytory/other-folder'
-);
+if (!defined('OS_ENCODING')) {
+    define('OS_ENCODING', 'utf-8');
+}
 
-// extension
-$markdown_ext_list = array(
+// Document roots: label => absolute path
+$doc_roots = [
+    'docs' => __DIR__ . '/docs',
+];
+
+// Markdown file extensions to render (not just download)
+$markdown_ext_list = [
     'md',
     'txt',
-    // ...
-);
+];
 
-header("Content-Type: text/html; charset=UTF-8");
+// Application URL (used for auto-save SSE, etc.)
+// Auto-detected from request; override only if behind proxy.
+$app_url = null;  // e.g. 'https://docs.example.com'
+
+$timezone = 'Asia/Seoul';

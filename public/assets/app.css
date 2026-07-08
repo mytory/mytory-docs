@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Korean font stack */
+:root {
+    --font-sans: "KopubWorldDotum", "KoPubDotum Medium", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "나눔바른고딕", "Malgun Gothic", "맑은 고딕", "NanumGothic", "나눔고딕", sans-serif;
+    --font-serif: "KopubWorldBatang", "KoPubBatang Light", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "나눔바른고딕", "Malgun Gothic", "맑은 고딕", serif;
+    --font-mono: "D2Coding", "Fira Code", "JetBrains Mono", "SF Mono", monospace;
+}
+
+/* Base */
+@layer base {
+    html {
+        font-size: 18px;
+    }
+
+    body {
+        font-family: var(--font-serif);
+        line-height: 1.8;
+        font-weight: 300;
+    }
+
+    h1, h2, h3, h4, h5, h6, strong {
+        font-family: var(--font-sans);
+        font-weight: 600;
+    }
+
+    h2 { font-weight: 400; font-size: 1.6rem; margin-top: 3rem; }
+    h3 { font-size: 1.2rem; margin-top: 3rem; }
+    h4, h5, h6 { font-size: 1rem; }
+
+    /* Headings clear floats */
+    h2, h3 { clear: both; }
+
+    pre, code {
+        font-family: var(--font-mono);
+    }
+
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    blockquote {
+        font-style: normal;
+        color: #777;
+        border-left-color: #ddd;
+    }
+}
+
+/* Heading counter */
+.heading-numbers h1 { counter-reset: h2; }
+.heading-numbers h2 { counter-reset: h3; }
+.heading-numbers h3 { counter-reset: h4; }
+.heading-numbers h4 { counter-reset: h5; }
+.heading-numbers h5 { counter-reset: h6; }
+
+.heading-numbers h2::before { counter-increment: h2; content: counter(h2) ". "; }
+.heading-numbers h3::before { counter-increment: h3; content: "(" counter(h3) ") "; }
+.heading-numbers h4::before { counter-increment: h4; content: counter(h4) ") "; }
+.heading-numbers h5::before { counter-increment: h5; content: counter(h4) "." counter(h5) ") "; }
+.heading-numbers h6::before { counter-increment: h6; content: counter(h4) "." counter(h5) "." counter(h6) ") "; }
+
+.heading-numbers blockquote h1::before,
+.heading-numbers blockquote h2::before,
+.heading-numbers blockquote h3::before,
+.heading-numbers blockquote h4::before,
+.heading-numbers blockquote h5::before,
+.heading-numbers blockquote h6::before {
+    content: "" !important;
+    counter-increment: none !important;
+}
+
+/* Extension badge (non-md files in list) */
+.extension-badge {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 0 4px;
+    border-radius: 3px;
+    background: #e5e7eb;
+    color: #6b7280;
+    vertical-align: middle;
+    line-height: 1.4;
+}
+
+/* Search snippet highlight */
+mark {
+    background: #fef08a;
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+.dark mark {
+    background: #854d0e;
+}
+
+/* Print */
+@media print {
+    @page {
+        margin: 2cm;
+    }
+
+    body {
+        font-family: var(--font-serif) !important;
+        font-size: 11pt;
+        font-weight: 300;
+        line-height: 1.8;
+        color: #000;
+        padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6, strong {
+        font-family: var(--font-sans) !important;
+    }
+
+    h1:first-of-type { margin-top: 0; margin-bottom: 1.5em; }
+    h1 { font-size: 20pt; }
+    h2 { font-size: 16pt; }
+    h3 { font-size: 12pt; font-weight: 400; }
+    h4, h5, h6 { font-size: 11pt; }
+
+    hr { border-top-color: #000; }
+
+    a { text-decoration: underline; }
+    a::after { content: "" !important; }
+
+    p { margin: 0; text-indent: 1em; text-align: left; }
+    p > img { margin: 1em 0 1em -1em; }
+    li p { text-indent: 0; }
+
+    blockquote {
+        border: none;
+        font-size: .95em;
+        color: #333;
+        page-break-inside: auto;
+    }
+
+    pre {
+        margin: 1em 0;
+        border: 1px solid #000;
+        font-family: var(--font-mono);
+        font-size: .9em;
+        page-break-inside: avoid;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    ul, ol { margin: 1em 0; padding-left: 2em; }
+    ul ul, ul ol, ol ul, ol ol { margin: 0; }
+
+    img {
+        max-width: 80%;
+        page-break-inside: avoid;
+    }
+
+    .page-break { page-break-after: always; }
+    .prose { max-width: none !important; }
+    nav, footer, .editor-status, .messages, #new-file-dialog, #delete-dialog { display: none !important; }
+}
