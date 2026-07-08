@@ -40,6 +40,17 @@
     a { text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    /* Korean: italic is unnatural — use underline emphasis instead */
+    em, i {
+        font-style: normal;
+        text-decoration: underline;
+        text-decoration-color: #aaa;
+        text-underline-offset: 0.15em;
+    }
+    .dark em, .dark i {
+        text-decoration-color: #555;
+    }
+
     blockquote {
         font-style: normal;
         color: #777;
@@ -122,6 +133,11 @@ mark {
 
     a { text-decoration: underline; }
     a::after { content: "" !important; }
+
+    em, i {
+        font-style: normal;
+        text-decoration: underline;
+    }
 
     p { margin: 0; text-indent: 1em; text-align: left; }
     p > img { margin: 1em 0 1em -1em; }
