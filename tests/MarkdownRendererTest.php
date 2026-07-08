@@ -145,6 +145,18 @@ class MarkdownRendererTest extends TestCase
         $this->assertStringContainsString('<a href="https://example.com"', $html);
     }
 
+    // ── Numeric cell alignment ───────────────────────────
+
+    public function test_right_aligns_numeric_cells(): void
+    {
+        $markdown = "| A | B |\n|---|---|\n| 123 | text |\n| 1.87% | word |";
+        $html = $this->renderer->render($markdown, 'test/notes');
+
+        $this->assertStringContainsString('text-right', $html);
+        $this->assertStringContainsString('tabular-nums', $html);
+        $this->assertStringContainsString('font-mono', $html);
+    }
+
     // ── Footnotes ─────────────────────────────────────────
 
     public function test_renders_footnotes(): void
