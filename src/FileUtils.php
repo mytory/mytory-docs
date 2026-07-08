@@ -161,17 +161,21 @@ class FileUtils
             return (string)$frontMatter['title'];
         }
 
-        // First # heading
+        // First # heading (level-1 only)
         $encoding = mb_detect_encoding($content, ['UTF-8', 'EUC-KR'], true);
         if ($encoding === 'EUC-KR') {
             $content = iconv('EUC-KR', 'UTF-8//IGNORE', $content) ?: $content;
         }
 
-        if (preg_match('/^#\s*(.+)$/m', $content, $m)) {
+        if (preg_match('/^#[[:blank:]]+(.+)$/m', $content, $m)) {
             return trim($m[1]);
         }
-        // Setext heading (underlined with === or ---)
+        // Setext heading (underlined with === or ---) — higher priority than ##
         if (preg_match('/^(.+)\n[=]{3,}$/m', $content, $m)) {
+            return trim($m[1]);
+        }
+        // Also catch level-2+ headings as fallback (strip leading #)
+        if (preg_match('/^#{2,}[[:blank:]]+(.+)$/m', $content, $m)) {
             return trim($m[1]);
         }
 
