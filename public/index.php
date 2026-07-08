@@ -261,7 +261,8 @@ if ($method === 'GET' && $uri === '/search') {
 
     global $doc_roots;
     $rootNames = array_keys($doc_roots);
-    require $viewDir . '/search.php';
+    $pageTitle = ($q ? "'{$q}' — " : '') . 'Search : Mytory Docs';
+    require $viewDir . '/layout.php';
     exit;
 }
 

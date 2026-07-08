@@ -56,6 +56,8 @@
     <?php require __DIR__ . '/edit.php'; ?>
 <?php elseif (preg_match('#^/list/#', $uri)): ?>
     <?php require __DIR__ . '/list.php'; ?>
+<?php elseif ($uri === '/search'): ?>
+    <?php require __DIR__ . '/search.php'; ?>
 <?php elseif ($uri === '/'): ?>
     <?php require __DIR__ . '/home.php'; ?>
 <?php endif; ?>
