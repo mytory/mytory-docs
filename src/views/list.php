@@ -78,7 +78,11 @@
         <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
             <td class="py-1.5">
                 <?php if ($file['markdown']): ?>
-                    <a href="/view/<?= rawurlencode($viewPath) ?>" class="flex items-center gap-2 text-gray-900 dark:text-gray-100 hover:text-blue-700 dark:hover:text-blue-400">
+                    <?php 
+                $segments = explode('/', $viewPath);
+                $encodedPath = implode('/', array_map('rawurlencode', $segments));
+            ?>
+            <a href="/view/<?= $encodedPath ?>" class="flex items-center gap-2 text-gray-900 dark:text-gray-100 hover:text-blue-700 dark:hover:text-blue-400">
                         <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/>
                         </svg>

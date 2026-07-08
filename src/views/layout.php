@@ -19,10 +19,10 @@
             <?php if (isset($parsed)): ?>
                 <?php if (preg_match('#^/edit/#', $uri)): ?>
                     <a href="/list/<?= rawurlencode($parsed['full_path']) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">List</a>
-                    <a href="/view/<?= rawurlencode($parsed['root_name']) ?>/<?= rawurlencode($parsed['relative_path'] . '/' . $parsed['file']) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">View</a>
+                    <a href="/view/<?= rawurlencode($parsed['root_name']) ?>/<?= implode('/', array_map('rawurlencode', explode('/', $parsed['relative_path'] . '/' . $parsed['file']))) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">View</a>
                 <?php elseif (preg_match('#^/view/#', $uri)): ?>
                     <a href="/list/<?= rawurlencode($parsed['full_path']) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">List</a>
-                    <a href="/edit/<?= rawurlencode($parsed['root_name']) ?>/<?= rawurlencode($parsed['relative_path'] . '/' . $parsed['file']) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Edit</a>
+                    <a href="/edit/<?= rawurlencode($parsed['root_name']) ?>/<?= implode('/', array_map('rawurlencode', explode('/', $parsed['relative_path'] . '/' . $parsed['file']))) ?>" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Edit</a>
                     <button id="toggle-heading-numbers" class="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 text-xs cursor-pointer">#</button>
                 <?php elseif (preg_match('#^/list/#', $uri)): ?>
                     <button onclick="document.getElementById('new-file-dialog').showModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">New File</button>
