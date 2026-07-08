@@ -81,7 +81,7 @@
 </footer>
 
 <!-- New File Dialog -->
-<dialog id="new-file-dialog" class="rounded-lg shadow-xl border dark:border-gray-600 bg-white dark:bg-gray-800 p-6 w-full max-w-sm backdrop:bg-black/50">
+<dialog id="new-file-dialog" class="rounded-lg shadow-xl border dark:border-gray-600 bg-white dark:bg-gray-800 p-6 w-full max-w-sm backdrop:bg-black/50 fixed inset-0 m-auto">
     <h2 class="text-lg font-semibold mb-4">New File</h2>
     <form method="post" action="/new-file/<?= rawurlencode(($parsed['root_name'] ?? '') . '/' . ($parsed['relative_path'] ?? '')) ?>">
         <input type="text" name="filename" placeholder="new-file.md" autofocus
@@ -94,7 +94,7 @@
 </dialog>
 
 <!-- Delete Confirm Dialog -->
-<dialog id="delete-dialog" class="rounded-lg shadow-xl border dark:border-gray-600 bg-white dark:bg-gray-800 p-6 w-full max-w-sm backdrop:bg-black/50">
+<dialog id="delete-dialog" class="rounded-lg shadow-xl border dark:border-gray-600 bg-white dark:bg-gray-800 p-6 w-full max-w-sm backdrop:bg-black/50 fixed inset-0 m-auto">
     <h2 class="text-lg font-semibold mb-2">Delete?</h2>
     <p id="delete-dialog-message" class="text-sm text-gray-500 dark:text-gray-400 mb-4"></p>
     <form id="delete-dialog-form" method="post">
