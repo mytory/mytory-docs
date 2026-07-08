@@ -280,11 +280,15 @@ if ($method === 'GET' && preg_match('#^/view/([^/]+)/(.+)$#', $uri, $m)) {
 
     $content = FileUtils::readContent($realFile);
     $frontMatter = FrontMatter::parse($content);
-    $renderer = new MarkdownRenderer();
+    $isPlain = strtolower(pathinfo($realFile, PATHINFO_EXTENSION)) === 'txt';
 
-    // Image proxy base path for this file's directory
-    $imgProxyBase = $parsed['root_name'] . '/' . $parsed['relative_path'];
-    $html = $renderer->render($content, $imgProxyBase);
+    if ($isPlain) {
+        $html = '<pre class="text-sm font-mono whitespace-pre-wrap">' . htmlspecialchars($content) . '</pre>';
+    } else {
+        $renderer = new MarkdownRenderer();
+        $imgProxyBase = $parsed['root_name'] . '/' . $parsed['relative_path'];
+        $html = $renderer->render($content, $imgProxyBase);
+    }
 
     // Title for <title> tag
     $pageTitle = ($frontMatter['title'] ?? FileUtils::extractTitle($realFile)) . ' : Mytory Docs';
