@@ -60,10 +60,10 @@ class MarkdownRenderer
             $html
         );
 
-        // Add table class for Tailwind styling
-        $html = str_replace('<table>', '<table class="min-w-full border-collapse border border-gray-300 dark:border-gray-600">', $html);
-        $html = str_replace('<th>', '<th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700">', $html);
-        $html = str_replace('<td>', '<td class="border border-gray-300 dark:border-gray-600 px-4 py-2">', $html);
+        // Add table classes for Tailwind styling (use regex to handle existing attrs)
+        $html = preg_replace('/<table>/', '<table class="min-w-full border-collapse border border-gray-300 dark:border-gray-600">', $html);
+        $html = preg_replace('/<th(\s|>)/', '<th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700"$1', $html);
+        $html = preg_replace('/<td(\s|>)/', '<td class="border border-gray-300 dark:border-gray-600 px-4 py-2"$1', $html);
 
         return $html;
     }

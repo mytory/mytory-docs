@@ -51,10 +51,15 @@
         text-decoration-color: #555;
     }
 
-    blockquote {
+    blockquote, .prose blockquote {
         font-style: normal;
+        font-weight: 300;
         color: #777;
         border-left-color: #ddd;
+    }
+    .prose blockquote p::before,
+    .prose blockquote p::after {
+        content: none;  /* Disable auto quote marks */
     }
 }
 
