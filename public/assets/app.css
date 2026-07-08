@@ -119,7 +119,18 @@
     content: none;
 }
 
-/* Tighter list spacing for Korean typography */
+/* Override prose td/th alignment — our numeric classes must win */
+.prose td.text-right, .prose td.text-right * {
+    text-align: right !important;
+}
+.prose td.font-mono {
+    font-family: var(--font-mono);
+}
+.prose td.tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Tighter list spacing */
 .prose :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
     margin-top: 0;
     margin-bottom: 0;
