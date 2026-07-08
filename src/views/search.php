@@ -45,12 +45,12 @@
             ?>
             <li class="border-b border-gray-100 dark:border-gray-800 pb-3">
                 <a href="<?= htmlspecialchars($viewUrl) ?>" class="block">
-                    <span class="text-sm font-medium text-blue-700 dark:text-blue-400">
+                    <div class="text-sm font-medium text-blue-700 dark:text-blue-400">
                         <?= htmlspecialchars($r['title']) ?>
-                    </span>
-                    <span class="text-xs text-gray-400 dark:text-gray-500 ml-2">
+                    </div>
+                    <div class="text-xs text-gray-400 dark:text-gray-500">
                         <?= htmlspecialchars($displayRoot) ?> / <?= htmlspecialchars($relativePath) ?>
-                    </span>
+                    </div>
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
                         <?= $r['snippet'] ?>
                     </p>

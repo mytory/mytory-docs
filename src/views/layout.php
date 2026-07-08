@@ -30,19 +30,17 @@
             <?php endif; ?>
         </div>
 
-        <div class="flex items-center gap-3">
-            <!-- Search form -->
-            <form action="/search" method="get" class="flex items-center gap-1">
-                <input type="search" name="q" placeholder="Search…" 
-                    class="w-32 lg:w-48 px-2 py-1 text-sm rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
-            </form>
-            
+        <div class="flex items-center gap-3 ml-auto">
             <?php if (isset($parsed) && preg_match('#^/(edit|view)/#', $uri)): ?>
                 <code class="text-xs text-gray-400 dark:text-gray-500 truncate max-w-[200px] hidden sm:inline" title="<?= htmlspecialchars($parsed['real_full_file'] ?? '') ?>">
                     <?= htmlspecialchars(basename($parsed['real_full_file'] ?? '')) ?>
                 </code>
             <?php endif; ?>
+            <form action="/search" method="get" class="flex items-center">
+                <input type="search" name="q" placeholder="Search…" 
+                    class="w-28 lg:w-44 px-2 py-1 text-sm rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+            </form>
         </div>
     </div>
 </nav>
