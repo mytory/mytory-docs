@@ -345,6 +345,18 @@ if ($method === 'GET' && preg_match('#^/list/([^/]+)(/.*)?$#', $uri, $m)) {
     $listing = FileUtils::listDirectory($dirPath);
     $pageTitle = $rootName . ($subPath ? ' / ' . $subPath : '') . ' : Mytory Docs';
 
+    // Build breadcrumbs (each segment clickable)
+    $breadcrumbs = [];
+    $breadcrumbs[] = ['label' => $rootName, 'url' => "/list/{$rootName}"];
+    if ($subPath !== '') {
+        $parts = explode('/', $subPath);
+        $accum = $rootName;
+        foreach ($parts as $part) {
+            $accum .= '/' . $part;
+            $breadcrumbs[] = ['label' => $part, 'url' => '/list/' . rawurlencode($accum)];
+        }
+    }
+
     // Parent folder link
     $parentPath = null;
     if ($subPath !== '') {

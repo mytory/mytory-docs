@@ -1,11 +1,20 @@
 <!-- List: directory listing -->
 
 <div class="flex items-center justify-between mb-4">
-    <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+    <div class="flex items-center gap-1 text-lg">
+        <svg class="w-5 h-5 text-yellow-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
         </svg>
-        <h1 class="text-lg font-semibold"><?= htmlspecialchars($pageTitle) ?></h1>
+        <?php foreach ($breadcrumbs as $i => $crumb): ?>
+            <?php if ($i > 0): ?>
+                <span class="text-gray-400 dark:text-gray-500">/</span>
+            <?php endif; ?>
+            <?php if ($i === count($breadcrumbs) - 1): ?>
+                <span class="font-semibold"><?= htmlspecialchars($crumb['label']) ?></span>
+            <?php else: ?>
+                <a href="<?= htmlspecialchars($crumb['url']) ?>" class="text-blue-700 dark:text-blue-400 hover:underline"><?= htmlspecialchars($crumb['label']) ?></a>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
     <button onclick="document.getElementById('new-file-dialog').showModal()" 
         class="text-sm px-2 py-1 rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800">
