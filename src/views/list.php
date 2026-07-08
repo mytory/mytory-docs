@@ -98,8 +98,10 @@
                         <?= $file['title'] ?>
                     </a>
                 <?php else: ?>
-                    <a href="#" onclick="prompt('Full path:', '<?= htmlspecialchars($file['name']) ?>'); return false;" 
-                       class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                    <?php $fullPath = $dirPath . '/' . $file['path']; ?>
+                    <a href="#" onclick="navigator.clipboard.writeText('<?= htmlspecialchars(addslashes($fullPath)) ?>').then(()=>showToast('Copied: ' + this.dataset.path));return false"
+                       data-path="<?= htmlspecialchars($fullPath) ?>"
+                       class="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-blue-700 cursor-pointer">
                         <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
                         </svg>
@@ -122,6 +124,13 @@
 </table>
 
 <script>
+function showToast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.className = 'fixed bottom-4 right-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-4 py-2 rounded-lg shadow-lg text-sm z-50 transition-opacity';
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2000);
+}
 function deleteFile(path, title) {
     document.getElementById('delete-dialog-message').textContent = 'Delete: ' + title;
     document.getElementById('delete-dialog-form').action = '/delete-file/' + path;
