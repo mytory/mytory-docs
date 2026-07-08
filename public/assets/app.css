@@ -20,7 +20,7 @@
 /* Korean font stack */
 :root {
     --font-sans: "SUIT", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-    --font-serif: "NotoSerifCJKKR", "SUIT", "Apple SD Gothic Neo", "Malgun Gothic", serif;
+    --font-serif: "NotoSerifCJKKR", serif;
     --font-mono: "D2Coding", "Fira Code", "JetBrains Mono", "SF Mono", monospace;
 }
 
