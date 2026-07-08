@@ -51,15 +51,10 @@
         text-decoration-color: #555;
     }
 
-    blockquote, .prose blockquote {
+    blockquote {
         font-style: normal;
-        font-weight: 300;
         color: #777;
         border-left-color: #ddd;
-    }
-    .prose blockquote p::before,
-    .prose blockquote p::after {
-        content: none;  /* Disable auto quote marks */
     }
 }
 
@@ -96,6 +91,22 @@
     color: #6b7280;
     vertical-align: middle;
     line-height: 1.4;
+}
+
+/* Override prose blockquote italic — @layer base has lower priority than @layer components */
+.prose :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    font-style: normal;
+    font-weight: 300;
+}
+.prose :where(blockquote) :where(p):first-of-type::before,
+.prose :where(blockquote) :where(p):last-of-type::after {
+    content: none;
+}
+
+/* Tighter list spacing for Korean typography */
+.prose :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Search snippet highlight */
