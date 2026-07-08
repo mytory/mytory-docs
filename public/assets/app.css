@@ -142,9 +142,12 @@ mark {
         margin: 2cm;
     }
 
+    html {
+        font-size: 10.5pt;
+    }
+
     body {
         font-family: var(--font-serif) !important;
-        font-size: 10.5pt;
         font-weight: 400;
         line-height: 1.8;
         color: #000;
