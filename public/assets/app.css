@@ -1,10 +1,26 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Web fonts */
+@font-face {
+    font-family: 'SUIT';
+    src: url('/assets/fonts/SUIT-Variable.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'NotoSerifCJKKR';
+    src: url('/assets/fonts/noto-serif-cjk-kr-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Korean font stack */
 :root {
-    --font-sans: "KopubWorldDotum", "KoPubDotum Medium", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "나눔바른고딕", "Malgun Gothic", "맑은 고딕", "NanumGothic", "나눔고딕", sans-serif;
-    --font-serif: "KopubWorldBatang", "KoPubBatang Light", "Apple SD Gothic Neo", "애플 SD 고딕 Neo", "NanumBarunGothic", "나눔바른고딕", "Malgun Gothic", "맑은 고딕", serif;
+    --font-sans: "SUIT", "KopubWorldDotum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-serif: "SUIT", "KopubWorldBatang", "Apple SD Gothic Neo", "Malgun Gothic", serif;
     --font-mono: "D2Coding", "Fira Code", "JetBrains Mono", "SF Mono", monospace;
 }
 
@@ -127,9 +143,9 @@ mark {
     }
 
     body {
-        font-family: var(--font-serif) !important;
+        font-family: "NotoSerifCJKKR", var(--font-serif) !important;
         font-size: 11pt;
-        font-weight: 300;
+        font-weight: 400;
         line-height: 1.8;
         color: #000;
         padding: 0;
