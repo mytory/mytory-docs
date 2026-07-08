@@ -33,7 +33,7 @@
         <div class="flex items-center gap-3 ml-auto">
             <?php if (isset($parsed) && preg_match('#^/(edit|view)/#', $uri)): ?>
                 <span class="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap hidden sm:inline">
-                    <?= htmlspecialchars(($parsed['root_name'] ?? '') . '/' . ($parsed['relative_path'] ?? '') . '/' . ($parsed['file'] ?? '')) ?>
+                    <?= htmlspecialchars($parsed['file'] ?? '') ?>
                 </span>
             <?php endif; ?>
             <form action="/search" method="get">
