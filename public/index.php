@@ -283,7 +283,7 @@ if ($method === 'GET' && preg_match('#^/view/([^/]+)/(.+)$#', $uri, $m)) {
     $isPlain = strtolower(pathinfo($realFile, PATHINFO_EXTENSION)) === 'txt';
 
     if ($isPlain) {
-        $html = '<pre class="text-sm font-mono whitespace-pre-wrap">' . htmlspecialchars($content) . '</pre>';
+        $html = '<pre class="text-sm font-mono" style="white-space:pre-wrap">' . htmlspecialchars($content) . '</pre>';
     } else {
         $renderer = new MarkdownRenderer();
         $imgProxyBase = $parsed['root_name'] . '/' . $parsed['relative_path'];
