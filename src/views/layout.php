@@ -12,7 +12,7 @@
 
 <!-- Navigation -->
 <nav class="border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-10">
-    <div class="max-w-3xl mx-auto px-4 py-2 flex items-center justify-between gap-4 text-sm">
+    <div class="max-w-[700px] mx-auto px-4 py-2 flex items-center justify-between gap-4 text-sm">
         <div class="flex items-center gap-4">
             <a href="/" class="font-bold text-lg text-gray-900 dark:text-white no-underline hover:opacity-70">MD</a>
             
@@ -48,7 +48,7 @@
 <!-- File path bar (view/edit only) -->
 <?php if (isset($parsed) && preg_match('#^/(edit|view)/#', $uri) && !empty($parsed['real_full_file'])): ?>
 <div class="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 py-1">
-    <div class="max-w-3xl mx-auto px-4">
+    <div class="max-w-[700px] mx-auto px-4">
         <button onclick="navigator.clipboard.writeText(this.dataset.path).then(()=>showToast('Copied: ' + this.dataset.path))"
             class="text-xs text-gray-400 dark:text-gray-500 font-mono hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors block w-full text-left truncate"
             title="Click to copy"
@@ -58,7 +58,7 @@
 <?php endif; ?>
 
 <!-- Content -->
-<main class="flex-1 max-w-3xl mx-auto px-4 py-8 w-full">
+<main class="flex-1 max-w-[700px] mx-auto px-4 py-8 w-full">
 
 <?php if (preg_match('#^/view/#', $uri)): ?>
     <?php require __DIR__ . '/view.php'; ?>
