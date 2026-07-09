@@ -1,11 +1,15 @@
 <!DOCTYPE html>
+<?php
+$cssVer = md5_file(ROOT . '/public/assets/build.css');
+$jsVer = md5_file(ROOT . '/public/assets/app.js');
+?>
 <html lang="ko" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/assets/build.css">
+    <link rel="stylesheet" href="/assets/build.css?v=<?= $cssVer ?>">
     <title><?= htmlspecialchars($pageTitle) ?></title>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
@@ -104,6 +108,6 @@
     </form>
 </dialog>
 
-<script src="/assets/app.js"></script>
+<script src="/assets/app.js?v=<?= $jsVer ?>"></script>
 </body>
 </html>
