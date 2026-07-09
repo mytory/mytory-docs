@@ -49,11 +49,10 @@
 <?php if (isset($parsed) && preg_match('#^/(edit|view)/#', $uri) && !empty($parsed['real_full_file'])): ?>
 <div class="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 py-1">
     <div class="max-w-3xl mx-auto px-4">
-        <button onclick="navigator.clipboard.writeText(this.textContent).then(()=>{this.classList.add('text-green-500');setTimeout(()=>this.classList.remove('text-green-500'),1000)})"
+        <button onclick="navigator.clipboard.writeText(this.dataset.path).then(()=>{this.classList.add('text-green-500');setTimeout(()=>this.classList.remove('text-green-500'),1000)})"
             class="text-xs text-gray-400 dark:text-gray-500 font-mono hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors block w-full text-left truncate"
-            title="Click to copy">
-            <?= htmlspecialchars($parsed['real_full_file']) ?>
-        </button>
+            title="Click to copy"
+            data-path="<?= htmlspecialchars($parsed['real_full_file']) ?>"><?= htmlspecialchars($parsed['real_full_file']) ?></button>
     </div>
 </div>
 <?php endif; ?>
