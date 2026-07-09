@@ -124,13 +124,6 @@
 </table>
 
 <script>
-function showToast(msg) {
-    const t = document.createElement('div');
-    t.textContent = msg;
-    t.className = 'fixed bottom-4 right-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-4 py-2 rounded-lg shadow-lg text-sm z-50 transition-opacity';
-    document.body.appendChild(t);
-    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2000);
-}
 function deleteFile(path, title) {
     document.getElementById('delete-dialog-message').textContent = 'Delete: ' + title;
     document.getElementById('delete-dialog-form').action = '/delete-file/' + path;

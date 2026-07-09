@@ -1,6 +1,15 @@
 // Mytory Docs — Frontend JS
 // CodeMirror is loaded inline in edit.php (ES module, CDN)
 
+// Global toast notification
+function showToast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.className = 'fixed bottom-4 right-4 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 px-4 py-2 rounded-lg shadow-lg text-sm z-50 transition-opacity';
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // New file dialog: focus input
     const newFileDialog = document.getElementById('new-file-dialog');
