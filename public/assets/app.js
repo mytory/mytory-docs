@@ -22,23 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Delete dialog: bind from list page
     // (handled inline in list.php deleteFile function)
 
-    // View page: heading counter — smart auto-detect
+    // View page: heading counter — smart auto-detect (per-document)
     const body = document.body;
-    const saved = localStorage.getItem('heading-numbers');
+    const storageKey = 'heading-numbers' + location.pathname;
+    const saved = localStorage.getItem(storageKey);
 
     if (saved !== null) {
-        // User has explicitly toggled — respect their choice
+        // User has explicitly toggled for this document — respect their choice
         if (saved === '1') body.classList.add('heading-numbers');
     } else {
-        // Auto-detect: scan h2 headings for existing numbering
-        const headings = document.querySelectorAll('.prose h2');
+        // Auto-detect: scan h2 and h3 headings for existing numbering
+        const headings = document.querySelectorAll('.prose h2, .prose h3');
         const numbered = [...headings].filter(h => {
             const text = h.textContent || '';
             return /^\d+[.)]\s/.test(text)         // "1. " or "1) "
                 || /^\(\d+\)\s/.test(text)         // "(1) "
                 || /^[①②③④⑤⑥⑦⑧⑨⑩]/.test(text);    // "①"
         });
-        // If most h2 already have numbers, turn counters OFF
+        // If most h2/h3 already have numbers, turn counters OFF
         if (numbered.length > headings.length * 0.5 && headings.length > 0) {
             // Already numbered — keep counters off
         } else {
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('toggle-heading-numbers')?.addEventListener('click', () => {
         const has = body.classList.toggle('heading-numbers');
-        localStorage.setItem('heading-numbers', has ? '1' : '0');
+        localStorage.setItem(storageKey, has ? '1' : '0');
     });
 
     // Any table in view mode: add basic styling
