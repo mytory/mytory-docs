@@ -51,7 +51,7 @@ $jsVer = md5_file(ROOT . '/public/assets/app.js');
 
 <!-- File path bar (view/edit only) -->
 <?php if (isset($parsed) && preg_match('#^/(edit|view)/#', $uri) && !empty($parsed['real_full_file'])): ?>
-<div class="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 py-1">
+<div class="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 py-1 print:hidden">
     <div class="max-w-[700px] mx-auto px-4">
         <button onclick="navigator.clipboard.writeText(this.dataset.path).then(()=>showToast('Copied: ' + this.dataset.path))"
             class="text-xs text-gray-400 dark:text-gray-500 font-mono hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors block w-full text-left truncate"
