@@ -38,3 +38,4 @@ Thumbs.db
 /bootstrap/
 /lib/
 *.sample
+.phpunit.result.cache
