@@ -177,7 +177,7 @@ mark {
 
     hr { border-top-color: #000; }
 
-    a { text-decoration: underline; }
+    a { text-decoration: none; }
     a::after { content: "" !important; }
 
     em, i {
