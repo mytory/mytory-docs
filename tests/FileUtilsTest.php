@@ -131,13 +131,81 @@ class FileUtilsTest extends TestCase
         $this->assertSame('2024-03-15', $date);
     }
 
-    public function test_extract_date_from_inline_pattern(): void
+    public function test_extract_date_from_list_item_under_title(): void
     {
         $path = $this->fixtureDir . '/inline-date.md';
-        file_put_contents($path, "# Title\ndate: 2023-12-25\nContent");
+        file_put_contents($path, "# Title\n\n- date: 2023-12-25\n- tag: x\n\nContent");
         $date = FileUtils::extractDate($path);
 
         $this->assertSame('2023-12-25', $date);
+    }
+
+    public function test_extract_date_standalone_under_title(): void
+    {
+        $path = $this->fixtureDir . '/standalone-date.md';
+        file_put_contents($path, "# Title\n\n2026-03-05\n\n본문");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2026-03-05', $date);
+    }
+
+    public function test_extract_date_korean_list_item_with_space(): void
+    {
+        $path = $this->fixtureDir . '/korean-date.md';
+        file_put_contents($path, "# Title\n\n* 날짜 : 2026-03-05\n* 발신 : 웹개발팀");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2026-03-05', $date);
+    }
+
+    public function test_extract_date_from_list_item_with_time_value(): void
+    {
+        $path = $this->fixtureDir . '/dated-time.md';
+        file_put_contents($path, "# Title\n\n- Date: 2012-11-29 12:00:00");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2012-11-29', $date);
+    }
+
+    public function test_extract_date_from_setext_heading(): void
+    {
+        $path = $this->fixtureDir . '/setext-date.md';
+        file_put_contents($path, "Title\n======\n\n- Date: 2024-01-01");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2024-01-01', $date);
+    }
+
+    public function test_extract_date_ignores_body_date(): void
+    {
+        $path = $this->fixtureDir . '/body-date.md';
+        file_put_contents($path, "# Title\n\n본문 내용입니다.\n\n2026-03-05\n\n마지막");
+        $date = FileUtils::extractDate($path);
+
+        // Body-text date must NOT be used; falls back to ctime
+        $this->assertNotSame('2026-03-05', $date);
+        $this->assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', $date);
+    }
+
+    public function test_extract_date_korean_title_with_0x85_byte(): void
+    {
+        // `테` (U+D14C, UTF-8 ED 85 8C) contains a 0x85 byte that \R without
+        // the `u` flag mistakes for a NEL newline. The title must not split.
+        $path = $this->fixtureDir . '/korean-title.md';
+        file_put_contents($path, "# OCM 테이블 설계\n\n2025-03-19\n\n본문");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2025-03-19', $date);
+    }
+
+    public function test_extract_date_list_at_top_without_heading(): void
+    {
+        // Legacy docs without a heading declare `- Date:` on the first line.
+        $path = $this->fixtureDir . '/no-heading.md';
+        file_put_contents($path, "- Date: 2013-09-02 16:14:31\n\n본문 시작");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2013-09-02', $date);
     }
 
     public function test_extract_date_falls_back_to_filectime(): void
@@ -147,6 +215,33 @@ class FileUtilsTest extends TestCase
         $date = FileUtils::extractDate($path);
 
         $this->assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', $date);
+    }
+
+    public function test_extract_date_from_filename_prefix(): void
+    {
+        $path = $this->fixtureDir . '/2024-05-20_meeting-notes.md';
+        file_put_contents($path, "# No date in content");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2024-05-20', $date);
+    }
+
+    public function test_extract_date_content_wins_over_filename(): void
+    {
+        $path = $this->fixtureDir . '/2024-05-20_meeting-notes.md';
+        file_put_contents($path, "---\ndate: 2023-01-02\n---\n\n# Content");
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2023-01-02', $date);
+    }
+
+    public function test_extract_date_from_filename_non_markdown(): void
+    {
+        $path = $this->fixtureDir . '/2024-05-20_screenshot.jpg';
+        file_put_contents($path, 'fake image');
+        $date = FileUtils::extractDate($path);
+
+        $this->assertSame('2024-05-20', $date);
     }
 
     // ── extractTitle ─────────────────────────────────────

@@ -86,7 +86,8 @@ class FileUtils
     }
 
     /**
-     * Extract date from file content (YAML front matter fields or inline patterns).
+     * Extract date from a file.
+     * Priority: document date (front matter / title-adjacent) → filename date prefix → filectime.
      */
     public static function extractDate(string $filePath): ?string
     {
@@ -96,19 +97,15 @@ class FileUtils
 
         // Non-text files: try date from filename or filectime
         if (!in_array($ext, $markdown_ext_list, true)) {
-            $filename = PathParser::convertFromOsEncoding(pathinfo($filePath, PATHINFO_FILENAME));
-            if (strtotime(substr($filename, 0, 10))) {
-                return date('Y-m-d', strtotime(substr($filename, 0, 10)));
-            }
-            return date('Y-m-d', filectime($filePath));
+            return self::extractDateFromFilename($filePath) ?? date('Y-m-d', filectime($filePath));
         }
 
         $content = file_get_contents($filePath);
         if ($content === false) {
-            return date('Y-m-d', filectime($filePath));
+            return self::extractDateFromFilename($filePath) ?? date('Y-m-d', filectime($filePath));
         }
 
-        // Try YAML front matter date first
+        // YAML front matter date takes priority
         $frontMatter = FrontMatter::parse($content);
         if (!empty($frontMatter['date'])) {
             $date = date_parse((string)$frontMatter['date']);
@@ -117,20 +114,111 @@ class FileUtils
             }
         }
 
-        // Try inline patterns (date: YYYY-MM-DD or 날짜: YYYY-MM-DD)
-        $patterns = [
-            '/[Dd]ate\s*:\s*(\d{4}-\d{2}-\d{2})/',
-            '/날짜\s*:\s*(\d{4}-\d{2}-\d{2})/',
-            '/일시\s*:\s*(\d{4}-\d{2}-\d{2})/',
-            '/\n(\d{4}-\d{2}-\d{2})\s/',
-        ];
-        foreach ($patterns as $pattern) {
-            if (preg_match($pattern, $content, $m)) {
-                return trim($m[1]);
+        // Title-adjacent date: a standalone date line or `- {date|날짜|일시}: ...` list
+        // item immediately below the first heading. Body-text dates are ignored.
+        $titleDate = self::extractDateNearTitle($content);
+        if ($titleDate !== null) {
+            return $titleDate;
+        }
+
+        // Fallback: date prefix in filename (e.g. 2026-08-01_review-...md), then filectime
+        return self::extractDateFromFilename($filePath) ?? date('Y-m-d', filectime($filePath));
+    }
+
+    /**
+     * Extract a date from right below the first heading (the title):
+     *  - a standalone YYYY-MM-DD line, or
+     *  - a list item `- {date|날짜|일시}: YYYY-MM-DD` in the first list block.
+     * Returns null when there is no title-adjacent date.
+     */
+    private static function extractDateNearTitle(string $content): ?string
+    {
+        $lines = preg_split('/\R/u', $content);
+        $count = count($lines);
+
+        // Locate the first heading line (ATX `# ...` or setext `===`/`---`)
+        $titleIdx = -1;
+        for ($i = 0; $i < $count; $i++) {
+            $line = rtrim($lines[$i]);
+            if ($line === '') {
+                continue;
+            }
+            if (preg_match('/^#{1,6}[ \t]+/', $line)) {
+                $titleIdx = $i;
+                break;
+            }
+            // Setext: current line is an underline, the line above is the title
+            if ($i > 0 && preg_match('/^={3,}$/', trim($line))) {
+                $titleIdx = $i - 1;
+                break;
+            }
+            if ($i > 0 && preg_match('/^-{3,}$/', trim($line)) && trim($lines[$i - 1]) !== '') {
+                $titleIdx = $i - 1;
+                break;
+            }
+            // Setext: current line is the title, the next line is the underline
+            $next = ($i + 1 < $count) ? trim($lines[$i + 1]) : '';
+            if (preg_match('/^={3,}$/', $next) || preg_match('/^-{3,}$/', $next)) {
+                $titleIdx = $i;
+                break;
+            }
+            // First non-heading content line: no title to anchor to
+            break;
+        }
+        if ($titleIdx < 0) {
+            // No heading: anchor at the very top of the document, so a date
+            // field declared on the first line(s) still counts as the doc date.
+            $start = 0;
+        } else {
+            // For setext headings, skip the underline line (=== / ---)
+            $start = $titleIdx + 1;
+            if ($start < $count && preg_match('/^={3,}$/', trim($lines[$start])) || $start < $count && preg_match('/^-{3,}$/', trim($lines[$start]))) {
+                $start++;
             }
         }
 
-        return date('Y-m-d', filectime($filePath));
+        for ($i = $start; $i < $count; $i++) {
+            $line = rtrim($lines[$i]);
+            if ($line === '') {
+                continue;
+            }
+
+            // Standalone date line right below the title
+            if (preg_match('/^\d{4}-\d{2}-\d{2}\s*$/', $line)) {
+                return trim($line);
+            }
+
+            // First list block right below the title: scan for a date field item
+            if (preg_match('/^[-*+]\s+/', $line)) {
+                for (; $i < $count; $i++) {
+                    $l = rtrim($lines[$i]);
+                    if (preg_match('/^[-*+]\s+(?:date|날짜|일시)\s*[:：]\s*(\d{4}-\d{2}-\d{2})/i', $l, $m)) {
+                        return $m[1];
+                    }
+                    if (!preg_match('/^[-*+]\s+/', $l)) {
+                        break;
+                    }
+                }
+                return null;
+            }
+
+            // Any other content right below the title → not title-adjacent
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract a YYYY-MM-DD date prefix from the filename, or null if absent.
+     */
+    private static function extractDateFromFilename(string $filePath): ?string
+    {
+        $filename = PathParser::convertFromOsEncoding(pathinfo($filePath, PATHINFO_FILENAME));
+        if (strtotime(substr($filename, 0, 10))) {
+            return date('Y-m-d', strtotime(substr($filename, 0, 10)));
+        }
+        return null;
     }
 
     /**
