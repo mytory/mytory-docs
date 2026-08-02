@@ -75,6 +75,13 @@
             <span class="font-normal text-gray-400 dark:text-gray-500">— <?= count($results) ?>개</span>
         </h2>
 
+        <p class="text-xs text-gray-400 dark:text-gray-500 mb-3">
+            인덱스 마지막 갱신: <?= $indexTime ? htmlspecialchars($indexTime) : '없음 (아직 빌드 안 됨)' ?>
+            — 앱 밖에서 수정된 파일은 반영되지 않을 수 있음.
+            <a href="/api/search?q=<?= urlencode($q) ?><?= !empty($dir) ? '&dir=' . urlencode($dir) : '' ?>" class="underline">Raw JSON</a> · 
+            <span class="cursor-pointer underline" onclick="rebuildIndex()">Rebuild index</span>
+        </p>
+
         <?php if (empty($results)): ?>
             <p class="text-sm text-gray-400 dark:text-gray-500 mb-4">No results for "<?= htmlspecialchars($q) ?>"</p>
         <?php else: ?>
@@ -101,15 +108,6 @@
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
-
-        <div class="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
-            <p class="text-xs text-gray-400 dark:text-gray-500">
-                인덱스 마지막 갱신: <?= $indexTime ? htmlspecialchars($indexTime) : '없음 (아직 빌드 안 됨)' ?>
-                — 앱 밖에서 수정된 파일은 반영되지 않을 수 있음.
-                <a href="/api/search?q=<?= urlencode($q) ?><?= !empty($dir) ? '&dir=' . urlencode($dir) : '' ?>" class="underline">Raw JSON</a> · 
-                <span class="cursor-pointer underline" onclick="rebuildIndex()">Rebuild index</span>
-            </p>
-        </div>
     </section>
 <?php endif; ?>
 
