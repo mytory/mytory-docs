@@ -220,6 +220,7 @@ if ($method === 'GET' && $uri === '/api/search') {
     header('Content-Type: application/json');
     $q = $_GET['q'] ?? '';
     $root = $_GET['root'] ?? null;
+    $dir = $_GET['dir'] ?? null;   // e.g. "글/IT" or "글"
     $rebuild = ($_GET['_rebuild'] ?? '') === '1';
 
     if ($q === '' && !$rebuild) {
@@ -231,11 +232,33 @@ if ($method === 'GET' && $uri === '/api/search') {
         $fts = new Fts5Index();
         if ($rebuild) {
             $count = $fts->rebuild();
-            echo json_encode(['rebuilt' => true, 'files' => $count]);
+            echo json_encode([
+                'rebuilt'              => true,
+                'files'                => $count,
+                'index_last_indexed_at' => $fts->getLastIndexedAt(),
+            ]);
             exit;
         }
         $results = $fts->search($q, $root);
-        echo json_encode(['results' => $results, 'query' => $q]);
+
+        // Step 1: filename matches in the current directory (no index needed)
+        $dirResults = [];
+        if ($dir !== null && $dir !== '') {
+            global $doc_roots;
+            $dirSegs = explode('/', $dir, 2);
+            $dirRoot = $dirSegs[0];
+            if (isset($doc_roots[$dirRoot])) {
+                $dirPath = $doc_roots[$dirRoot] . (isset($dirSegs[1]) ? '/' . $dirSegs[1] : '');
+                $dirResults = FileUtils::filterFilenames($dirPath, $q);
+            }
+        }
+
+        echo json_encode([
+            'results'                => $results,
+            'query'                  => $q,
+            'dir_results'            => $dirResults,
+            'index_last_indexed_at'  => $fts->getLastIndexedAt(),
+        ]);
     } catch (\Throwable $e) {
         http_response_code(500);
         echo json_encode(['error' => $e->getMessage()]);
@@ -247,15 +270,33 @@ if ($method === 'GET' && $uri === '/api/search') {
 if ($method === 'GET' && $uri === '/search') {
     $q = $_GET['q'] ?? '';
     $root = $_GET['root'] ?? null;
+    $dir = $_GET['dir'] ?? null;
     $results = [];
+    $dirResults = [];
+    $indexTime = null;
     $error = null;
 
     if ($q !== '') {
+        // Step 2: full-corpus search via the FTS5 index
         try {
             $fts = new Fts5Index();
             $results = $fts->search($q, $root);
+            $indexTime = $fts->getLastIndexedAt();
         } catch (\Throwable $e) {
             $error = $e->getMessage();
+        }
+
+        // Step 1: filename matches in the current directory (no index needed)
+        if ($dir !== null && $dir !== '') {
+            global $doc_roots;
+            $dirSegs = explode('/', $dir, 2);
+            $dirRoot = $dirSegs[0];
+            if (isset($doc_roots[$dirRoot])) {
+                $dirPath = $doc_roots[$dirRoot] . (isset($dirSegs[1]) ? '/' . $dirSegs[1] : '');
+                $dirResults = FileUtils::filterFilenames($dirPath, $q);
+            } else {
+                $dir = null; // unknown root → drop dir context
+            }
         }
     }
 

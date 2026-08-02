@@ -23,6 +23,10 @@ class Fts5Index
     public function __construct()
     {
         $this->dbPath = ROOT . '/search.db';
+        // Isolated database for tests (set by tests/Fts5IndexTest.php)
+        if (getenv('FTS5_TEST_DB') === '1') {
+            $this->dbPath = ROOT . '/tests/_temp/search-test.db';
+        }
         $this->db = new SQLite3($this->dbPath);
         $this->db->enableExceptions(true);
         $this->initTables();
@@ -48,6 +52,26 @@ class Fts5Index
                 tokenize='porter unicode61 remove_diacritics 0'
             )
         ");
+    }
+
+    /**
+     * Record the current time as the last index update.
+     */
+    private function touchIndex(): void
+    {
+        $stmt = $this->db->prepare("INSERT OR REPLACE INTO meta (key, value) VALUES ('last_indexed_at', :now)");
+        $stmt->bindValue(':now', date('Y-m-d H:i:s'), SQLITE3_TEXT);
+        $stmt->execute();
+    }
+
+    /**
+     * When was the search index last updated (rebuild, upsert or delete)?
+     * Returns null when the index has never been built.
+     */
+    public function getLastIndexedAt(): ?string
+    {
+        $value = $this->db->querySingle("SELECT value FROM meta WHERE key = 'last_indexed_at'");
+        return is_string($value) && $value !== '' ? $value : null;
     }
 
     /**
@@ -131,6 +155,7 @@ class Fts5Index
         }
 
         $this->markFresh();
+        $this->touchIndex();
         return $count;
     }
 
@@ -179,6 +204,7 @@ class Fts5Index
         $insStmt->bindValue(':title', $title, SQLITE3_TEXT);
         $insStmt->bindValue(':content', $content, SQLITE3_TEXT);
         $insStmt->execute();
+        $this->touchIndex();
     }
 
     /**
@@ -189,6 +215,7 @@ class Fts5Index
         $stmt = $this->db->prepare("DELETE FROM docs_fts WHERE path = :path");
         $stmt->bindValue(':path', $filePath, SQLITE3_TEXT);
         $stmt->execute();
+        $this->touchIndex();
     }
 
     /**

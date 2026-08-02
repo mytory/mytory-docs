@@ -136,4 +136,35 @@ class Fts5IndexTest extends TestCase
         $this->assertIsInt($count);
         $this->assertGreaterThanOrEqual(2, $count);
     }
+
+    public function test_rebuild_records_last_indexed_at(): void
+    {
+        $this->fts->rebuild();
+
+        $ts = $this->fts->getLastIndexedAt();
+
+        $this->assertNotNull($ts);
+        $this->assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $ts);
+    }
+
+    public function test_upsert_updates_last_indexed_at(): void
+    {
+        $file = $this->fixtureDir . '/touch.md';
+        file_put_contents($file, "# Touch\n\nUnique search term.");
+        $this->fts->upsert($file);
+
+        $this->assertNotNull($this->fts->getLastIndexedAt());
+    }
+
+    public function test_delete_updates_last_indexed_at(): void
+    {
+        $file = $this->fixtureDir . '/touch-delete.md';
+        file_put_contents($file, "# Touch Delete");
+        $this->fts->upsert($file);
+        $before = $this->fts->getLastIndexedAt();
+        $this->assertNotNull($before);
+
+        $this->fts->delete($file);
+        $this->assertNotNull($this->fts->getLastIndexedAt());
+    }
 }

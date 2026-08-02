@@ -41,6 +41,9 @@ $jsVer = md5_file(ROOT . '/public/assets/app.js');
                 </span>
             <?php endif; ?>
             <form action="/search" method="get">
+                <?php if (isset($parsed) && !empty($parsed['full_path'])): ?>
+                <input type="hidden" name="dir" value="<?= htmlspecialchars($parsed['full_path']) ?>">
+                <?php endif; ?>
                 <input type="search" name="q" placeholder="Search…" 
                     class="w-28 lg:w-44 px-2 py-1 text-sm rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">

@@ -318,4 +318,61 @@ class FileUtilsTest extends TestCase
         $this->expectException(RuntimeException::class);
         FileUtils::listDirectory('/nonexistent/path');
     }
+
+    // ── filterFilenames ────────────────────────────────────
+
+    public function test_filter_filenames_case_insensitive(): void
+    {
+        file_put_contents($this->fixtureDir . '/react-hooks.md', '# React');
+        file_put_contents($this->fixtureDir . '/ReactGuide.md', '# React Guide');
+        file_put_contents($this->fixtureDir . '/vue.md', '# Vue');
+
+        $matches = FileUtils::filterFilenames($this->fixtureDir, 'react');
+        $names = array_column($matches, 'name');
+
+        $this->assertCount(2, $names);
+        $this->assertContains('react-hooks.md', $names);
+        $this->assertContains('ReactGuide.md', $names);
+
+        // Uppercase query matches too
+        $matchesUpper = FileUtils::filterFilenames($this->fixtureDir, 'REACT');
+        $this->assertCount(2, $matchesUpper);
+    }
+
+    public function test_filter_filenames_ignores_subdirectories(): void
+    {
+        mkdir($this->fixtureDir . '/react-projects');
+        file_put_contents($this->fixtureDir . '/react-notes.md', '# React Notes');
+
+        $matches = FileUtils::filterFilenames($this->fixtureDir, 'react');
+        $names = array_column($matches, 'name');
+
+        $this->assertCount(1, $names);
+        $this->assertSame(['react-notes.md'], $names);
+
+        rmdir($this->fixtureDir . '/react-projects');
+    }
+
+    public function test_filter_filenames_empty_query_returns_empty(): void
+    {
+        file_put_contents($this->fixtureDir . '/a.md', '# A');
+        $this->assertSame([], FileUtils::filterFilenames($this->fixtureDir, ''));
+        $this->assertSame([], FileUtils::filterFilenames($this->fixtureDir, '   '));
+    }
+
+    public function test_filter_filenames_respects_limit(): void
+    {
+        for ($i = 1; $i <= 5; $i++) {
+            file_put_contents($this->fixtureDir . "/doc-{$i}.md", "# Doc {$i}");
+        }
+
+        $matches = FileUtils::filterFilenames($this->fixtureDir, 'doc', 2);
+
+        $this->assertCount(2, $matches);
+    }
+
+    public function test_filter_filenames_nonexistent_dir_returns_empty(): void
+    {
+        $this->assertSame([], FileUtils::filterFilenames('/nonexistent/path', 'doc'));
+    }
 }

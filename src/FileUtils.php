@@ -280,6 +280,53 @@ class FileUtils
     }
 
     /**
+     * Filter files in a directory by filename (case-insensitive substring match).
+     * Files only, no subdirectories; hidden files (dot-prefixed) are skipped.
+     * Sorted alphabetically, capped at $limit.
+     *
+     * @return array<int, array{name: string, path: string, title: string, date: string, markdown: bool}>
+     */
+    public static function filterFilenames(string $dirPath, string $query, int $limit = 50): array
+    {
+        if (!is_dir($dirPath) || $query === '') {
+            return [];
+        }
+
+        $matches = [];
+        $handle = opendir($dirPath);
+        if ($handle === false) {
+            return [];
+        }
+
+        while (($entry = readdir($handle)) !== false) {
+            if ($entry === '.' || $entry === '..' || str_starts_with($entry, '.')) {
+                continue;
+            }
+            $fullPath = $dirPath . DIRECTORY_SEPARATOR . $entry;
+            if (!is_file($fullPath)) {
+                continue;
+            }
+
+            $name = PathParser::convertFromOsEncoding($entry);
+            if (mb_stripos($name, $query) === false) {
+                continue;
+            }
+
+            $matches[] = [
+                'name'     => $name,
+                'path'     => $entry,
+                'title'    => self::extractTitle($fullPath),
+                'date'     => self::extractDate($fullPath),
+                'markdown' => self::isMarkdownFile($fullPath),
+            ];
+        }
+        closedir($handle);
+
+        usort($matches, fn($a, $b) => strcasecmp($a['name'], $b['name']));
+        return array_slice($matches, 0, $limit);
+    }
+
+    /**
      * List directory contents, sorted: directories first (alphabetical), files (by date desc).
      * 
      * @return array{dirs: array, files: array}
