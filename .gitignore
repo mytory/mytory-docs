@@ -39,3 +39,6 @@ Thumbs.db
 /lib/
 *.sample
 .phpunit.result.cache
+
+# Test runtime artifacts
+/tests/_temp/
