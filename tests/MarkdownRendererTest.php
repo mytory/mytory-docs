@@ -157,6 +157,24 @@ class MarkdownRendererTest extends TestCase
         $this->assertStringContainsString('font-mono', $html);
     }
 
+    public function test_right_aligns_numeric_cells_with_units_and_ranges(): void
+    {
+        $markdown = "| A | B | C |\n|---|---|---|\n| 9.3h | 145 (22%) | 10:09 |\n| <12% | 78.7 🥇 | 148분 (최악) |";
+        $html = $this->renderer->render($markdown, 'test/notes');
+
+        $this->assertStringContainsString('text-right', $html);
+        $this->assertStringContainsString('font-mono', $html);
+    }
+
+    public function test_does_not_style_text_cells(): void
+    {
+        $markdown = "| A |\n|---|\n| 급변 (≥2h) |\n| 42회 (6%) — 밤샘 |";
+        $html = $this->renderer->render($markdown, 'test/notes');
+
+        // 괄호 밖에 주석이 남아 있어 숫자 셀로 보지 않는다
+        $this->assertStringNotContainsString('font-mono', $html);
+    }
+
     // ── Footnotes ─────────────────────────────────────────
 
     public function test_renders_footnotes(): void

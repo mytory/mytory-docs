@@ -68,7 +68,7 @@ class MarkdownRenderer
             function ($m) {
                 $attrs = $m[1] ?? '';
                 $content = $m[2];
-                $isNumeric = (bool) preg_match('/^[\d,.\s%+\-–—*×~≤≥<>^]+$/', trim(strip_tags($content)));
+                $isNumeric = self::isNumericCell($content);
                 $extra = $isNumeric ? ' text-right tabular-nums font-mono' : '';
                 return "<td class=\"border border-gray-300 dark:border-gray-600 px-4 py-2{$extra}\"{$attrs}>{$content}</td>";
             },
@@ -76,5 +76,28 @@ class MarkdownRenderer
         );
 
         return $html;
+    }
+
+    /**
+     * 셀의 실질 내용이 숫자(단위·범위 포함)인지 판별한다.
+     *
+     * - HTML 엔티티를 디코딩해 &lt;12% → <12% 로 만든다.
+     * - 괄호 안 주석은 제거한다: (22%), (최악), (중앙 03:17)
+     * - 이모지(🥇 등)를 제거한다.
+     * - 끝의 단위 접미사(h, 분, 회, 시, +)를 제거한다.
+     * - 남은 텍스트가 숫자·구분자·범위기호뿐이면 숫자 셀로 본다.
+     */
+    private static function isNumericCell(string $content): bool
+    {
+        $text = trim(html_entity_decode(strip_tags($content), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $text = trim((string) preg_replace('/\([^)]*\)/u', '', $text));
+        $text = (string) preg_replace('/[\x{1F000}-\x{1FAFF}\x{2600}-\x{27BF}\x{FE0F}\x{2B00}-\x{2BFF}]/u', '', $text);
+        $text = (string) preg_replace('/[가-힣a-zA-Z]{1,2}\+?$/u', '', $text);
+        $text = trim($text);
+        if ($text === '') {
+            return false;
+        }
+
+        return (bool) preg_match('/^[<>≤≥]?[\d,.\s%+\-–—*×~:^]+$/', $text);
     }
 }

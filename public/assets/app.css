@@ -130,7 +130,8 @@
 .prose td.text-right, .prose td.text-right * {
     text-align: right !important;
 }
-.prose td.font-mono {
+/* strong 등 자식 요소가 @layer base의 산스 폰트 규칙으로 덮어쓰지 않도록 셀 안 전체에 적용 */
+.prose td.font-mono, .prose td.font-mono * {
     font-family: var(--font-mono);
 }
 .prose td.tabular-nums {
