@@ -30,6 +30,13 @@
         font-size: 125%;
     }
 
+    html,
+    input,
+    textarea,
+    select {
+        font-feature-settings: 'ss18' on;
+    }
+
     body {
         font-family: var(--font-sans);
         line-height: 1.8;
