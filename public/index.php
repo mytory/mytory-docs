@@ -171,7 +171,7 @@ if ($method === 'POST' && preg_match('#^/new-file/([^/]+)(/.*)?$#', $uri, $m)) {
     $dirPath = $doc_roots[$rootName] . ($subPath ? '/' . $subPath : '');
     try {
         FileUtils::createFile($dirPath, $filename);
-        $editUrl = '/edit/' . rawurlencode($rootName) . ($subPath ? '/' . rawurlencode($subPath) : '') . '/' . rawurlencode($filename);
+        $editUrl = '/edit/' . rawurlencode($rootName) . ($subPath ? '/' . PathParser::urlPath($subPath) : '') . '/' . rawurlencode($filename);
         header('Location: ' . $editUrl);
     } catch (\RuntimeException $e) {
         http_response_code(409);
@@ -190,7 +190,7 @@ if ($method === 'POST' && preg_match('#^/delete-file/([^/]+)/(.+)$#', $uri, $m))
         FileUtils::deleteFile($realFile);
         // Remove from index
         try { (new Fts5Index())->delete($realFile); } catch (\Throwable) {}
-        header('Location: /list/' . rawurlencode($parsed['full_path']));
+        header('Location: /list/' . PathParser::urlPath($parsed['full_path']));
     } catch (\RuntimeException $e) {
         http_response_code(404);
         echo $e->getMessage();
@@ -388,13 +388,13 @@ if ($method === 'GET' && preg_match('#^/list/([^/]+)(/.*)?$#', $uri, $m)) {
 
     // Build breadcrumbs (each segment clickable)
     $breadcrumbs = [];
-    $breadcrumbs[] = ['label' => $rootName, 'url' => "/list/{$rootName}"];
+    $breadcrumbs[] = ['label' => $rootName, 'url' => '/list/' . rawurlencode($rootName)];
     if ($subPath !== '') {
         $parts = explode('/', $subPath);
         $accum = $rootName;
         foreach ($parts as $part) {
             $accum .= '/' . $part;
-            $breadcrumbs[] = ['label' => $part, 'url' => '/list/' . rawurlencode($accum)];
+            $breadcrumbs[] = ['label' => $part, 'url' => '/list/' . PathParser::urlPath($accum)];
         }
     }
 
@@ -402,7 +402,9 @@ if ($method === 'GET' && preg_match('#^/list/([^/]+)(/.*)?$#', $uri, $m)) {
     $parentPath = null;
     if ($subPath !== '') {
         $parent = dirname($subPath);
-        $parentPath = $parent === '.' ? "/list/{$rootName}" : "/list/{$rootName}/{$parent}";
+        $parentPath = $parent === '.'
+            ? '/list/' . rawurlencode($rootName)
+            : '/list/' . rawurlencode($rootName) . '/' . PathParser::urlPath($parent);
     }
 
     require $viewDir . '/layout.php';

@@ -79,6 +79,16 @@ class PathParser
         return explode(':', $path_string, 2)[0];
     }
 
+    /**
+     * Percent-encode each path segment separately, keeping '/' as a literal
+     * separator. Unlike rawurlencode() on the whole path, this never produces
+     * %2F — which Apache rejects by default (AllowEncodedSlashes Off → 404).
+     */
+    public static function urlPath(string $path): string
+    {
+        return implode('/', array_map('rawurlencode', explode('/', $path)));
+    }
+
     private static function convertToOsEncoding(string $string): string
     {
         if (strtolower(OS_ENCODING) === 'utf-8') {

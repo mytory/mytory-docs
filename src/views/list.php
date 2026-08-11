@@ -67,7 +67,7 @@
         <?php foreach ($listing['dirs'] as $dir): ?>
         <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
             <td class="py-1.5">
-                <a href="/list/<?= rawurlencode($parsed['root_name'] . '/' . $parsed['relative_path'] . ($parsed['relative_path'] ? '/' : '') . $dir['path']) ?>" 
+                <a href="/list/<?= PathParser::urlPath($parsed['root_name'] . '/' . $parsed['relative_path'] . ($parsed['relative_path'] ? '/' : '') . $dir['path']) ?>" 
                    class="flex items-center gap-2 text-blue-700 dark:text-blue-400">
                     <svg class="w-4 h-4 text-yellow-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
@@ -111,7 +111,7 @@
             </td>
             <td class="py-1.5 text-gray-400 dark:text-gray-500 whitespace-nowrap"><?= htmlspecialchars($file['date']) ?></td>
             <td class="py-1.5">
-                <button onclick="deleteFile('<?= rawurlencode($viewPath) ?>', '<?= htmlspecialchars(addslashes(strip_tags($file['title']))) ?>')" 
+                <button onclick="deleteFile('<?= PathParser::urlPath($viewPath) ?>', '<?= htmlspecialchars(addslashes(strip_tags($file['title']))) ?>')" 
                     class="text-gray-400 hover:text-red-500" title="Delete">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>

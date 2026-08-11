@@ -69,7 +69,9 @@ class FileUtils
         }
 
         $title = $pathinfo['filename'];
-        file_put_contents($newFile, '# ' . $title);
+        if (file_put_contents($newFile, '# ' . $title) === false) {
+            throw new \RuntimeException("Cannot create file: {$newFile}");
+        }
 
         return $newFile;
     }
@@ -82,7 +84,9 @@ class FileUtils
         if (!is_file($filePath)) {
             throw new \RuntimeException("File not found: {$filePath}");
         }
-        unlink($filePath);
+        if (!unlink($filePath)) {
+            throw new \RuntimeException("Cannot delete file: {$filePath}");
+        }
     }
 
     /**

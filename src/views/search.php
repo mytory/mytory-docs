@@ -90,7 +90,7 @@
                     $displayRoot = PathParser::convertFromOsEncoding($r['root_name']);
                     $relativePath = str_replace($doc_roots[$r['root_name']] ?? '', '', $r['path']);
                     $relativePath = ltrim(str_replace('\\', '/', $relativePath), '/');
-                    $viewUrl = '/view/' . rawurlencode($r['root_name']) . '/' . rawurlencode($relativePath);
+                    $viewUrl = '/view/' . rawurlencode($r['root_name']) . '/' . PathParser::urlPath($relativePath);
                 ?>
                 <li class="border-b border-gray-100 dark:border-gray-800 pb-3">
                     <a href="<?= htmlspecialchars($viewUrl) ?>" class="block">

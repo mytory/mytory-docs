@@ -22,8 +22,8 @@ import {markdown} from "https://esm.sh/@codemirror/lang-markdown@6.3.0";
 import {oneDark} from "https://esm.sh/@codemirror/theme-one-dark@6.1.2";
 
 const initialContent = document.getElementById('initial-content').value;
-const saveUrl = '/save/<?= rawurlencode($parsed['root_name']) ?>/<?= rawurlencode($parsed['relative_path'] . '/' . $parsed['file']) ?>';
-const backupUrl = '/backup/<?= rawurlencode($parsed['root_name']) ?>/<?= rawurlencode($parsed['relative_path'] . '/' . $parsed['file']) ?>';
+const saveUrl = '/save/<?= rawurlencode($parsed['root_name']) ?>/<?= PathParser::urlPath($parsed['relative_path'] . '/' . $parsed['file']) ?>';
+const backupUrl = '/backup/<?= rawurlencode($parsed['root_name']) ?>/<?= PathParser::urlPath($parsed['relative_path'] . '/' . $parsed['file']) ?>';
 
 const editor = new EditorView({
     doc: initialContent,
